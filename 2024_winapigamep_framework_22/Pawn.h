@@ -5,6 +5,8 @@ class Pawn :
 {
 public:
     // Unit을(를) 통해 상속됨
+    void Update() override;
+    void Render(HDC _hdc) override;
     void Attack() override;
     void RangeCheck() override;
 private:

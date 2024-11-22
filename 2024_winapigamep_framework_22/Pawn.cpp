@@ -13,7 +13,7 @@ void Pawn::RangeCheck()
 	for (int i = 0; i < 4; i++) {
 		if (map[(int)(m_pos.x + xAttackRange[i])] [(int)(m_pos.y + yAttackRange[i])] == L"¤±") {
 			//Vec2 vec = { (int)(m_pos.x + xAttackRange[i])][(int)(m_pos.y + yAttackRange[i]) }
-			attackRange.push_back();
+			//attackRange.push_back();
 		}
 	}
 }

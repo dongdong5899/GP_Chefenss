@@ -7,14 +7,16 @@
 
 void DefenseScene::Init()
 {
-	GET_SINGLE(MapManager)->SetMapSize(MAP_SIZE::BIG);
-	vector<wstring> map = GET_SINGLE(MapManager)->GetMap();
+	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
+	vector<wstring> map = GET_SINGLE(MapManager)->GetMapStrData();
 	int size = GET_SINGLE(MapManager)->GetTileSize();
 	int yPos = 100;
 	int height = map.size();
 	int width = map[0].size();
+	vector<vector<Object*>> m_currentMapTileVec;
 	for (int y = 0; y < height; ++y)
 	{
+		vector<Object*> tileLine;
 		for (int x = 0; x < width; ++x)
 		{
 			Object* pObj = nullptr;
@@ -36,6 +38,9 @@ void DefenseScene::Init()
 			pObj->SetPos({ SCREEN_WIDTH / 2 + size / 2 + (x - (float)width / 2) * size, SCREEN_HEIGHT / 2 + size / 2 + (y - (float)height / 2) * size - yPos });
 			pObj->SetSize({ size, size });
 			AddObject(pObj, LAYER::BACKGROUND);
+			tileLine.push_back(pObj);
 		}
+		m_currentMapTileVec.push_back(tileLine);
 	}
+	GET_SINGLE(MapManager)->SetMapTileData(m_currentMapTileVec);
 }

@@ -4,6 +4,7 @@
 
 Wall::Wall()
 {
+
 }
 
 Wall::~Wall()

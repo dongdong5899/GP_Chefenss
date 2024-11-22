@@ -46,6 +46,6 @@ void DefenseScene::Init()
 	Enemy* pEnemy = new Enemy;
 	pEnemy->SetName(L"Enemy");
 	pEnemy->SetPos(GET_SINGLE(MapManager)->GetMapTileData()[m_startPos.y][m_startPos.x]->GetPos());
-	pEnemy->SetSize({ size ,size });
+	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
 	AddObject(pEnemy, LAYER::ENEMY);
 }

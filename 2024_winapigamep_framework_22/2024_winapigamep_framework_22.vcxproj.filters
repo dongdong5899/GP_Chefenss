@@ -38,6 +38,12 @@
     <Filter Include="Engine\03. Object\Background">
       <UniqueIdentifier>{3c160836-e656-4095-880b-de1bd501057d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Unit">
+      <UniqueIdentifier>{a0b0e509-090b-4e1f-b9a9-354c53878787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Unit\ChessPiece">
+      <UniqueIdentifier>{493568e9-a046-4473-8dd3-986cd493f7a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -137,6 +143,10 @@
       <Filter>Engine\03. Object\Background</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Unit.h">
+      <Filter>Engine\03. Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -228,5 +238,9 @@
       <Filter>Engine\03. Object\Background</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Unit.cpp">
+      <Filter>Engine\03. Object\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp" />
   </ItemGroup>
 </Project>

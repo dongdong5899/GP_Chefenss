@@ -16,6 +16,8 @@ public:
 public:
 	void SetMoveDuration(float _duration) { m_moveDuration = _duration; }
 	Vec2 GetEnemyPos() { return m_pos; }
+	void ApplyDamage(int _damage);
+	void Die();
 private:
 	int m_hp;
 	float m_lastMoveTime;

@@ -3,9 +3,11 @@
 #include "Collider.h"
 #include "EventManager.h"
 #include "TimeManager.h"
+#include "MapManager.h"
 Enemy::Enemy()
 	: m_hp(5)
 	, m_lastMoveTime(0)
+	, m_moveDuration(0.5f)
 {
 	this->AddComponent<Collider>();
 }
@@ -20,6 +22,9 @@ void Enemy::Update()
 	if (m_lastMoveTime + m_moveDuration < time)
 	{
 		m_lastMoveTime = time;
+		Vec2 pos = GetPos();
+		pos.x += GET_SINGLE(MapManager)->GetTileSize();
+		SetPos(pos);
 	}
 }
 

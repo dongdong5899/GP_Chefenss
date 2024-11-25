@@ -1,31 +1,30 @@
 #include "pch.h"
-#include "Bishop.h"
+#include "Queen.h"
 #include "MapManager.h"
-Bishop::Bishop()
+Queen::Queen()
 {
 }
 
-Bishop::~Bishop()
+Queen::~Queen()
 {
 }
 
-void Bishop::Update()
+void Queen::Update()
 {
 }
 
-void Bishop::Render(HDC _hdc)
+void Queen::Render(HDC _hdc)
 {
 }
 
-void Bishop::Attack()
+void Queen::Attack()
 {
-
 }
 
-void Bishop::RangeCheck()
+void Queen::RangeCheck()
 {
 	vector<vector<Object*>> map = GET_SINGLE(MapManager)->GetMapTileData();
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		Vec2 attackCheckPos = m_tilePos;
 		while (true) {
 			if (attackCheckPos.x < 0 || attackCheckPos.y < 0 || map[0].size() < attackCheckPos.x || map.size() < attackCheckPos.y) {

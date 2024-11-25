@@ -26,14 +26,14 @@ void Rook::RangeCheck()
 {
 	vector<vector<Object*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	for (int i = 0; i < 4; i++) {
+		Vec2 attackCheckPos = m_tilePos;
 		while (true) {
-			if (m_currentPos.x < 0 || m_currentPos.y < 0 || map[0].size() < m_currentPos.x || map.size() < m_currentPos.y) {
-				m_currentPos = m_pos;
+			if (attackCheckPos.x < 0 || attackCheckPos.y < 0 || map[0].size() < attackCheckPos.x || map.size() < attackCheckPos.y) {
 				break;
 			}
-			m_currentPos.x += xAttackRange[i];
-			m_currentPos.y += yAttackRange[i];
-			Object* tile = map[(int)(m_currentPos.x)][(int)(m_currentPos.y)];
+			attackCheckPos.x += xAttackRange[i];
+			attackCheckPos.y += yAttackRange[i];
+			Object* tile = map[(int)(attackCheckPos.x)][(int)(attackCheckPos.y)];
 			Road* road = dynamic_cast<Road*>(tile);
 			if (road)
 			{

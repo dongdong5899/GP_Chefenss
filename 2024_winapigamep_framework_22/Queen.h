@@ -1,11 +1,11 @@
 #pragma once
 #include "Unit.h"
-class Bishop :
+class Queen :
     public Unit
 {
 public:
-    Bishop();
-    ~Bishop();
+    Queen();
+    ~Queen();
 public:
     void Update() override;
     void Render(HDC _hdc) override;
@@ -13,7 +13,7 @@ public:
     void Attack() override;
     void RangeCheck() override;
 private:
-    float xAttackRange[4] = { -1,1,-1,1 };
-    float yAttackRange[4] = { 1,1,-1,-1 };
+    float xAttackRange[8] = { 1,0,-1,0,-1,1,-1,1 };
+    float yAttackRange[8] = { 0,1,0,-1,1,1,-1,-1 };
 };
 

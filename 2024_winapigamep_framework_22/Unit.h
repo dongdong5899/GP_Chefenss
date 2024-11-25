@@ -22,8 +22,7 @@ public:
     Stat stat;
     vector<Enemy> enemyList;
     int cost;
-    Vec2 m_pos;
-    Vec2 m_currentPos;
+    Vec2 m_tilePos;
     vector<Road*> attackRange;
 };
 

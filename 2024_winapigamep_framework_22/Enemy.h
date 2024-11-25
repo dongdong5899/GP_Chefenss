@@ -1,5 +1,7 @@
 #pragma once
+#include <set>
 #include "Object.h"
+class Road;
 class Enemy :
     public Object
 {
@@ -15,13 +17,18 @@ public:
 	virtual void ExitCollision(Collider* _other);
 public:
 	void SetMoveDuration(float _duration) { m_moveDuration = _duration; }
-	Vec2 GetEnemyPos() { return m_pos; }
-	void ApplyDamage(int _damage);
+	int GetModify() { return m_hp; }
+	void SetOwner(Road* _road) { m_road = _road; }
+	Road* GetOwner() { return m_road; }
+	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
+	bool IsPassedRoad(Road* _road) { m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
+	void ApplyDamage(int _damage) { m_hp -= _damage; }
 	void Die();
 private:
 	int m_hp;
 	float m_lastMoveTime;
 	float m_moveDuration;
-	Vec2 m_pos;
+	Road* m_road;
+	std::set<Road*> m_passedRoadSet;
 };
 

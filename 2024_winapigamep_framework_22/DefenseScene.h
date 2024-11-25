@@ -5,7 +5,5 @@ class DefenseScene : public Scene
 public:
 	// Scene을(를) 통해 상속됨
 	virtual void Init() override;
-private:
-	Vec2 m_startPos;
 };
 

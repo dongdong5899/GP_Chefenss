@@ -21,7 +21,7 @@ void Queen::Render(HDC _hdc)
 
 void Queen::RangeCheck()
 {
-	vector<vector<Object*>> map = GET_SINGLE(MapManager)->GetMapTileData();
+	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	for (int i = 0; i < 8; i++) {
 		Vec2 attackCheckPos = m_tilePos;
 		while (true) {
@@ -30,7 +30,7 @@ void Queen::RangeCheck()
 			}
 			attackCheckPos.x += xAttackRange[i];
 			attackCheckPos.y += yAttackRange[i];
-			Object* tile = map[(int)(attackCheckPos.x)][(int)(attackCheckPos.y)];
+			Tile* tile = map[(int)(attackCheckPos.x)][(int)(attackCheckPos.y)];
 			Road* road = dynamic_cast<Road*>(tile);
 			if (road)
 			{

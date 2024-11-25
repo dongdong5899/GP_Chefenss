@@ -14,29 +14,30 @@ void DefenseScene::Init()
 	int yPos = 100;
 	int height = map.size();
 	int width = map[0].size();
-	vector<vector<Object*>> m_currentMapTileVec;
+	vector<vector<Tile*>> m_currentMapTileVec;
 	for (int y = 0; y < height; ++y)
 	{
-		vector<Object*> tileLine;
+		vector<Tile*> tileLine;
 		for (int x = 0; x < width; ++x)
 		{
-			Object* pObj = nullptr;
+			Tile* pTile = nullptr;
 			if (map[y][x] == L'бс')
 			{
-				pObj = new Wall;
-				pObj->SetName(L"Wall");
+				pTile = new Wall;
+				pTile->SetName(L"Wall");
 			}
 			else
 			{
+				pTile = new Road;
+				pTile->SetName(L"Road");
 				if (map[y][x] == L'S')
-					m_startPos = { x, y };
-				pObj = new Road;
-				pObj->SetName(L"Road");
+					GET_SINGLE(MapManager)->SetStartRoad(dynamic_cast<Road*>(pTile));
 			}
-			pObj->SetPos({ SCREEN_WIDTH / 2 + size / 2 + (x - (float)width / 2) * size, SCREEN_HEIGHT / 2 + size / 2 + (y - (float)height / 2) * size - yPos });
-			pObj->SetSize({ size, size });
-			AddObject(pObj, LAYER::BACKGROUND);
-			tileLine.push_back(pObj);
+			pTile->SetTilePos({ x, y });
+			pTile->SetPos({ SCREEN_WIDTH / 2 + size / 2 + (x - (float)width / 2) * size, SCREEN_HEIGHT / 2 + size / 2 + (y - (float)height / 2) * size - yPos });
+			pTile->SetSize({ size, size });
+			AddObject(pTile, LAYER::BACKGROUND);
+			tileLine.push_back(pTile);
 		}
 		m_currentMapTileVec.push_back(tileLine);
 	}
@@ -45,7 +46,7 @@ void DefenseScene::Init()
 
 	Enemy* pEnemy = new Enemy;
 	pEnemy->SetName(L"Enemy");
-	pEnemy->SetPos(GET_SINGLE(MapManager)->GetMapTileData()[m_startPos.y][m_startPos.x]->GetPos());
 	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
 	AddObject(pEnemy, LAYER::ENEMY);
+	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
 }

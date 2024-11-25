@@ -1,13 +1,19 @@
 #include "pch.h"
+#include "Road.h"
 #include "Enemy.h"
 #include "Collider.h"
 #include "EventManager.h"
 #include "TimeManager.h"
 #include "MapManager.h"
+
+const int dirX[4] = {1, 0, -1, 0};
+const int dirY[4] = {0, 1, 0, -1};
+
 Enemy::Enemy()
 	: m_hp(5)
 	, m_lastMoveTime(0)
-	, m_moveDuration(0.5f)
+	, m_moveDuration(0.25f)
+	, m_road(nullptr)
 {
 	this->AddComponent<Collider>();
 }
@@ -22,9 +28,21 @@ void Enemy::Update()
 	if (m_lastMoveTime + m_moveDuration < time)
 	{
 		m_lastMoveTime = time;
-		Vec2 pos = GetPos();
-		pos.x += GET_SINGLE(MapManager)->GetTileSize();
-		SetPos(pos);
+
+		cout << GetOwner();
+		GetOwner()->SetAssignedEnemy(nullptr);
+		Vec2 tilePos = GetOwner()->GetTilePos();
+
+		for (int i = 0; i < 4; ++i)
+		{
+			Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + dirY[i]][tilePos.x + dirX[i]];
+			Road* road = dynamic_cast<Road*>(tile);
+			if (road != nullptr)
+			{
+				road->AssignEnemy(this);
+				break;
+			}
+		}
 	}
 }
 
@@ -62,4 +80,9 @@ void Enemy::StayCollision(Collider* _other)
 void Enemy::ExitCollision(Collider* _other)
 {
 	std::cout << "Exit" << std::endl;
+}
+
+void Enemy::Die()
+{
+	cout << "Die\n";
 }

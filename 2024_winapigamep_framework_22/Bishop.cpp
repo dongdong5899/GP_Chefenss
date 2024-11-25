@@ -1,28 +1,28 @@
 #include "pch.h"
-#include "Rook.h"
+#include "Bishop.h"
 #include "MapManager.h"
-
-Rook::Rook()
+Bishop::Bishop()
 {
 }
 
-Rook::~Rook()
+Bishop::~Bishop()
 {
 }
 
-void Rook::Update()
+void Bishop::Update()
 {
 }
 
-void Rook::Render(HDC _hdc)
+void Bishop::Render(HDC _hdc)
 {
 }
 
-void Rook::Attack()
+void Bishop::Attack()
 {
+
 }
 
-void Rook::RangeCheck()
+void Bishop::RangeCheck()
 {
 	vector<vector<Object*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	for (int i = 0; i < 4; i++) {

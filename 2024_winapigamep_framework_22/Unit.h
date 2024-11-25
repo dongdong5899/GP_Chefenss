@@ -1,13 +1,12 @@
 #pragma once
 #include "Object.h"
 #include "Enemy.h"
-
+#include "Road.h"
 struct Stat
 {
     float AttackSpeed;
     float AttackDamage;
 };
-
 
 class Unit :
     public Object
@@ -24,6 +23,7 @@ public:
     vector<Enemy> enemyList;
     int cost;
     Vec2 m_pos;
-    vector<Vec2> attackRange;
+    Vec2 m_currentPos;
+    vector<Road*> attackRange;
 };
 

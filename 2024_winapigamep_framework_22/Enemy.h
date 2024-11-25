@@ -21,7 +21,7 @@ public:
 	void SetOwner(Road* _road) { m_road = _road; }
 	Road* GetOwner() { return m_road; }
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
-	bool IsPassedRoad(Road* _road) { m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
+	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
 	void ApplyDamage(int _damage) { m_hp -= _damage; }
 	void Die();
 private:

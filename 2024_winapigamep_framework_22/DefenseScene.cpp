@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Road.h"
 #include "Wall.h"
+#include "Enemy.h"
 #include "MapManager.h"
 
 void DefenseScene::Init()
@@ -22,16 +23,13 @@ void DefenseScene::Init()
 			Object* pObj = nullptr;
 			if (map[y][x] == L'бс')
 			{
-				pObj = new Road;
-				pObj->SetName(L"Road");
-			}
-			else if (map[y][x] == L'бр')
-			{
 				pObj = new Wall;
 				pObj->SetName(L"Wall");
 			}
 			else
 			{
+				if (map[y][x] == L'S')
+					m_startPos = { x, y };
 				pObj = new Road;
 				pObj->SetName(L"Road");
 			}
@@ -43,4 +41,11 @@ void DefenseScene::Init()
 		m_currentMapTileVec.push_back(tileLine);
 	}
 	GET_SINGLE(MapManager)->SetMapTileData(m_currentMapTileVec);
+
+
+	Enemy* pEnemy = new Enemy;
+	pEnemy->SetName(L"Enemy");
+	pEnemy->SetPos(GET_SINGLE(MapManager)->GetMapTileData()[m_startPos.y][m_startPos.x]->GetPos());
+	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
+	AddObject(pEnemy, LAYER::ENEMY);
 }

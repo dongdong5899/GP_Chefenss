@@ -7,7 +7,7 @@ public:
 	void Update();
 public:
 	const float& GetDT() const { return m_dT; }
-	const LONGLONG GetTime() const { return (float)(m_llCurCnt.QuadPart) / (float)m_llFrequency.QuadPart; }
+	const float GetTime() const { return (float)(m_llCurCnt.QuadPart) / (float)m_llFrequency.QuadPart; }
 private:
 	// Delta time
 	LARGE_INTEGER m_llPrevCnt = {};

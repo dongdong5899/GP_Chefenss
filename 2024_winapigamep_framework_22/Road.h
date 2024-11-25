@@ -1,8 +1,8 @@
 #pragma once
-#include "Object.h"
+#include "Tile.h"
 class Enemy;
 class Road :
-    public Object
+    public Tile
 {
 public:
 	Road();
@@ -11,7 +11,8 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 	Enemy* GetAssignedEnemy() { return m_assignedEnemy; }
-	void AssignEnemy(Enemy* _enemy) { m_assignedEnemy = _enemy; }
+	void SetAssignedEnemy(Enemy* _enemy) { m_assignedEnemy = _enemy; }
+	void AssignEnemy(Enemy* _enemy);
 	bool IsAssignedEnemy() { return m_assignedEnemy != nullptr; }
 private:
 	Enemy* m_assignedEnemy;

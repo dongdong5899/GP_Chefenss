@@ -2,25 +2,22 @@
 #include "Pawn.h"
 #include "MapManager.h"
 #include "Road.h"
+#include "TimeManager.h"
+Pawn::Pawn()
+{
+}
+Pawn::~Pawn()
+{
+}
 void Pawn::Update()
 {
-
 }
 
 void Pawn::Render(HDC _hdc)
 {
 }
 
-void Pawn::Attack()
-{
-	for(Road* &range : attackRange)
-	{
-		Enemy* enemy = range->GetAssignedEnemy();
-		if (enemy != nullptr) {
-			enemy->ApplyDamage(stat.AttackDamage);
-		}
-	}
-}
+
 
 void Pawn::RangeCheck()
 {
@@ -34,3 +31,6 @@ void Pawn::RangeCheck()
 		}
 	}
 }
+
+
+

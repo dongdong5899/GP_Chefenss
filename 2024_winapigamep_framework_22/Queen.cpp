@@ -17,9 +17,7 @@ void Queen::Render(HDC _hdc)
 {
 }
 
-void Queen::Attack()
-{
-}
+
 
 void Queen::RangeCheck()
 {

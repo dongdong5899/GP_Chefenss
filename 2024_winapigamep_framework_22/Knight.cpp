@@ -17,9 +17,7 @@ void Knight::Render(HDC _hdc)
 {
 }
 
-void Knight::Attack()
-{
-}
+
 
 void Knight::RangeCheck()
 {

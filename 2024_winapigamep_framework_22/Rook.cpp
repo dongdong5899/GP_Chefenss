@@ -18,9 +18,6 @@ void Rook::Render(HDC _hdc)
 {
 }
 
-void Rook::Attack()
-{
-}
 
 void Rook::RangeCheck()
 {

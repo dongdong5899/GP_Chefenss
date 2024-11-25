@@ -17,10 +17,6 @@ void Bishop::Render(HDC _hdc)
 {
 }
 
-void Bishop::Attack()
-{
-
-}
 
 void Bishop::RangeCheck()
 {

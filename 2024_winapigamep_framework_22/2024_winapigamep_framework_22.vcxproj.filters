@@ -136,9 +136,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="KDRTextScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Road.h">
       <Filter>Engine\03. Object\Background</Filter>
     </ClInclude>
@@ -146,7 +143,17 @@
     <ClInclude Include="Unit.h">
       <Filter>Engine\03. Object\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="Pawn.h" />
+    <ClInclude Include="DefenseScene.h" />
+    <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Pawn.h">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="Rook.h">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="Bishop.h">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -231,9 +238,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="KDRTextScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Road.cpp">
       <Filter>Engine\03. Object\Background</Filter>
     </ClCompile>
@@ -241,6 +245,19 @@
     <ClCompile Include="Unit.cpp">
       <Filter>Engine\03. Object\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="DefenseScene.cpp" />
+    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Pawn.cpp">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClCompile>
+    <ClCompile Include="Rook.cpp">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClCompile>
+    <ClCompile Include="Bishop.cpp">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

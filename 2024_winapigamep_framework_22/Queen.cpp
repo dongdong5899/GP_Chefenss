@@ -1,28 +1,28 @@
 #include "pch.h"
-#include "Rook.h"
+#include "Queen.h"
 #include "MapManager.h"
-
-Rook::Rook()
+Queen::Queen()
 {
 }
 
-Rook::~Rook()
+Queen::~Queen()
 {
 }
 
-void Rook::Update()
+void Queen::Update()
 {
 }
 
-void Rook::Render(HDC _hdc)
+void Queen::Render(HDC _hdc)
 {
 }
 
 
-void Rook::RangeCheck()
+
+void Queen::RangeCheck()
 {
 	vector<vector<Object*>> map = GET_SINGLE(MapManager)->GetMapTileData();
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		Vec2 attackCheckPos = m_tilePos;
 		while (true) {
 			if (attackCheckPos.x < 0 || attackCheckPos.y < 0 || map[0].size() < attackCheckPos.x || map.size() < attackCheckPos.y) {

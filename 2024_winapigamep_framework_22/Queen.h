@@ -1,18 +1,18 @@
 #pragma once
 #include "Unit.h"
-class Rook :
+class Queen :
     public Unit
 {
 public:
-    Rook();
-    ~Rook();
+    Queen();
+    ~Queen();
 public:
     void Update() override;
     void Render(HDC _hdc) override;
     // Unit을(를) 통해 상속됨
     void RangeCheck() override;
 private:
-    float xAttackRange[4] = { 1,0,-1,0 };
-    float yAttackRange[4] = { 0,1,0,-1 };
+    float xAttackRange[8] = { 1,0,-1,0,-1,1,-1,1 };
+    float yAttackRange[8] = { 0,1,0,-1,1,1,-1,-1 };
 };
 

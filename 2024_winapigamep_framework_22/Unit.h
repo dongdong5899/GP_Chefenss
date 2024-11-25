@@ -4,7 +4,7 @@
 #include "Road.h"
 struct Stat
 {
-    float AttackSpeed;
+    float AttackCooldown;
     float AttackDamage;
 };
 
@@ -16,14 +16,15 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
 public:
-    virtual void Attack() abstract;
     virtual void RangeCheck() abstract;
+    void Attack();
+    bool AttackCoolTimeCheck(float fdt);
 public:
     Stat stat;
     vector<Enemy> enemyList;
     int cost;
-    Vec2 m_pos;
-    Vec2 m_currentPos;
+    Vec2 m_tilePos;
     vector<Road*> attackRange;
+    float attackCooldown;
 };
 

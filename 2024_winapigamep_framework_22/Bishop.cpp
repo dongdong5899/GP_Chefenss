@@ -20,7 +20,7 @@ void Bishop::Render(HDC _hdc)
 
 void Bishop::RangeCheck()
 {
-	vector<vector<Object*>> map = GET_SINGLE(MapManager)->GetMapTileData();
+	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	for (int i = 0; i < 4; i++) {
 		Vec2 attackCheckPos = m_tilePos;
 		while (true) {

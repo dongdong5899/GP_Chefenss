@@ -36,3 +36,13 @@ enum class MAP_SIZE
 	SMALL,
 	BIG,
 };
+
+enum class UNIT_TYPE 
+{
+	PAWN,
+	KNIGHT,
+	BISHOP,
+	ROOK,
+	QUEEN,
+	END
+};

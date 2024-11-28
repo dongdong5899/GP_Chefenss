@@ -5,6 +5,8 @@
 #include "Wall.h"
 #include "Enemy.h"
 #include "MapManager.h"
+#include "InputManager.h"
+#include "UnitManager.h"
 
 void DefenseScene::Init()
 {
@@ -49,4 +51,9 @@ void DefenseScene::Init()
 	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
 	AddObject(pEnemy, LAYER::ENEMY);
 	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+}
+
+void DefenseScene::Update()
+{
+	
 }

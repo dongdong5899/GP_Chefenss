@@ -14,7 +14,7 @@ public:
 	vector<vector<Tile*>> GetMapTileData() { return m_currentMapTileVec; }
 	void SetMapTileData(vector<vector<Tile*>> _tileData) { m_currentMapTileVec = _tileData; }
 	int GetTileSize();
-	Vec2 MapToPos(Vec2 _mapPos);
+	Vec2 PosToMapPos(Vec2 _mapPos);
 public:
 	void SetStartRoad(Road* _startRoad) { m_startTile = _startRoad; }
 	Road* GetStartRoad() { return m_startTile; }

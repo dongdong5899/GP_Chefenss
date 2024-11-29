@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MapManager.h"
+#include "InputManager.h"
 
 
 void MapManager::Init()
@@ -23,10 +24,19 @@ int MapManager::GetTileSize()
 	return size;
 }
 
-Vec2 MapManager::MapToPos(Vec2 _mapPos)
+Vec2 MapManager::PosToMapPos(Vec2 _pos)
 {
+	int size = GetTileSize();
+	vector<vector<Tile*>> mapData = GetMapTileData();
+	int height = mapData.size();
+	int width = mapData[0].size();
+	POINT startPos = { SCREEN_WIDTH / 2 + size / 2 - ((float)width / 2 + 0.5f) * size, SCREEN_HEIGHT / 2 + size / 2 - ((float)height / 2 + 0.5f) * size - 100 };
 
+	int x = (_pos.x - startPos.x) / size;
+	int y = (_pos.y - startPos.y) / size;
 
-	return Vec2();
+	cout << x << ", " << y << endl;
+
+	return {x, y};
 }
 

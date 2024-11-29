@@ -5,6 +5,8 @@
 #include "Wall.h"
 #include "Enemy.h"
 #include "MapManager.h"
+#include "InputManager.h"
+#include "UnitManager.h"
 
 void DefenseScene::Init()
 {
@@ -49,4 +51,39 @@ void DefenseScene::Init()
 	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
 	AddObject(pEnemy, LAYER::ENEMY);
 	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+}
+
+void DefenseScene::Update()
+{
+	SetUnitType();
+	GenerateUnit();
+}
+
+void DefenseScene::SetUnitType()
+{
+	if (GET_KEYDOWN(KEY_TYPE::Q)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::PAWN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::W)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::KNIGHT);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::E)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::BISHOP);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::R)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::ROOK);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::T)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::QUEEN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+	}
+}
+
+void DefenseScene::GenerateUnit()
+{
+	Object* unit = GET_SINGLE(UnitManager)->GenerateUnit();
+	unit->SetSize({ 0.9f,0.9f });
+	//Tile* tile = GET_SINGLE(MapManager)->
 }

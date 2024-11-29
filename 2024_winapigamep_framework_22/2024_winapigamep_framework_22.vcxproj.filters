@@ -144,7 +144,6 @@
       <Filter>Engine\03. Object\Unit</Filter>
     </ClInclude>
     <ClInclude Include="DefenseScene.h" />
-    <ClInclude Include="MapManager.h" />
     <ClInclude Include="Pawn.h">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClInclude>
@@ -153,6 +152,19 @@
     </ClInclude>
     <ClInclude Include="Bishop.h">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Knight.h">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="Queen.h">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitManager.h">
+      <Filter>Engine\02. Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -246,7 +258,6 @@
       <Filter>Engine\03. Object\Unit</Filter>
     </ClCompile>
     <ClCompile Include="DefenseScene.cpp" />
-    <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Pawn.cpp">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClCompile>
@@ -255,6 +266,19 @@
     </ClCompile>
     <ClCompile Include="Bishop.cpp">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Knight.cpp">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClCompile>
+    <ClCompile Include="Queen.cpp">
+      <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

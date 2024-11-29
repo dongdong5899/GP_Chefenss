@@ -5,10 +5,11 @@
 #include "Wall.h"
 #include "Enemy.h"
 #include "MapManager.h"
+#include "InputManager.h"
 
 void DefenseScene::Init()
 {
-	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
+	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::SMALL);
 	vector<wstring> map = GET_SINGLE(MapManager)->GetMapStrData();
 	int size = GET_SINGLE(MapManager)->GetTileSize();
 	int yPos = 100;
@@ -49,4 +50,9 @@ void DefenseScene::Init()
 	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
 	AddObject(pEnemy, LAYER::ENEMY);
 	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+}
+
+void DefenseScene::Update()
+{
+	GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 }

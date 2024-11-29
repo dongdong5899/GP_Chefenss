@@ -55,5 +55,35 @@ void DefenseScene::Init()
 
 void DefenseScene::Update()
 {
-	
+	SetUnitType();
+	GenerateUnit();
+}
+
+void DefenseScene::SetUnitType()
+{
+	if (GET_KEYDOWN(KEY_TYPE::Q)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::PAWN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::W)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::KNIGHT);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::E)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::BISHOP);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::R)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::ROOK);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::T)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::QUEEN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+	}
+}
+
+void DefenseScene::GenerateUnit()
+{
+	Object* unit = GET_SINGLE(UnitManager)->GenerateUnit();
+	unit->SetSize({ 0.9f,0.9f });
+	//Tile* tile = GET_SINGLE(MapManager)->
 }

@@ -3,8 +3,14 @@
 #include "MapManager.h"
 #include "Road.h"
 #include "TimeManager.h"
+#include "ResourceManager.h"
+#include "Texture.h"
+#include "Animator.h"
+
 Pawn::Pawn()
 {
+	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Pawn", L"Texture\\PlayerPawn.bmp");
+	m_vScale = 3;
 }
 Pawn::~Pawn()
 {
@@ -15,6 +21,16 @@ void Pawn::Update()
 
 void Pawn::Render(HDC _hdc)
 {
+	Vec2 vPos = GetPos();
+	Vec2 vSize = GetSize();
+	int width = m_uTexture->GetWidth();
+	int height = m_uTexture->GetHeight();
+	::TransparentBlt(_hdc
+		, (int)(vPos.x - width * m_vScale / 2)
+		, (int)(vPos.y - height * m_vScale / 2)
+		, width * m_vScale, height*m_vScale,
+		m_uTexture->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 

@@ -10,5 +10,6 @@ public:
 private:
 	void SetUnitType();
 	void GenerateUnit();
+	bool WallChecker();
 };
 

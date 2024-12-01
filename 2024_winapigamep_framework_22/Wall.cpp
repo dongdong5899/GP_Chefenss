@@ -2,7 +2,7 @@
 #include "Wall.h"
 #include "GDISelector.h"
 
-Wall::Wall()
+Wall::Wall():m_assignedUnit(nullptr)
 {
 
 }

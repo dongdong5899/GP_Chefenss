@@ -1,9 +1,12 @@
 #include "pch.h"
 #include "Rook.h"
 #include "MapManager.h"
-
+#include "Texture.h"
+#include "ResourceManager.h"
 Rook::Rook()
 {
+	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Rook", L"Texture\\PlayerRook.bmp");
+	m_vScale = 3;
 }
 
 Rook::~Rook()
@@ -16,6 +19,16 @@ void Rook::Update()
 
 void Rook::Render(HDC _hdc)
 {
+	Vec2 vPos = GetPos();
+	Vec2 vSize = GetSize();
+	int width = m_uTexture->GetWidth();
+	int height = m_uTexture->GetHeight();
+	::TransparentBlt(_hdc
+		, (int)(vPos.x - width * m_vScale / 2)
+		, (int)(vPos.y - height * m_vScale / 2)
+		, width * m_vScale, height * m_vScale,
+		m_uTexture->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 

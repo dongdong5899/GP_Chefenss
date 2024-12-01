@@ -3,6 +3,16 @@
 #include "GDISelector.h"
 #include "TimeManager.h"
 
+
+Unit::Unit():m_uTexture(nullptr)
+{
+	
+}
+
+Unit::~Unit()
+{
+}
+
 void Unit::Update()
 {
 	if (AttackCoolTimeCheck(GET_SINGLE(TimeManager)->GetDT())) {
@@ -36,3 +46,5 @@ bool Unit::AttackCoolTimeCheck(float fdt)
 		return false;
 	}
 }
+
+

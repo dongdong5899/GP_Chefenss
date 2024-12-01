@@ -51,6 +51,7 @@ void DefenseScene::Init()
 	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
 	AddObject(pEnemy, LAYER::ENEMY);
 	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+	GET_SINGLE(UnitManager)->Init();
 }
 
 void DefenseScene::Update()
@@ -99,6 +100,9 @@ void DefenseScene::GenerateUnit()
 	Tile* tile = GET_SINGLE(MapManager)->GetMapTileData()[mousePos.y][mousePos.x];
 	Wall* wall = dynamic_cast<Wall*>(tile);
 	if (wall) {
+		if (wall->GetAssignedUnit()) {
+			return;
+		}
 		unit->SetUnitType(GET_SINGLE(UnitManager)->GetUnitType());
 		wall->SetAssignedUnit(unit);
 		unit->SetPos(wall->GetPos());

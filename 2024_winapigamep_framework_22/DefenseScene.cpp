@@ -9,7 +9,7 @@
 
 void DefenseScene::Init()
 {
-	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::SMALL);
+	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<wstring> map = GET_SINGLE(MapManager)->GetMapStrData();
 	int size = GET_SINGLE(MapManager)->GetTileSize();
 	int yPos = 100;
@@ -44,15 +44,18 @@ void DefenseScene::Init()
 	}
 	GET_SINGLE(MapManager)->SetMapTileData(m_currentMapTileVec);
 
-
-	Enemy* pEnemy = new Enemy;
-	pEnemy->SetName(L"Enemy");
-	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
-	AddObject(pEnemy, LAYER::ENEMY);
-	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
 }
 
 void DefenseScene::Update()
 {
-	GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
+	Scene::Update();
+	if (GET_SINGLE(InputManager)->GetKey(KEY_TYPE::F) == KEY_STATE::DOWN)
+	{
+		int size = GET_SINGLE(MapManager)->GetTileSize();
+		Enemy* pEnemy = new Enemy;
+		pEnemy->SetName(L"Enemy");
+		pEnemy->SetSize({ size * 0.9f, size * 0.9f });
+		AddObject(pEnemy, LAYER::ENEMY);
+		GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+	}
 }

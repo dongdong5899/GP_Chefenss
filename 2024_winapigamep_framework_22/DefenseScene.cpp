@@ -88,6 +88,16 @@ void DefenseScene::SetUnitType()
 
 void DefenseScene::GenerateUnit()
 {
+	Scene::Update();
+	if (GET_SINGLE(InputManager)->GetKey(KEY_TYPE::F) == KEY_STATE::DOWN)
+	{
+		int size = GET_SINGLE(MapManager)->GetTileSize();
+		Enemy* pEnemy = new Enemy;
+		pEnemy->SetName(L"Enemy");
+		pEnemy->SetSize({ size * 0.9f, size * 0.9f });
+		AddObject(pEnemy, LAYER::ENEMY);
+		GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+	}
 	Unit* unit = GET_SINGLE(UnitManager)->GenerateUnit();
 	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();

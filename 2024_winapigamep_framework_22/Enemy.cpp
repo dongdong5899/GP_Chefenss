@@ -6,14 +6,15 @@
 #include "TimeManager.h"
 #include "MapManager.h"
 
-const int dirX[4] = {1, 0, -1, 0};
-const int dirY[4] = {0, 1, 0, -1};
+int xDir[] = {-1, 0, 1, 0};
+int yDir[] = {0, -1, 0, 1};
 
 Enemy::Enemy()
 	: m_hp(5)
 	, m_lastMoveTime(0)
 	, m_moveDuration(0.25f)
 	, m_road(nullptr)
+	, m_movement{1, 0}
 {
 	this->AddComponent<Collider>();
 }
@@ -33,15 +34,48 @@ void Enemy::Update()
 		GetOwner()->SetAssignedEnemy(nullptr);
 		Vec2 tilePos = GetOwner()->GetTilePos();
 
-		for (int i = 0; i < 4; ++i)
+		vector<Vec2> nextMovement;
+		wchar_t tileChar = GET_SINGLE(MapManager)->GetMapStrData()[tilePos.y][tilePos.x];
+		if (tileChar == L'E')
 		{
-			Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + dirY[i]][tilePos.x + dirX[i]];
-			Road* road = dynamic_cast<Road*>(tile);
-			if (road != nullptr)
+			Die();
+			return;
+		}
+		else if (tileChar == L'0')
+		{
+			for (int i = 0; i < 4; ++i)
 			{
-				road->AssignEnemy(this);
-				break;
+				wchar_t turnTileChar = GET_SINGLE(MapManager)->GetMapStrData()[tilePos.y + yDir[i]][tilePos.x + xDir[i]];
+				if (turnTileChar == L'E')
+				{
+					SetMovement({ xDir[i], yDir[i] });
+					nextMovement.clear();
+					break;
+				}
+				if (turnTileChar == L'1' || turnTileChar == L'0')
+				{
+					Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + yDir[i]][tilePos.x + xDir[i]];
+					Road* road = dynamic_cast<Road*>(tile);
+					if (road != nullptr)
+					{
+						nextMovement.push_back({ xDir[i], yDir[i] });
+					}
+				}
 			}
+		}
+		if (nextMovement.size() != 0)
+		{
+			int index = rand() % nextMovement.size();
+			SetMovement(nextMovement[index]);
+		}
+
+		Vec2 movement = GetMovement();
+		cout << movement.x << ", " << movement.y << endl;
+		Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + movement.y][tilePos.x + movement.x];
+		Road* road = dynamic_cast<Road*>(tile);
+		if (road != nullptr)
+		{
+			road->AssignEnemy(this);
 		}
 	}
 }
@@ -84,5 +118,6 @@ void Enemy::ExitCollision(Collider* _other)
 
 void Enemy::Die()
 {
+	SetDead();
 	cout << "Die\n";
 }

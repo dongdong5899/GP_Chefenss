@@ -79,6 +79,8 @@ void DefenseScene::Update()
 		GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
 		GenerateUnit();
 	}
+
+	GET_SINGLE(UnitManager)->UnitSelect();
 }
 
 
@@ -106,25 +108,8 @@ void DefenseScene::SetUnitType()
 
 void DefenseScene::GenerateUnit()
 {
-	
-	Unit* unit = GET_SINGLE(UnitManager)->GenerateUnit();
-	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
-	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
-	int mapWidth = map[1].size();
-	int mapHeight = map.size();
-	if (mousePos.x < 0 || mousePos.y < 0|| mousePos.x >= mapWidth || mousePos.y >= mapHeight) {
-		return;
+	Unit* unit = GET_SINGLE(UnitManager)->UnitGenerate();
+	if (unit != nullptr) {
+		AddObject(unit,LAYER::PLAYER);
 	}
-		
-	Tile* tile = GET_SINGLE(MapManager)->GetMapTileData()[mousePos.y][mousePos.x];
-	Wall* wall = dynamic_cast<Wall*>(tile);
-	if (wall) {
-		if (wall->GetAssignedUnit()) {
-			return;
-		}
-		unit->SetUnitType(GET_SINGLE(UnitManager)->GetUnitType());
-		wall->SetAssignedUnit(unit);
-		unit->SetPos(wall->GetPos());
-	}
-	AddObject(unit,LAYER::PLAYER);
 }

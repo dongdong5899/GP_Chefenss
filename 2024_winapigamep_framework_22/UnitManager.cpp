@@ -92,16 +92,24 @@ void UnitManager::UnitSelect()
 			Tile* tile = map[mousePos.y][mousePos.x];
 
 			Wall* wall = dynamic_cast<Wall*>(tile);
-			if (wall) {
-				if (wall->GetAssignedUnit()) {
-					return;
-				}
-				m_currentUnit->SetPos(wall->GetPos());
+			if (wall) { 
+				if (wall->GetAssignedUnit()) 
+					m_currentUnit->SetPos(GET_SINGLE(InputManager)->GetMousePos());
+				else 
+					m_currentUnit->SetPos(wall->GetPos());
 			}
 		}
 		m_prevUnitType = m_currentUnitType;
 	}
 	
+}
+
+void UnitManager::UnitDelete()
+{
+	if (m_currentUnit) {
+		GET_SINGLE(EventManager)->DeleteObject(m_currentUnit);
+		m_currentUnit = nullptr;
+	}
 }
 
 

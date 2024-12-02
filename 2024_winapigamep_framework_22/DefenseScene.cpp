@@ -1,17 +1,23 @@
 #include "pch.h"
 #include "DefenseScene.h"
-#include "Object.h"
-#include "Road.h"
-#include "Wall.h"
-#include "Enemy.h"
 #include "MapManager.h"
 #include "InputManager.h"
 #include "UnitManager.h"
 #include "TimeManager.h"
-#include "PawnEnemy.h"
-#include "BishopEnemy.h"
 #include "EnemyManager.h"
 #include "ResourceManager.h"
+
+#include "Object.h"
+#include "Road.h"
+#include "Wall.h"
+
+#include "Enemy.h"
+#include "PawnEnemy.h"
+#include "BishopEnemy.h"
+#include "KnightEnemy.h"
+#include "RookEnemy.h"
+#include "QueenEnemy.h"
+
 #include "Texture.h"
 
 DefenseScene::DefenseScene()
@@ -48,21 +54,24 @@ void DefenseScene::Update()
 	}
 
 	if (GET_KEYDOWN(KEY_TYPE::A)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy<PawnEnemy>();
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::PAWN);
 		AddObject(pEnemy, LAYER::ENEMY);
 	}
-	if (GET_KEYDOWN(KEY_TYPE::S)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy<BishopEnemy>();
+	else if (GET_KEYDOWN(KEY_TYPE::S)) {
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::BISHOP);
 		AddObject(pEnemy, LAYER::ENEMY);
 	}
-	if (GET_KEYDOWN(KEY_TYPE::D)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::BISHOP);
+	else if (GET_KEYDOWN(KEY_TYPE::D)) {
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::KNIGHT);
+		AddObject(pEnemy, LAYER::ENEMY);
 	}
-	if (GET_KEYDOWN(KEY_TYPE::F)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::ROOK);
+	else if (GET_KEYDOWN(KEY_TYPE::F)) {
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::ROOK);
+		AddObject(pEnemy, LAYER::ENEMY);
 	}
-	if (GET_KEYDOWN(KEY_TYPE::G)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::QUEEN);
+	else if (GET_KEYDOWN(KEY_TYPE::G)) {
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::QUEEN);
+		AddObject(pEnemy, LAYER::ENEMY);
 	}
 
 	SetUnitType();

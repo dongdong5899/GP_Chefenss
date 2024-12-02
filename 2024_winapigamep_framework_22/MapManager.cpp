@@ -9,7 +9,7 @@
 
 void MapManager::Init()
 {
-	SetMapOffset({ 200, -100 });
+	SetMapOffset({ 200, -50 });
 }
 
 void MapManager::Update()

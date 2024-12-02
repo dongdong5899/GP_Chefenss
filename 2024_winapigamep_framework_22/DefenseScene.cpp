@@ -20,6 +20,8 @@
 
 #include "Texture.h"
 
+#include "TextPro.h"
+
 DefenseScene::DefenseScene()
 	: m_lastUpdateTime(0)
 	, m_UpdateDuration(0.1f)
@@ -36,6 +38,11 @@ DefenseScene::~DefenseScene()
 
 void DefenseScene::Init()
 {
+	TextPro* pWaveText = new TextPro();
+	pWaveText->SetText(L"Wave");
+	pWaveText->SetPos({ SCREEN_WIDTH / 2, 50 });
+	AddObject(pWaveText, LAYER::UI);
+
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();
 	for (Object* pObj : createdObj)

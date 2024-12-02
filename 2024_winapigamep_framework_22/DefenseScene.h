@@ -1,23 +1,28 @@
 #pragma once
 #include "Scene.h"
+class Texture;
 class DefenseScene : public Scene
 {
 public:
+	DefenseScene();
+	~DefenseScene();
+public:
 	// Scene을(를) 통해 상속됨
 	virtual void Init() override;
-	void Update() override;
+	virtual void Update() override;
+	virtual void Render(HDC _hdc) override;
 
 private:
-	void ResetTimer(float _updateDuration) 
-	{ 
-		m_lastUpdateTime = 0; 
-		m_UpdateDuration = _updateDuration; 
-	}
 	void SetUnitType();
 	void GenerateUnit();
 	bool WallChecker();
+	void SetTexture(Texture* _texture) { m_backgroundTexture = _texture; }
+	Texture* GetTexture() { return m_backgroundTexture; }
+	float GetScale() { return m_backgroundScale; }
 private:
 	float m_lastUpdateTime;
 	float m_UpdateDuration;
+	Texture* m_backgroundTexture;
+	float m_backgroundScale;
 };
 

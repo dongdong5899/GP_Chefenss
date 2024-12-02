@@ -5,6 +5,8 @@
 #include "EventManager.h"
 #include "TimeManager.h"
 #include "MapManager.h"
+#include "Texture.h"
+#include "Health.h"
 
 int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
@@ -12,11 +14,17 @@ int yDir[] = {0, -1, 0, 1};
 Enemy::Enemy()
 	: m_hp(5)
 	, m_moveDuration(5)
+	, m_uTexture(nullptr)
+	, m_vScale(1)
 	, m_currnetUpdateCount(0)
 	, m_road(nullptr)
 	, m_movement{1, 0}
 {
-	this->AddComponent<Collider>();
+	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
+	float size = (float)tileSize / 20.f;
+	SetScale(size);
+
+	AddComponent<Health>();
 }
 
 Enemy::~Enemy()
@@ -30,7 +38,6 @@ void Enemy::Update()
 	{
 		m_currnetUpdateCount = 0;
 
-		GetOwner()->SetAssignedEnemy(nullptr);
 		Vec2 tilePos = GetOwner()->GetTilePos();
 
 		vector<Vec2> nextMovement;
@@ -74,49 +81,32 @@ void Enemy::Update()
 		if (road != nullptr)
 		{
 			PassRoad(road);
-			road->AssignEnemy(this);
+			GetOwner()->RemoveAssignedEnemy(this);
+			road->AddAssignedEnemy(this);
 		}
 	}
 }
 
 void Enemy::Render(HDC _hdc)
-{	
-	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
-	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
+{
+	ComponentRender(_hdc);
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
-	RECT_RENDER(_hdc, vPos.x, vPos.y
-		, vSize.x, vSize.y);
-	ComponentRender(_hdc);
-	//SelectObject(_hdc, oldbrush); 
-	//DeleteObject(brush);
-}
-
-void Enemy::EnterCollision(Collider* _other)
-{
-	std::cout << "Enter" << std::endl;
-	Object* pOtherObj = _other->GetOwner();
-	wstring str = pOtherObj->GetName();
-	if (pOtherObj->GetName() == L"PlayerBullet")
-	{
-		m_hp -= 1;
-		if (m_hp <= 0)
-			Die();
-	}
-}
-
-void Enemy::StayCollision(Collider* _other)
-{
-	//std::cout << "Stay" << std::endl;
-}
-
-void Enemy::ExitCollision(Collider* _other)
-{
-	std::cout << "Exit" << std::endl;
+	Texture* texture = GetTexture();
+	int width = texture->GetWidth();
+	int height = texture->GetHeight();
+	float textureScale = GetScale();
+	::TransparentBlt(_hdc
+		, (int)(vPos.x - width * textureScale / 2)
+		, (int)(vPos.y - height * textureScale / 2)
+		, width * textureScale, height * textureScale
+		, texture->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 void Enemy::Die()
 {
+	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(this);
 	cout << "Die\n";
 }

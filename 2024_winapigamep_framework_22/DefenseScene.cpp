@@ -38,10 +38,10 @@ DefenseScene::~DefenseScene()
 
 void DefenseScene::Init()
 {
-	TextPro* pWaveText = new TextPro();
-	pWaveText->SetText(L"Wave");
-	pWaveText->SetPos({ SCREEN_WIDTH / 2, 50 });
-	AddObject(pWaveText, LAYER::UI);
+	m_waveText = new TextPro();
+	m_waveText->SetText(L"Wave : ");
+	m_waveText->SetPos({ SCREEN_WIDTH / 2, 50 });
+	AddObject(m_waveText, LAYER::UI);
 
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();

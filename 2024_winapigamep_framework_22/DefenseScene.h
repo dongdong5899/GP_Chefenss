@@ -15,7 +15,6 @@ public:
 private:
 	void SetUnitType();
 	void GenerateUnit();
-	bool WallChecker();
 	void SetTexture(Texture* _texture) { m_backgroundTexture = _texture; }
 	Texture* GetTexture() { return m_backgroundTexture; }
 	float GetScale() { return m_backgroundScale; }

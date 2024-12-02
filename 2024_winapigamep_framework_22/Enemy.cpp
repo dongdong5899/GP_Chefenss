@@ -41,7 +41,7 @@ void Enemy::Update()
 			Die();
 			return;
 		}
-		else if (tileChar == L'0')
+		else if (tileChar == L'T')
 		{
 			for (int i = 0; i < 4; ++i)
 			{
@@ -52,11 +52,11 @@ void Enemy::Update()
 					nextMovement.clear();
 					break;
 				}
-				if (turnTileChar == L'1' || turnTileChar == L'0')
+				if (turnTileChar == (L'0' + i))
 				{
 					Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + yDir[i]][tilePos.x + xDir[i]];
 					Road* road = dynamic_cast<Road*>(tile);
-					if (road != nullptr)
+					if (road != nullptr && !IsPassedRoad(road))
 					{
 						nextMovement.push_back({ xDir[i], yDir[i] });
 					}
@@ -70,11 +70,11 @@ void Enemy::Update()
 		}
 
 		Vec2 movement = GetMovement();
-		cout << movement.x << ", " << movement.y << endl;
 		Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + movement.y][tilePos.x + movement.x];
 		Road* road = dynamic_cast<Road*>(tile);
 		if (road != nullptr)
 		{
+			PassRoad(road);
 			road->AssignEnemy(this);
 		}
 	}

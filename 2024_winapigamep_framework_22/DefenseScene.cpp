@@ -10,7 +10,7 @@
 
 void DefenseScene::Init()
 {
-	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::SMALL);
+	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<wstring> map = GET_SINGLE(MapManager)->GetMapStrData();
 	int size = GET_SINGLE(MapManager)->GetTileSize();
 	int yPos = 100;
@@ -57,7 +57,7 @@ void DefenseScene::Init()
 void DefenseScene::Update()
 {
 	Scene::Update();
-	if (GET_SINGLE(InputManager)->GetKey(KEY_TYPE::F) == KEY_STATE::DOWN)
+	if (GET_KEYDOWN(KEY_TYPE::F))
 	{
 		int size = GET_SINGLE(MapManager)->GetTileSize();
 		Enemy* pEnemy = new Enemy;

@@ -8,11 +8,16 @@ public:
 	void Init();
 	void Update();
 public:
-	void SetUnitType(UNIT_TYPE _unitType) { m_currentUnit = _unitType; }
-	UNIT_TYPE GetUnitType() { return m_currentUnit; }
-	Unit* GenerateUnit();
-	
+	void SetUnitType(UNIT_TYPE _unitType) { m_currentUnitType = _unitType; }
+	UNIT_TYPE GetUnitType() { return m_currentUnitType; }
+	Unit* TypeUnitGenerate();
+	Unit* UnitGenerate();
+	void UnitSelect();
+	void SetSelectMode(bool _selectMode) { m_selectMode = _selectMode; }
 private:
-	UNIT_TYPE m_currentUnit;
+	UNIT_TYPE m_currentUnitType;
+	UNIT_TYPE m_prevUnitType;
+	Unit* m_currentUnit;
+	bool m_selectMode;
 };
 

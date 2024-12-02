@@ -18,7 +18,7 @@ public:
     void Update() override;
     void Render(HDC _hdc) override;
 public:
-    virtual void RangeCheck() abstract;
+    virtual vector<Road*> RangeCheck() abstract;
     void Attack();
     bool AttackCoolTimeCheck(float fdt);
     void SetUnitType(UNIT_TYPE unitType) { m_unitType = unitType; }

@@ -10,7 +10,7 @@ int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
 
 Enemy::Enemy()
-	: m_hp(5)
+	: m_hp(1)
 	, m_lastMoveTime(0)
 	, m_moveDuration(0.25f)
 	, m_road(nullptr)

@@ -8,6 +8,7 @@ Bishop::Bishop()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Bishop", L"Texture\\PlayerBishop.bmp");
 	m_vScale = 3;
+	cost = 7;
 }
 
 Bishop::~Bishop()

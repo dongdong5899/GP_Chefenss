@@ -7,6 +7,7 @@ Queen::Queen()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp");
 	m_vScale = 3;
+	cost = 15;
 }
 
 Queen::~Queen()

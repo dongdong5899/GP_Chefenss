@@ -7,7 +7,7 @@
 #include "MapManager.h"
 #include "InputManager.h"
 #include "UnitManager.h"
-
+#include "GameManager.h"
 void DefenseScene::Init()
 {
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::SMALL);
@@ -52,6 +52,7 @@ void DefenseScene::Init()
 	AddObject(pEnemy, LAYER::ENEMY);
 	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
 	GET_SINGLE(UnitManager)->Init();
+	GET_SINGLE(GameManager)->Init();
 }
 
 void DefenseScene::Update()
@@ -66,7 +67,13 @@ void DefenseScene::Update()
 		AddObject(pEnemy, LAYER::ENEMY);
 		GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
 	}
+
 	SetUnitType();
+
+	if (GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
+		
+	}
+
 	if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 		GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
 		GenerateUnit();
@@ -98,16 +105,19 @@ void DefenseScene::SetUnitType()
 
 void DefenseScene::GenerateUnit()
 {
-	
-	Unit* unit = GET_SINGLE(UnitManager)->GenerateUnit();
 	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	int mapWidth = map[1].size();
 	int mapHeight = map.size();
-	if (mousePos.x < 0 || mousePos.y < 0|| mousePos.x >= mapWidth || mousePos.y >= mapHeight) {
+	if (mousePos.x < 0 || mousePos.y < 0 || mousePos.x >= mapWidth || mousePos.y >= mapHeight) {
 		return;
 	}
-		
+
+	Unit* unit = GET_SINGLE(UnitManager)->GenerateUnit();
+	if (unit->cost <= GET_SINGLE(GameManager)->GetGold()) {
+		return;
+	}
+	GET_SINGLE(GameManager)->AddGold(-unit->cost);
 	Tile* tile = GET_SINGLE(MapManager)->GetMapTileData()[mousePos.y][mousePos.x];
 	Wall* wall = dynamic_cast<Wall*>(tile);
 	if (wall) {

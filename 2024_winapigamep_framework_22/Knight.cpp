@@ -7,6 +7,7 @@ Knight::Knight()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Knight", L"Texture\\PlayerKnight.bmp");
 	m_vScale = 3;
+	cost = 7;
 }
 
 Knight::~Knight()

@@ -11,6 +11,8 @@ Pawn::Pawn()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Pawn", L"Texture\\PlayerPawn.bmp");
 	m_vScale = 3;
+	cost = 5;
+	stat.AttackDamage = 1.f;
 }
 Pawn::~Pawn()
 {

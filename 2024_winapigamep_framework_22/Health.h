@@ -16,9 +16,11 @@ public:
 		if (_isSetCurrentHealth)
 			m_currnetHealth = m_maxHealth;
 	}
+	void SetColor(BRUSH_TYPE _color) { m_color = _color; }
 	int GetHealth() { return m_currnetHealth; }
 	void ApplyDamage(int _damage) { m_currnetHealth -= _damage; }
 private:
+	BRUSH_TYPE m_color;
 	int m_maxHealth;
 	int m_currnetHealth;
 };

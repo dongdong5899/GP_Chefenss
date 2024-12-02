@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "RookEnemy.h"
 #include "ResourceManager.h"
+#include "Health.h"
 
 RookEnemy::RookEnemy()
 {
@@ -8,6 +9,7 @@ RookEnemy::RookEnemy()
 		TextureLoad(L"RookEnemy", L"Texture\\EnemyRook.bmp"));
 	SetHP(30);
 	SetMoveDuration(4);
+	GetComponent<Health>()->SetColor(BRUSH_TYPE::RED);
 }
 
 RookEnemy::~RookEnemy()

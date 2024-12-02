@@ -8,52 +8,34 @@
 #include "InputManager.h"
 #include "UnitManager.h"
 #include "TimeManager.h"
+#include "PawnEnemy.h"
+#include "BishopEnemy.h"
+#include "EnemyManager.h"
+#include "ResourceManager.h"
+#include "Texture.h"
+
+DefenseScene::DefenseScene()
+	: m_lastUpdateTime(0)
+	, m_UpdateDuration(0.1f)
+	, m_backgroundTexture(nullptr)
+	, m_backgroundScale(1.2f)
+{
+	SetTexture(GET_SINGLE(ResourceManager)->
+		TextureLoad(L"Background", L"Texture\\Background.bmp"));
+}
+
+DefenseScene::~DefenseScene()
+{
+}
 
 void DefenseScene::Init()
 {
-	ResetTimer(0.1f);
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
-	vector<wstring> map = GET_SINGLE(MapManager)->GetMapStrData();
-	int size = GET_SINGLE(MapManager)->GetTileSize();
-	int yPos = 100;
-	int height = map.size();
-	int width = map[0].size();
-	vector<vector<Tile*>> m_currentMapTileVec;
-	for (int y = 0; y < height; ++y)
+	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();
+	for (Object* pObj : createdObj)
 	{
-		vector<Tile*> tileLine;
-		for (int x = 0; x < width; ++x)
-		{
-			Tile* pTile = nullptr;
-			if (map[y][x] == L'бс')
-			{
-				pTile = new Wall;
-				pTile->SetName(L"Wall");
-			}
-			else
-			{
-				pTile = new Road;
-				pTile->SetName(L"Road");
-				if (map[y][x] == L'S')
-					GET_SINGLE(MapManager)->SetStartRoad(dynamic_cast<Road*>(pTile));
-			}
-			pTile->SetTilePos({ x, y });
-			pTile->SetPos({ SCREEN_WIDTH / 2 + size / 2 + (x - (float)width / 2) * size, SCREEN_HEIGHT / 2 + size / 2 + (y - (float)height / 2) * size - yPos });
-			pTile->SetSize({ size, size });
-			AddObject(pTile, LAYER::BACKGROUND);
-			tileLine.push_back(pTile);
-		}
-		m_currentMapTileVec.push_back(tileLine);
+		AddObject(pObj, LAYER::BACKGROUND);
 	}
-	GET_SINGLE(MapManager)->SetMapTileData(m_currentMapTileVec);
-
-
-	Enemy* pEnemy = new Enemy;
-	pEnemy->SetName(L"Enemy");
-	pEnemy->SetSize({ size * 0.9f, size * 0.9f });
-	AddObject(pEnemy, LAYER::ENEMY);
-	GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
-	GET_SINGLE(UnitManager)->Init();
 }
 
 void DefenseScene::Update()
@@ -65,20 +47,43 @@ void DefenseScene::Update()
 		Scene::Update();
 	}
 
-	if (GET_KEYDOWN(KEY_TYPE::F))
-	{
-		int size = GET_SINGLE(MapManager)->GetTileSize();
-		Enemy* pEnemy = new Enemy;
-		pEnemy->SetName(L"Enemy");
-		pEnemy->SetSize({ size * 0.9f, size * 0.9f });
+	if (GET_KEYDOWN(KEY_TYPE::A)) {
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy<PawnEnemy>();
 		AddObject(pEnemy, LAYER::ENEMY);
-		GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
 	}
+	if (GET_KEYDOWN(KEY_TYPE::S)) {
+		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy<BishopEnemy>();
+		AddObject(pEnemy, LAYER::ENEMY);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::D)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::BISHOP);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::F)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::ROOK);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::G)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::QUEEN);
+	}
+
 	SetUnitType();
 	if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 		GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
 		GenerateUnit();
 	}
+}
+
+void DefenseScene::Render(HDC _hdc)
+{
+	Texture* texture = GetTexture();
+	int width = texture->GetWidth();
+	int height = texture->GetHeight();
+	float textureScale = GetScale();
+	::TransparentBlt(_hdc, -50, 0
+		, width * textureScale, height * textureScale
+		, texture->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
+
+	Scene::Render(_hdc);
 }
 
 

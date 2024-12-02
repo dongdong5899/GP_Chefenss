@@ -86,8 +86,8 @@ void DefenseScene::Update()
 	}
 
 	if (GET_SINGLE(UnitManager)->GetSelectMode()) {
-		//GET_SINGLE(UnitManager)->UnitSelect();
 		SetUnitType();
+		GET_SINGLE(UnitManager)->UnitSelect();
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
 			GenerateUnit();

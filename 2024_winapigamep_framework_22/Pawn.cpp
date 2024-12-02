@@ -16,11 +16,12 @@ Pawn::Pawn()
 	m_vScale = size;
 	cost = 5;
 	stat.AttackDamage = 1.f;
-	RangeCheck();
 }
+
 Pawn::~Pawn()
 {
 }
+
 void Pawn::Update()
 {
 	

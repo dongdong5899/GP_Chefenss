@@ -16,7 +16,6 @@ Unit::~Unit()
 
 void Unit::Update()
 {
-	
 }
 
 void Unit::Render(HDC _hdc)

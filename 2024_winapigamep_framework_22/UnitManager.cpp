@@ -8,7 +8,9 @@
 #include "MapManager.h"
 #include "InputManager.h"
 #include "Wall.h"
-
+#include "SceneManager.h"
+#include "Scene.h"
+#include "EventManager.h"
 void UnitManager::Init()
 {
 	m_currentUnitType = UNIT_TYPE::END;
@@ -70,25 +72,36 @@ Unit* UnitManager::UnitGenerate()
 void UnitManager::UnitSelect()
 {
 	if (m_currentUnitType != UNIT_TYPE::END) {
-		if (m_currentUnitType != m_prevUnitType)
+		if (m_currentUnitType != m_prevUnitType) {
+			if (m_currentUnit) {
+				GET_SINGLE(EventManager)->DeleteObject(m_currentUnit);
+			}
 			m_currentUnit = TypeUnitGenerate();
+			GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(m_currentUnit,LAYER::PLAYER);
+		}
 		Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 		vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
+
 		int mapWidth = map[1].size();
 		int mapHeight = map.size();
+
 		if (mousePos.x < 0 || mousePos.y < 0 || mousePos.x >= mapWidth || mousePos.y >= mapHeight) {
-			return;
+			m_currentUnit->SetPos(GET_SINGLE(InputManager)->GetMousePos());
 		}
-		Tile* tile = GET_SINGLE(MapManager)->GetMapTileData()[mousePos.y][mousePos.x];
-		Wall* wall = dynamic_cast<Wall*>(tile);
-		if (wall) {
-			if (wall->GetAssignedUnit()) {
-				return;
+		else {
+			Tile* tile = map[mousePos.y][mousePos.x];
+
+			Wall* wall = dynamic_cast<Wall*>(tile);
+			if (wall) {
+				if (wall->GetAssignedUnit()) {
+					return;
+				}
+				m_currentUnit->SetPos(wall->GetPos());
 			}
-			m_currentUnit->SetPos(wall->GetPos());
 		}
-		m_prevUnitType = m_currentUnitType; 
+		m_prevUnitType = m_currentUnitType;
 	}
+	
 }
 
 

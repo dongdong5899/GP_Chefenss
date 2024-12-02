@@ -19,6 +19,8 @@ public:
 	Vec2 GetMovement() { return m_movement; }
 	void SetHP(int _hp) { m_hp = _hp; }
 	int GetHP() { return m_hp; }
+	void SetHpIndex(int _index) { m_hpIndex = _index; }
+	int GetHpIndex() { return m_hpIndex; }
 	void SetTexture(Texture* _texture) { m_uTexture = _texture; }
 	Texture* GetTexture() { return m_uTexture; }
 	void SetScale(float _scale) { m_vScale = _scale; }
@@ -32,6 +34,7 @@ private:
 	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
 private:
 	int m_hp;
+	int m_hpIndex;
 	int m_moveDuration;
 	int m_currnetUpdateCount;
 	Texture* m_uTexture;

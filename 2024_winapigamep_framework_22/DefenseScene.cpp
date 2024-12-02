@@ -87,6 +87,7 @@ void DefenseScene::Render(HDC _hdc)
 	int width = texture->GetWidth();
 	int height = texture->GetHeight();
 	float textureScale = GetScale();
+	
 	::TransparentBlt(_hdc, -50, 0
 		, width * textureScale, height * textureScale
 		, texture->GetTexDC()

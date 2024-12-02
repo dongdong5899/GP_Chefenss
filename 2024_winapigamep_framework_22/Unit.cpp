@@ -29,8 +29,9 @@ void Unit::Attack()
 {
 	for (Road*& range : attackRange)
 	{
-		Enemy* enemy = range->GetAssignedEnemy();
-		if (enemy != nullptr) {
+		vector<Enemy*> enemies = range->GetAssignedEnemy();
+		for (Enemy* enemy : enemies)
+		{
 			enemy->ApplyDamage(stat.AttackDamage);
 		}
 	}

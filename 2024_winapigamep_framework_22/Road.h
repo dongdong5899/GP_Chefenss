@@ -9,10 +9,10 @@ public:
 	~Road();
 public:
 	void Update() override;
-	Enemy* GetAssignedEnemy() { return m_assignedEnemy; }
-	void SetAssignedEnemy(Enemy* _enemy) { m_assignedEnemy = _enemy; }
-	void AssignEnemy(Enemy* _enemy);
-	bool IsAssignedEnemy() { return m_assignedEnemy != nullptr; }
+	vector<Enemy*> GetAssignedEnemy() { return m_assignedEnemy; }
+	void AddAssignedEnemy(Enemy* _enemy);
+	void RemoveAssignedEnemy(Enemy* _enemy);
 private:
-	Enemy* m_assignedEnemy;
+	vector<Enemy*> m_assignedEnemy;
+	int m_assignedEnemyCount;
 };

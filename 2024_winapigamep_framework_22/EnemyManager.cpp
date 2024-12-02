@@ -48,7 +48,7 @@ Enemy* EnemyManager::CreateEnemy(UNIT_TYPE _type)
 		int size = GET_SINGLE(MapManager)->GetTileSize();
 		pEnemy->SetName(L"Enemy");
 		pEnemy->SetSize({ size, size });
-		GET_SINGLE(MapManager)->GetStartRoad()->AssignEnemy(pEnemy);
+		GET_SINGLE(MapManager)->GetStartRoad()->AddAssignedEnemy(pEnemy);
 		return pEnemy;
 	}
 }

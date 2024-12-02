@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "MapManager.h"
 #include "Texture.h"
+#include "Health.h"
 
 int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
@@ -22,6 +23,8 @@ Enemy::Enemy()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	SetScale(size);
+
+	AddComponent<Health>();
 }
 
 Enemy::~Enemy()
@@ -35,7 +38,6 @@ void Enemy::Update()
 	{
 		m_currnetUpdateCount = 0;
 
-		GetOwner()->SetAssignedEnemy(nullptr);
 		Vec2 tilePos = GetOwner()->GetTilePos();
 
 		vector<Vec2> nextMovement;
@@ -79,13 +81,15 @@ void Enemy::Update()
 		if (road != nullptr)
 		{
 			PassRoad(road);
-			road->AssignEnemy(this);
+			GetOwner()->RemoveAssignedEnemy(this);
+			road->AddAssignedEnemy(this);
 		}
 	}
 }
 
 void Enemy::Render(HDC _hdc)
 {
+	ComponentRender(_hdc);
 	Vec2 vPos = GetPos();
 	Vec2 vSize = GetSize();
 	Texture* texture = GetTexture();
@@ -102,6 +106,7 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::Die()
 {
+	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(this);
 	cout << "Die\n";
 }

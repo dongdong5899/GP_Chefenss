@@ -15,9 +15,9 @@ Unit::~Unit()
 
 void Unit::Update()
 {
-	if (AttackCoolTimeCheck(GET_SINGLE(TimeManager)->GetDT())) {
+	/*if (AttackCoolTimeCheck(GET_SINGLE(TimeManager)->GetDT())) {*/
 		Attack();
-	}
+	/*}*/
 }
 
 void Unit::Render(HDC _hdc)
@@ -32,6 +32,7 @@ void Unit::Attack()
 		Enemy* enemy = range->GetAssignedEnemy();
 		if (enemy != nullptr) {
 			enemy->ApplyDamage(stat.AttackDamage);
+			cout << "hit";
 		}
 	}
 }

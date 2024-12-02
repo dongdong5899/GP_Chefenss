@@ -7,6 +7,7 @@ Rook::Rook()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Rook", L"Texture\\PlayerRook.bmp");
 	m_vScale = 3;
+	cost = 10;
 }
 
 Rook::~Rook()

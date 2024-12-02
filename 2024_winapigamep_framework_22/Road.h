@@ -9,7 +9,6 @@ public:
 	~Road();
 public:
 	void Update() override;
-	void Render(HDC _hdc) override;
 	Enemy* GetAssignedEnemy() { return m_assignedEnemy; }
 	void SetAssignedEnemy(Enemy* _enemy) { m_assignedEnemy = _enemy; }
 	void AssignEnemy(Enemy* _enemy);

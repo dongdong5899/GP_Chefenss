@@ -1,5 +1,6 @@
 #pragma once
 
+class Object;
 class Tile;
 class Road;
 class MapManager
@@ -10,6 +11,9 @@ public:
 	void Update();
 public:
 	void SetMapMode(MAP_SIZE _mapSize);
+	void SetMapOffset(Vec2 _offset) { m_offset = _offset; }
+	Vec2 GetMapOffset() { return m_offset; }
+	vector<Object*> CreateTiles();
 	vector<wstring> GetMapStrData() { return m_currentMapStrVec; }
 	vector<vector<Tile*>> GetMapTileData() { return m_currentMapTileVec; }
 	void SetMapTileData(vector<vector<Tile*>> _tileData) { m_currentMapTileVec = _tileData; }
@@ -45,5 +49,6 @@ private:
 			L"°·°·°·°·°·°·°·°·E°·°·°·°·°·°·",
 		}
 	};
+	Vec2 m_offset;
 };
 

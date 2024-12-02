@@ -2,33 +2,23 @@
 #include "Road.h"
 #include "Enemy.h"
 #include "GDISelector.h"
+#include "ResourceManager.h"
+#include "Texture.h"
 
 Road::Road()
+	: m_assignedEnemy(nullptr)
 {
+	SetTexture(GET_SINGLE(ResourceManager)->
+		TextureLoad(L"Road", L"Texture\\EnemyTile.bmp"));
 }
 
 Road::~Road()
 {
 }
 
-
-
 void Road::Update()
 {
 
-}
-
-void Road::Render(HDC _hdc)
-{
-	{
-		GDISelector pen(_hdc, PEN_TYPE::BLUE);
-		GDISelector brush(_hdc, BRUSH_TYPE::BLUE);
-		Vec2 vPos = GetPos();
-		Vec2 vSize = GetSize();
-		RECT_RENDER(_hdc, vPos.x, vPos.y
-			, vSize.x, vSize.y);
-	}
-	ComponentRender(_hdc);
 }
 
 void Road::AssignEnemy(Enemy* _enemy)

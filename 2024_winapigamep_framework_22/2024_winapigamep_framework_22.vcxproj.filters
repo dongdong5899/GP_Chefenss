@@ -166,9 +166,6 @@
     <ClInclude Include="UnitManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -281,9 +278,6 @@
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
     <ClCompile Include="UnitManager.cpp">
-      <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>

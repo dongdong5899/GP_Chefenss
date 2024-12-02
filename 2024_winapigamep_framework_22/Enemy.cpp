@@ -10,9 +10,9 @@ int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
 
 Enemy::Enemy()
-	: m_hp(1)
-	, m_lastMoveTime(0)
-	, m_moveDuration(0.25f)
+	: m_hp(5)
+	, m_moveDuration(5)
+	, m_currnetUpdateCount(0)
 	, m_road(nullptr)
 	, m_movement{1, 0}
 {
@@ -25,12 +25,11 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	float time = GET_SINGLE(TimeManager)->GetTime();
-	if (m_lastMoveTime + m_moveDuration < time)
+	m_currnetUpdateCount++;
+	if (m_currnetUpdateCount >= m_moveDuration)
 	{
-		m_lastMoveTime = time;
+		m_currnetUpdateCount = 0;
 
-		cout << GetOwner();
 		GetOwner()->SetAssignedEnemy(nullptr);
 		Vec2 tilePos = GetOwner()->GetTilePos();
 
@@ -41,7 +40,7 @@ void Enemy::Update()
 			Die();
 			return;
 		}
-		else if (tileChar == L'0')
+		else if (tileChar == L'T')
 		{
 			for (int i = 0; i < 4; ++i)
 			{
@@ -52,11 +51,11 @@ void Enemy::Update()
 					nextMovement.clear();
 					break;
 				}
-				if (turnTileChar == L'1' || turnTileChar == L'0')
+				if (turnTileChar == (L'0' + i))
 				{
 					Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + yDir[i]][tilePos.x + xDir[i]];
 					Road* road = dynamic_cast<Road*>(tile);
-					if (road != nullptr)
+					if (road != nullptr && !IsPassedRoad(road))
 					{
 						nextMovement.push_back({ xDir[i], yDir[i] });
 					}
@@ -70,11 +69,11 @@ void Enemy::Update()
 		}
 
 		Vec2 movement = GetMovement();
-		cout << movement.x << ", " << movement.y << endl;
 		Object* tile = GET_SINGLE(MapManager)->GetMapTileData()[tilePos.y + movement.y][tilePos.x + movement.x];
 		Road* road = dynamic_cast<Road*>(tile);
 		if (road != nullptr)
 		{
+			PassRoad(road);
 			road->AssignEnemy(this);
 		}
 	}
@@ -101,8 +100,8 @@ void Enemy::EnterCollision(Collider* _other)
 	if (pOtherObj->GetName() == L"PlayerBullet")
 	{
 		m_hp -= 1;
-		if(m_hp <=0)
-			GET_SINGLE(EventManager)->DeleteObject(this);
+		if (m_hp <= 0)
+			Die();
 	}
 }
 
@@ -118,6 +117,6 @@ void Enemy::ExitCollision(Collider* _other)
 
 void Enemy::Die()
 {
-	SetDead();
+	GET_SINGLE(EventManager)->DeleteObject(this);
 	cout << "Die\n";
 }

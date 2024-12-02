@@ -81,12 +81,8 @@ void DefenseScene::Update()
 		AddObject(pEnemy, LAYER::ENEMY);
 	}
 
-	if (GET_KEYDOWN(KEY_TYPE::CTRL)) {
-		GET_SINGLE(UnitManager)->SetSelectMode(!GET_SINGLE(UnitManager)->GetSelectMode());
-	}
-
+	SetUnitType();
 	if (GET_SINGLE(UnitManager)->GetSelectMode()) {
-		SetUnitType();
 		GET_SINGLE(UnitManager)->UnitSelect();
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
@@ -117,21 +113,28 @@ void DefenseScene::SetUnitType()
 {
 	if (GET_KEYDOWN(KEY_TYPE::Q)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::PAWN);
+		GET_SINGLE(UnitManager)->SetSelectMode(true);
 	}
 	if (GET_KEYDOWN(KEY_TYPE::W)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::KNIGHT);
+		GET_SINGLE(UnitManager)->SetSelectMode(true);
 	}
 	if (GET_KEYDOWN(KEY_TYPE::E)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::BISHOP);
+		GET_SINGLE(UnitManager)->SetSelectMode(true);
 	}
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::ROOK);
+		GET_SINGLE(UnitManager)->SetSelectMode(true);
 	}
 	if (GET_KEYDOWN(KEY_TYPE::T)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::QUEEN);
+		GET_SINGLE(UnitManager)->SetSelectMode(true);
 	}
 	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+		GET_SINGLE(UnitManager)->UnitDelete();
+		GET_SINGLE(UnitManager)->SetSelectMode(false);
 	}
 }
 

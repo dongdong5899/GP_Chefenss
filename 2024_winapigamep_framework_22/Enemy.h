@@ -16,7 +16,7 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 public:
-	void SetMoveDuration(float _duration) { m_moveDuration = _duration; }
+	int GetMoveSpeed() { return m_moveDuration; }
 	int GetModify() { return m_hp; }
 	void SetOwner(Road* _road) { m_road = _road; }
 	Road* GetOwner() { return m_road; }
@@ -28,8 +28,8 @@ public:
 	void Die();
 private:
 	int m_hp;
-	float m_lastMoveTime;
-	float m_moveDuration;
+	int m_moveDuration;
+	int m_currnetUpdateCount;
 	Road* m_road;
 	Vec2 m_movement;
 	std::set<Road*> m_passedRoadSet;

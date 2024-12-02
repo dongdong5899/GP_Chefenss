@@ -7,9 +7,11 @@
 #include "MapManager.h"
 #include "InputManager.h"
 #include "UnitManager.h"
+#include "TimeManager.h"
 
 void DefenseScene::Init()
 {
+	ResetTimer(0.1f);
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<wstring> map = GET_SINGLE(MapManager)->GetMapStrData();
 	int size = GET_SINGLE(MapManager)->GetTileSize();
@@ -56,7 +58,13 @@ void DefenseScene::Init()
 
 void DefenseScene::Update()
 {
-	Scene::Update();
+	float time = GET_SINGLE(TimeManager)->GetTime();
+	if (m_lastUpdateTime + m_UpdateDuration < time)
+	{
+		m_lastUpdateTime = time;
+		Scene::Update();
+	}
+
 	if (GET_KEYDOWN(KEY_TYPE::F))
 	{
 		int size = GET_SINGLE(MapManager)->GetTileSize();

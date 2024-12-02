@@ -74,13 +74,20 @@ void DefenseScene::Update()
 		AddObject(pEnemy, LAYER::ENEMY);
 	}
 
-	SetUnitType();
-	if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
-		GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
-		GenerateUnit();
+	if (GET_KEYDOWN(KEY_TYPE::CTRL)) {
+		GET_SINGLE(UnitManager)->SetSelectMode(!GET_SINGLE(UnitManager)->GetSelectMode());
 	}
 
-	GET_SINGLE(UnitManager)->UnitSelect();
+	if (GET_SINGLE(UnitManager)->GetSelectMode()) {
+		//GET_SINGLE(UnitManager)->UnitSelect();
+		SetUnitType();
+		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
+			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
+			GenerateUnit();
+		}
+	}
+
+
 }
 
 void DefenseScene::Render(HDC _hdc)

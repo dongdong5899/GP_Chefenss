@@ -13,6 +13,7 @@ public:
 	Unit* TypeUnitGenerate();
 	Unit* UnitGenerate();
 	void UnitSelect();
+	bool GetSelectMode() { return m_selectMode; }
 	void SetSelectMode(bool _selectMode) { m_selectMode = _selectMode; }
 private:
 	UNIT_TYPE m_currentUnitType;

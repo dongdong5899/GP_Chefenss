@@ -40,24 +40,26 @@ Unit* UnitManager::TypeUnitGenerate()
 
 Unit* UnitManager::UnitGenerate()
 {
-	Unit* unit = TypeUnitGenerate();
-	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
+ 	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	int mapWidth = map[1].size();
 	int mapHeight = map.size();
 	if (mousePos.x < 0 || mousePos.y < 0 || mousePos.x >= mapWidth || mousePos.y >= mapHeight) {
 		return nullptr;
 	}
+	Unit* unit = nullptr;
 
 	Tile* tile = GET_SINGLE(MapManager)->GetMapTileData()[mousePos.y][mousePos.x];
 	Wall* wall = dynamic_cast<Wall*>(tile);
+	cout << wall->GetPos().x;
 	if (wall) {
 		if (wall->GetAssignedUnit()) {
 			return nullptr;
 		}
+		unit = TypeUnitGenerate();
 		unit->SetUnitType(GET_SINGLE(UnitManager)->GetUnitType());
-		wall->SetAssignedUnit(unit);
 		unit->SetPos(wall->GetPos());
+		wall->SetAssignedUnit(unit);
 	}
 	m_currentUnitType = UNIT_TYPE::END;
 	return unit;

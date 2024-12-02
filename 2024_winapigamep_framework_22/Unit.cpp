@@ -2,6 +2,7 @@
 #include "Unit.h"
 #include "GDISelector.h"
 #include "TimeManager.h"
+#include "MapManager.h"
 
 
 Unit::Unit():m_uTexture(nullptr)
@@ -15,9 +16,7 @@ Unit::~Unit()
 
 void Unit::Update()
 {
-	/*if (AttackCoolTimeCheck(GET_SINGLE(TimeManager)->GetDT())) {*/
-		Attack();
-	/*}*/
+	
 }
 
 void Unit::Render(HDC _hdc)

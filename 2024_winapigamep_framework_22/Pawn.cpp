@@ -23,12 +23,21 @@ Pawn::~Pawn()
 }
 void Pawn::Update()
 {
-	Unit::Attack();
+	
 }
 
 void Pawn::Render(HDC _hdc)
 {
-	Unit::Render(_hdc);
+	Vec2 vPos = GetPos();
+	Vec2 vSize = GetSize();
+	int width = m_uTexture->GetWidth();
+	int height = m_uTexture->GetHeight();
+	::TransparentBlt(_hdc
+		, (int)(vPos.x - width * m_vScale / 2)
+		, (int)(vPos.y - height * m_vScale / 2)
+		, width * m_vScale, height * m_vScale,
+		m_uTexture->GetTexDC()
+		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 

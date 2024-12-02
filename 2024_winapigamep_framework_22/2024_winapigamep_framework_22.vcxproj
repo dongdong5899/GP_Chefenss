@@ -184,6 +184,7 @@
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Knight.h" />
+    <ClInclude Include="KnightEnemy.h" />
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pawn.h" />
@@ -192,11 +193,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Queen.h" />
+    <ClInclude Include="QueenEnemy.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="Rook.h" />
+    <ClInclude Include="RookEnemy.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="targetver.h" />
@@ -227,6 +230,7 @@
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Knight.cpp" />
+    <ClCompile Include="KnightEnemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -235,10 +239,12 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Queen.cpp" />
+    <ClCompile Include="QueenEnemy.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="Rook.cpp" />
+    <ClCompile Include="RookEnemy.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Texture.cpp" />

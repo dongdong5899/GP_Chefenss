@@ -16,6 +16,7 @@ Pawn::Pawn()
 	m_vScale = size;
 	cost = 5;
 	stat.AttackDamage = 1.f;
+	stat.AttackCooldown = 0.3f;
 }
 
 Pawn::~Pawn()
@@ -24,7 +25,8 @@ Pawn::~Pawn()
 
 void Pawn::Update()
 {
-	
+	if(isDeployed)
+		Unit::Update();
 }
 
 void Pawn::Render(HDC _hdc)
@@ -48,7 +50,7 @@ vector<Road*> Pawn::RangeCheck()
 	m_tilePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	vector<Road*> vRange;
 	for (int i = 0; i < 4; i++) {
-		Tile* tile = map[(int)(m_tilePos.x + xAttackRange[i])][(int)(m_tilePos.y + yAttackRange[i])];
+		Tile* tile = map[(int)(m_tilePos.y + yAttackRange[i])][(int)(m_tilePos.x + xAttackRange[i])];
 		Road* road = dynamic_cast<Road*>(tile);
 		if (road) 
 		{

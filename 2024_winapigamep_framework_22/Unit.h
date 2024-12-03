@@ -22,6 +22,7 @@ public:
     void Attack();
     bool AttackCoolTimeCheck(float fdt);
     void SetUnitType(UNIT_TYPE unitType) { m_unitType = unitType; }
+    void SetDeploy(bool deploy) { isDeployed = deploy; }
 public:
     Stat stat;
     vector<Enemy> enemyList;
@@ -33,5 +34,7 @@ public:
     std::string unitName,unitDescription;
     Texture* m_uTexture;
     int m_vScale;
+    bool rangeCheck;
+    bool isDeployed;
 };
 

@@ -5,7 +5,7 @@
 #include "MapManager.h"
 
 
-Unit::Unit():m_uTexture(nullptr)
+Unit::Unit():m_uTexture(nullptr), attackCooldown(0)
 {
 	
 }
@@ -16,6 +16,17 @@ Unit::~Unit()
 
 void Unit::Update()
 {
+	if (!rangeCheck) {
+		rangeCheck = true;
+		RangeCheck();
+	}
+	else {
+		attackCooldown+=GET_SINGLE(TimeManager)->GetDT();
+		if (attackCooldown > stat.AttackCooldown) {
+			attackCooldown = 0;
+			Attack();
+		}
+	}
 }
 
 void Unit::Render(HDC _hdc)
@@ -31,7 +42,7 @@ void Unit::Attack()
 		for (Enemy* enemy : enemies)
 		{
 			enemy->ApplyDamage(stat.AttackDamage);
-			cout << "hit";
+			cout << enemy->GetHP()<<endl;
 		}
 	}
 }

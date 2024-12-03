@@ -64,6 +64,7 @@ Unit* UnitManager::UnitGenerate()
 		wall->SetAssignedUnit(unit);
 	}
 	m_currentUnitType = UNIT_TYPE::END;
+	unit->SetDeploy(true);
 	return unit;
 }
 

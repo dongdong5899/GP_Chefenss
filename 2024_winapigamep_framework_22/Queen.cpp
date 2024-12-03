@@ -3,6 +3,7 @@
 #include "MapManager.h"
 #include "ResourceManager.h"
 #include "Texture.h"
+#include "InputManager.h"
 Queen::Queen()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp");
@@ -10,6 +11,8 @@ Queen::Queen()
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
 	cost = 15;
+	stat.AttackDamage = 10.f;
+	stat.AttackCooldown = 0.1f;
 }
 
 Queen::~Queen()
@@ -18,6 +21,9 @@ Queen::~Queen()
 
 void Queen::Update()
 {
+	if (isDeployed) {
+		Unit::Update();
+	}
 }
 
 void Queen::Render(HDC _hdc)
@@ -38,15 +44,16 @@ vector<Road*> Queen::RangeCheck()
 {
 	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
 	vector<Road*> vRange;
+	m_tilePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	for (int i = 0; i < 8; i++) {
 		Vec2 attackCheckPos = m_tilePos;
 		while (true) {
-			if (attackCheckPos.x < 0 || attackCheckPos.y < 0 || map[0].size() < attackCheckPos.x || map.size() < attackCheckPos.y) {
+			if (attackCheckPos.x + xAttackRange[i] < 0 || attackCheckPos.y + yAttackRange[i] < 0 || map[0].size() <= attackCheckPos.x + xAttackRange[i] || map.size() <= attackCheckPos.y + yAttackRange[i]) {
 				break;
 			}
 			attackCheckPos.x += xAttackRange[i];
 			attackCheckPos.y += yAttackRange[i];
-			Tile* tile = map[(int)(attackCheckPos.x)][(int)(attackCheckPos.y)];
+			Tile* tile = map[(int)(attackCheckPos.y)][(int)(attackCheckPos.x)];
 			Road* road = dynamic_cast<Road*>(tile);
 			if (road)
 			{

@@ -181,6 +181,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="Health.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />

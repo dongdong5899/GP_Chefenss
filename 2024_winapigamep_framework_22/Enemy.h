@@ -29,6 +29,7 @@ public:
 	int GetMoveSpeed() { return m_moveDuration; }
 	void ApplyDamage(int _damage);
 	void Die();
+	void SetCost(int _cost) { cost = _cost; }
 private:
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
 	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
@@ -42,5 +43,6 @@ private:
 	Road* m_road;
 	Vec2 m_movement;
 	std::set<Road*> m_passedRoadSet;
+	int cost;
 };
 

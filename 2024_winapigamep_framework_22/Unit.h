@@ -26,7 +26,6 @@ public:
 public:
     Stat stat;
     vector<Enemy> enemyList;
-    int cost;
     Vec2 m_tilePos;
     vector<Road*> attackRange;
     float attackCooldown;

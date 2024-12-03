@@ -3,10 +3,13 @@ class GameManager
 {
 	DECLARE_SINGLE(GameManager);
 public:
+	
 	void Init();
-	void AddGold(int gold) { m_gold += gold; }
-	int GetGold() { return m_gold; }
+	int GetCoin() { return coin; }
+	void SetCoin(int _coin) { coin = _coin; }
+	void AddCoin(int _add) { coin += _add; }
+	bool CanBuy(int cost);
 private:
-	int m_gold;
+	int coin;
 };
 

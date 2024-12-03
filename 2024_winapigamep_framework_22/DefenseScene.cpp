@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "EnemyManager.h"
 #include "ResourceManager.h"
+#include "GameManager.h"
 
 #include "Object.h"
 #include "Road.h"
@@ -85,6 +86,7 @@ void DefenseScene::Update()
 		GET_SINGLE(UnitManager)->UnitSelect();
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
+			if(GET_SINGLE(GameManager)->CanBuy(GET_SINGLE(UnitManager)->GetUnitCost()))
 			GenerateUnit();
 		}
 	}

@@ -9,6 +9,7 @@ RookEnemy::RookEnemy()
 		TextureLoad(L"RookEnemy", L"Texture\\EnemyRook.bmp"));
 	SetHP(30);
 	SetMoveDuration(4);
+	SetCost(400);
 	GetComponent<Health>()->SetColor(BRUSH_TYPE::RED);
 }
 

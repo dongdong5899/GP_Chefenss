@@ -1,7 +1,18 @@
 #include "pch.h"
 #include "GameManager.h"
 
+
+
 void GameManager::Init()
 {
-	m_gold = 5;
+	SetCoin(300);
+}
+
+bool GameManager::CanBuy(int cost)
+{
+	if (coin >= cost) {
+		coin-=cost;
+		return true;
+	}
+	return false;
 }

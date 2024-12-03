@@ -177,10 +177,10 @@
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="Health.h" />
@@ -215,6 +215,7 @@
     <ClInclude Include="UnitManager.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Waver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -229,8 +230,8 @@
     <ClCompile Include="DefenseScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />
@@ -262,6 +263,7 @@
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitManager.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Waver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc" />

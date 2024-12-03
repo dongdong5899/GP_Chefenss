@@ -166,6 +166,17 @@
     <ClInclude Include="UnitManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="BishopEnemy.h" />
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Health.h" />
+    <ClInclude Include="KnightEnemy.h" />
+    <ClInclude Include="PawnEnemy.h" />
+    <ClInclude Include="QueenEnemy.h" />
+    <ClInclude Include="RookEnemy.h" />
+    <ClInclude Include="TextPro.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="Waver.h" />
+    <ClInclude Include="EnemySpawner.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -280,6 +291,17 @@
     <ClCompile Include="UnitManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
+    <ClCompile Include="BishopEnemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Health.cpp" />
+    <ClCompile Include="KnightEnemy.cpp" />
+    <ClCompile Include="PawnEnemy.cpp" />
+    <ClCompile Include="QueenEnemy.cpp" />
+    <ClCompile Include="RookEnemy.cpp" />
+    <ClCompile Include="TextPro.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Waver.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

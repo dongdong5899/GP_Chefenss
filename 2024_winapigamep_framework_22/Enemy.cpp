@@ -104,6 +104,17 @@ void Enemy::Render(HDC _hdc)
 		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
+void Enemy::ApplyDamage(int _damage)
+{
+	int hp = GetHP();
+	hp -= _damage;
+	if (hp < 0) hp = 0;
+	SetHP(hp);
+
+	if (hp <= 0)
+		Die();
+}
+
 void Enemy::Die()
 {
 	GetOwner()->RemoveAssignedEnemy(this);

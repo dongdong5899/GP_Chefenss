@@ -20,7 +20,7 @@
 
 #include "Texture.h"
 
-#include "TextPro.h"
+#include "Waver.h"
 
 DefenseScene::DefenseScene()
 	: m_lastUpdateTime(0)
@@ -38,10 +38,9 @@ DefenseScene::~DefenseScene()
 
 void DefenseScene::Init()
 {
-	m_waveText = new TextPro();
-	m_waveText->SetText(L"Wave : ");
-	m_waveText->SetPos({ SCREEN_WIDTH / 2, 50 });
-	AddObject(m_waveText, LAYER::UI);
+	Waver* waver = new Waver();
+	waver->SetWaveDuration(30.f);
+	AddObject(waver, LAYER::DEFAULT);
 
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();

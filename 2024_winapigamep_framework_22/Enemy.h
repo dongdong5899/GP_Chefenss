@@ -27,7 +27,7 @@ public:
 	float GetScale() { return m_vScale; }
 	void SetMoveDuration(int _count) { m_moveDuration = _count; }
 	int GetMoveSpeed() { return m_moveDuration; }
-	void ApplyDamage(int _damage) { m_hp -= _damage; }
+	void ApplyDamage(int _damage);
 	void Die();
 private:
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }

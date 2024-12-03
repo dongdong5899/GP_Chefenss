@@ -7,6 +7,7 @@
 #include "MapManager.h"
 #include "Texture.h"
 #include "Health.h"
+#include "GameManager.h"
 
 int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
@@ -119,5 +120,6 @@ void Enemy::Die()
 {
 	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(this);
+	GET_SINGLE(GameManager)->AddCoin(cost);
 	cout << "Die\n";
 }

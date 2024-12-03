@@ -9,6 +9,7 @@ KnightEnemy::KnightEnemy()
 		TextureLoad(L"KnightEnemy", L"Texture\\EnemyKnight.bmp"));
 	SetHP(5);
 	SetMoveDuration(1);
+	SetCost(60);
 	GetComponent<Health>()->SetColor(BRUSH_TYPE::GREEN);
 }
 

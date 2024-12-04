@@ -20,6 +20,7 @@
 #include "QueenEnemy.h"
 
 #include "Texture.h"
+#include "TextPro.h"
 
 #include "Waver.h"
 
@@ -27,7 +28,8 @@ DefenseScene::DefenseScene()
 	: m_lastUpdateTime(0)
 	, m_UpdateDuration(0.1f)
 	, m_backgroundTexture(nullptr)
-	, m_backgroundScale(1.2f)
+	, m_backgroundScale(5.f)
+	, m_goldText(nullptr)
 {
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"Background", L"Texture\\Background.bmp"));
@@ -49,6 +51,12 @@ void DefenseScene::Init()
 	{
 		AddObject(pObj, LAYER::BACKGROUND);
 	}
+
+	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
+	m_goldText = new TextPro();
+	m_goldText->SetText(L"Gold : " + std::to_wstring(GET_SINGLE(GameManager)->GetCoin()));
+	m_goldText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 140 + mapOffset.y });
+	AddObject(m_goldText, LAYER::UI);
 }
 
 void DefenseScene::Update()
@@ -90,8 +98,6 @@ void DefenseScene::Update()
 			GenerateUnit();
 		}
 	}
-
-
 }
 
 void DefenseScene::Render(HDC _hdc)

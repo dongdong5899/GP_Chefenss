@@ -49,13 +49,15 @@ void DefenseScene::Init()
 
 	//TestButtonUI
 	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
-	ButtonUI* button = new ButtonUI();
-	button->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 110 + mapOffset.y });
-	button->SetSize({ 100, 100 });
-	AddObject(button, LAYER::UI);
 	//±¸µ¶
-	Button* buttonCompo = button->GetComponent<Button>();
-	buttonCompo->onClick += [this]() { cout << "Click" << endl; };
+	{
+		ButtonUI* button = new ButtonUI();
+		button->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, SCREEN_HEIGHT/2 + 300 + mapOffset.y });
+		button->SetSize({ 100, 100 });
+		AddObject(button, LAYER::UI);
+		Button* buttonCompo = button->GetComponent<Button>();
+		buttonCompo->onClick += [this]() { cout << "Click" << endl; };
+	}
 	//TestButtonUI
 
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
@@ -65,7 +67,6 @@ void DefenseScene::Init()
 		AddObject(pObj, LAYER::BACKGROUND);
 	}
 
-	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
 	m_goldText = new TextPro();
 	m_goldText->SetText(L"Gold : " + std::to_wstring(GET_SINGLE(GameManager)->GetCoin()));
 	m_goldText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 140 + mapOffset.y });
@@ -153,7 +154,9 @@ void DefenseScene::SetUnitType()
 	}
 	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
-		GET_SINGLE(UnitManager)->UnitDelete();
+		if (GET_SINGLE(UnitManager)->GetUnit()) {
+			GET_SINGLE(UnitManager)->UnitDelete();
+		}
 		GET_SINGLE(UnitManager)->SetSelectMode(false);
 	}
 }

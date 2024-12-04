@@ -17,6 +17,7 @@ public:
 	bool GetSelectMode() { return m_selectMode; }
 	void SetSelectMode(bool _selectMode) { m_selectMode = _selectMode; }
 	int GetUnitCost();
+	Unit* GetUnit() { return m_currentUnit; }
 private:
 	UNIT_TYPE m_currentUnitType;
 	UNIT_TYPE m_prevUnitType;

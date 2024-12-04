@@ -41,9 +41,8 @@ void Waver::Update()
 	int remain = (float)round((m_waveEndTime + m_waveDuration - time));
 	if (remain < 0) remain = 0;
 	m_waveDelayText->SetText(L"다음 웨이브까지 : " + std::to_wstring(remain));
-	if (remain == 0)
+	if (remain == 0 && !IsEnd())
 	{
-		cout << GET_SINGLE(TimeManager)->GetTime() << endl;
 		m_waveEndTime = time;
 		m_waveText->SetText(L"Wave : " + std::to_wstring(++m_currentWave + 1));
 		StartWave();

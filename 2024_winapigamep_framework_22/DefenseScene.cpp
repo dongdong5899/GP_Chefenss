@@ -23,6 +23,8 @@
 #include "TextPro.h"
 
 #include "Waver.h"
+#include "ButtonUI.h"
+#include "Button.h"
 
 DefenseScene::DefenseScene()
 	: m_lastUpdateTime(0)
@@ -44,6 +46,17 @@ void DefenseScene::Init()
 	Waver* waver = new Waver();
 	waver->SetWaveDuration(30.f);
 	AddObject(waver, LAYER::DEFAULT);
+
+	//TestButtonUI
+	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
+	ButtonUI* button = new ButtonUI();
+	button->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 110 + mapOffset.y });
+	button->SetSize({ 100, 100 });
+	AddObject(button, LAYER::UI);
+	//±¸µ¶
+	Button* buttonCompo = button->GetComponent<Button>();
+	buttonCompo->onClick += [this]() { cout << "Click" << endl; };
+	//TestButtonUI
 
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();

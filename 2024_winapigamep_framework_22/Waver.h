@@ -28,6 +28,7 @@ private:
             m_spawners.erase(index);
         }
     }
+    bool IsEnd() { return m_currentWave + 1 == m_waveEnemyVec.size(); }
 private:
     TextPro* m_waveText;
     TextPro* m_waveDelayText;

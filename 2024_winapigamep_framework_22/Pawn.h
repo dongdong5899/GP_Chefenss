@@ -14,6 +14,5 @@ public:
 private:
     float xAttackRange[4] = {1,0,-1,0};
     float yAttackRange[4] = { 0,1,0,-1};
-
 };
 

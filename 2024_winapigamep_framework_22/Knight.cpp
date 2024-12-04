@@ -10,8 +10,8 @@ Knight::Knight()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	stat.AttackDamage = 3.f;
-	stat.AttackCooldown = 0.1f;
+	SetAttackDamage(5.f);
+	SetAttackCooldown(0.4f); 
 }
 
 Knight::~Knight()
@@ -48,7 +48,7 @@ vector<Road*> Knight::RangeCheck()
 	vector<Road*> vRange;
 	m_tilePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	for (int i = 0; i < 8; i++) {
-		if (m_tilePos.x + xAttackRange[i] < 0 || m_tilePos.y < 0 
+		if (m_tilePos.x + xAttackRange[i] < 0 || m_tilePos.y  + yAttackRange[i]< 0 
 			|| map[0].size() <= m_tilePos.x + xAttackRange[i] || map.size() <= m_tilePos.y + yAttackRange[i])
 			continue;
 		Tile* tile = map[(int)(m_tilePos.y + yAttackRange[i])][(int)(m_tilePos.x + xAttackRange[i])];

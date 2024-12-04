@@ -14,8 +14,8 @@ Pawn::Pawn()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	stat.AttackDamage = 5.f;
-	stat.AttackCooldown = 0.3f;
+	SetAttackDamage(5.f);
+	SetAttackCooldown(0.5f);
 }
 
 Pawn::~Pawn()
@@ -49,7 +49,7 @@ vector<Road*> Pawn::RangeCheck()
 	m_tilePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 	vector<Road*> vRange;
 	for (int i = 0; i < 4; i++) {
-		if (m_tilePos.x + xAttackRange[i] < 0 || m_tilePos.y < 0
+		if (m_tilePos.x + xAttackRange[i] < 0 || m_tilePos.y+yAttackRange[i] < 0
 			|| map[0].size() <= m_tilePos.x + xAttackRange[i] || map.size() <= m_tilePos.y + yAttackRange[i])
 			continue;
 		Tile* tile = map[(int)(m_tilePos.y + yAttackRange[i])][(int)(m_tilePos.x + xAttackRange[i])];

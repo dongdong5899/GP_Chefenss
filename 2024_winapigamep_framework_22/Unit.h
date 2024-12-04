@@ -14,7 +14,7 @@ class Unit :
 {
 public:
     Unit();
-    ~Unit();
+    virtual ~Unit();
     void Update() override;
     void Render(HDC _hdc) override;
 public:
@@ -23,6 +23,8 @@ public:
     bool AttackCoolTimeCheck(float fdt);
     void SetUnitType(UNIT_TYPE unitType) { m_unitType = unitType; }
     void SetDeploy(bool deploy) { isDeployed = deploy; }
+    void SetAttackDamage(float _damage) { stat.AttackDamage = _damage; }
+    void SetAttackCooldown(float _cooldown) { stat.AttackCooldown = _cooldown; }
 public:
     Stat stat;
     vector<Enemy> enemyList;

@@ -6,9 +6,11 @@ public:
 	
 	void Init();
 	int GetCoin() { return coin; }
-	void SetCoin(int _coin) { coin = _coin; }
-	void AddCoin(int _add) { coin += _add; }
+	void SetCoin(int _coin);
+	void AddCoin(int _add);
 	bool CanBuy(int cost);
+private:
+	void ChangeText();
 private:
 	int coin;
 };

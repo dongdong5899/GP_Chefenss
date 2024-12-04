@@ -21,12 +21,12 @@ Waver::Waver()
 	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
 	m_waveText = new TextPro();
 	m_waveText->SetText(L"Wave : " + std::to_wstring(m_currentWave + 1));
-	m_waveText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 110 + mapOffset.y });
+	m_waveText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 100 + mapOffset.y });
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(m_waveText, LAYER::UI);
 	m_waveDelayText = new TextPro();
 	m_waveDelayText->SetText(L"다음 웨이브까지 : " + std::to_wstring(m_waveDuration));
-	m_waveDelayText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 130 + mapOffset.y });
+	m_waveDelayText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 120 + mapOffset.y });
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(m_waveDelayText, LAYER::UI);
 }

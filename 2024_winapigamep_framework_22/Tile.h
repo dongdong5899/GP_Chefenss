@@ -16,9 +16,12 @@ public:
 	void SetTexture(Texture* _texture) { m_uTexture = _texture; }
 	float GetScale() { return m_vScale; }
 	void SetScale(float _scale) { m_vScale = _scale; }
+	void SetColor(PEN_TYPE _color) { m_color = _color; }
+	PEN_TYPE GetColor() { return m_color; }
 private:
 	Vec2 m_tilePos;
 	Texture* m_uTexture;
+	PEN_TYPE m_color;
 	float m_vScale;
 };
 

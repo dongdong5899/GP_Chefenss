@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "Object.h"
 #include "InputManager.h"
+#include "GDISelector.h"
 
 Button::Button()
 	: onClick()
@@ -22,17 +23,20 @@ void Button::LateUpdate()
 		POINT mousePos = GET_MOUSEPOS;
 		float xDis = abs(mousePos.x - pos.x);
 		float yDis = abs(mousePos.y - pos.y);
-		if (onClick != nullptr && xDis < size.x && yDis < size.y)
+		if (xDis < size.x / 2 && yDis < size.y / 2)
 		{
-			onClick();
+			onClick.Invoke();
 		}
 	}
 }
 
 void Button::Render(HDC _hdc)
 {
-	Object* owner = GetOwner();
-	Vec2 pos = owner->GetPos();
-	Vec2 size = owner->GetSize();
-	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+	{
+		GDISelector pen(_hdc, PEN_TYPE::YELLOW);
+		GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
+		Vec2 pos = GetPos();
+		Vec2 size = GetSize();
+		RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+	}
 }

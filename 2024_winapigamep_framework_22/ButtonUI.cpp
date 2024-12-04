@@ -4,19 +4,19 @@
 
 ButtonUI::ButtonUI()
 {
+	//체크하고싶은애한테 이거 달아주면 됨
 	AddComponent<Button>();
-	GetComponent<Button>()->onClick = [this]() { this->OnClick(); };
+	//GetComponent를 UI만든곳에서 해서 하면 ButtonUI마다 다른 이벤트 실행 가능
+	Button* button = GetComponent<Button>();
+	//캐스트 사이즈 (물론 밖에서 다시 설정가능)
+	button->SetPos(GetPos());
+	button->SetSize(GetSize());
 }
 
 ButtonUI::~ButtonUI()
 {
-}
-
-void ButtonUI::Render(HDC _hdc)
-{
-	Vec2 pos = GetPos();
-	Vec2 size = GetSize();
-	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+	//-=가 안됨;; 쩔수없음
+	GetComponent<Button>()->onClick.Clear();
 }
 
 void ButtonUI::OnClick()

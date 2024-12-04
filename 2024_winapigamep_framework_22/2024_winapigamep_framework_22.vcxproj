@@ -169,6 +169,8 @@
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="BishopEnemy.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
@@ -224,6 +226,8 @@
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="BishopEnemy.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />

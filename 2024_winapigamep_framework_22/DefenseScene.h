@@ -13,18 +13,21 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
 	TextPro* GetGoldText() { return m_goldText; }
-
+	void SetCostTextColor(int index, COLORREF color);
 private:
-	void SetUnitType();
+	void SetUnitType(UNIT_TYPE _unitType);
 	void GenerateUnit();
 	void SetTexture(Texture* _texture) { m_backgroundTexture = _texture; }
 	Texture* GetTexture() { return m_backgroundTexture; }
 	float GetScale() { return m_backgroundScale; }
+	void SetUI();
+	
 private:
 	float m_lastUpdateTime;
 	float m_UpdateDuration;
 	Texture* m_backgroundTexture;
 	float m_backgroundScale;
 	TextPro* m_goldText;
+	TextPro* m_costText[5];
 };
 

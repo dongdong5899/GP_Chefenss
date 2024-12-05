@@ -113,9 +113,9 @@ void UnitManager::UnitDelete()
 	}
 }
 
-int UnitManager::GetUnitCost()
+int UnitManager::GetUnitCost(UNIT_TYPE _unitType)
 {
-	return unitCost[(int)m_currentUnitType];
+	return unitCost[(int)_unitType];
 }
 
 

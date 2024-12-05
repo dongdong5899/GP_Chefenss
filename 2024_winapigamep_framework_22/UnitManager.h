@@ -16,8 +16,9 @@ public:
 	void UnitDelete();
 	bool GetSelectMode() { return m_selectMode; }
 	void SetSelectMode(bool _selectMode) { m_selectMode = _selectMode; }
-	int GetUnitCost();
+	int GetUnitCost(UNIT_TYPE _unitType);
 	Unit* GetUnit() { return m_currentUnit; }
+	vector<int> GetUnitCostVec() { return unitCost;}
 private:
 	UNIT_TYPE m_currentUnitType;
 	UNIT_TYPE m_prevUnitType;

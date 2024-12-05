@@ -24,6 +24,7 @@ void Road::Update()
 
 void Road::AddAssignedEnemy(Enemy* _enemy)
 {
+	cout << "ADD" << _enemy << endl;
 	m_assignedEnemy.push_back(_enemy);
 	_enemy->SetOwner(this);
 	_enemy->SetPos(GetPos());
@@ -35,6 +36,7 @@ void Road::AddAssignedEnemy(Enemy* _enemy)
 
 void Road::RemoveAssignedEnemy(Enemy* _enemy)
 {
+	cout << "REMOVE" << _enemy << endl;
 	auto pos = std::find(m_assignedEnemy.begin(), m_assignedEnemy.end(), _enemy);
 	if (pos != m_assignedEnemy.end())
 	{

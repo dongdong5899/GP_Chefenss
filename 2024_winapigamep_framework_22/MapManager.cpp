@@ -87,8 +87,6 @@ Vec2 MapManager::PosToMapPos(Vec2 _pos)
 	int x = (_pos.x - startPos.x) / size;
 	int y = (_pos.y - startPos.y) / size;
 
-	cout << x << ", " << y << endl;
-
 	return {x, y};
 }
 

@@ -17,7 +17,7 @@ Tile::Tile()
 	SetColor(BRUSH_TYPE::RED);
 }
 
-Tile::~Tile()
+Tile::~Tile() 
 {
 }
 

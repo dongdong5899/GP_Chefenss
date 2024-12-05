@@ -8,7 +8,7 @@ PawnEnemy::PawnEnemy()
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"PawnEnemy", L"Texture\\EnemyPawn.bmp"));
 	SetHP(5);
-	SetMoveDuration(7);
+	SetMoveCooltime(70);
 	SetCost(20);
 }
 

@@ -15,7 +15,7 @@ Pawn::Pawn()
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
 	SetAttackDamage(5.f);
-	SetAttackCooldown(0.5f);
+	SetAttackCooldown(50);
 }
 
 Pawn::~Pawn()

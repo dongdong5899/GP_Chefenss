@@ -25,7 +25,7 @@ public:
 	Texture* GetTexture() { return m_uTexture; }
 	void SetScale(float _scale) { m_vScale = _scale; }
 	float GetScale() { return m_vScale; }
-	void SetMoveDuration(int _count) { m_moveDuration = _count; }
+	void SetMoveCooltime(int _count) { m_moveDuration = _count; }
 	int GetMoveSpeed() { return m_moveDuration; }
 	void ApplyDamage(int _damage);
 	void Die();

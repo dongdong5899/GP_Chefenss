@@ -83,10 +83,8 @@ void Enemy::Update()
 		if (road != nullptr)
 		{
 			PassRoad(road);
-			cout << "MOVE " << this << endl;
 			GetOwner()->RemoveAssignedEnemy(this);
 			road->AddAssignedEnemy(this);
-			cout << "MOVE END " << this << endl;
 		}
 	}
 }
@@ -120,9 +118,7 @@ void Enemy::ApplyDamage(int _damage)
 
 void Enemy::Die()
 {
-	cout << "DIE " << this << endl;
 	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(this);
 	GET_SINGLE(GameManager)->AddCoin(cost);
-	cout << "Die\n";
 }

@@ -28,7 +28,7 @@
 
 DefenseScene::DefenseScene()
 	: m_lastUpdateTime(0)
-	, m_UpdateDuration(0.1f)
+	, m_UpdateDuration(0.01f)
 	, m_backgroundTexture(nullptr)
 	, m_backgroundScale(5.f)
 	, m_goldText(nullptr)
@@ -81,6 +81,7 @@ void DefenseScene::Update()
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
 			GET_SINGLE(GameManager)->Buy(GET_SINGLE(UnitManager)->GetUnitType());
+			GET_SINGLE(UnitManager)->UnitDelete();
 			GenerateUnit();
 		}
 	}

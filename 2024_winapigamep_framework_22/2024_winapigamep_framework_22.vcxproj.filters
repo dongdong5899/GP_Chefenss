@@ -44,6 +44,12 @@
     <Filter Include="Engine\03. Object\Unit\ChessPiece">
       <UniqueIdentifier>{493568e9-a046-4473-8dd3-986cd493f7a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Enemy">
+      <UniqueIdentifier>{49cc980d-24a7-4fc5-8a6b-136f8947116e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\UI">
+      <UniqueIdentifier>{59c0c965-555d-4f3f-b538-f53af2c20b04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -97,13 +103,7 @@
     <ClInclude Include="GameScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="ResourceBase.h">
@@ -139,11 +139,9 @@
     <ClInclude Include="Road.h">
       <Filter>Engine\03. Object\Background</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="Unit.h">
       <Filter>Engine\03. Object\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="DefenseScene.h" />
     <ClInclude Include="Pawn.h">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClInclude>
@@ -153,7 +151,6 @@
     <ClInclude Include="Bishop.h">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h" />
     <ClInclude Include="Knight.h">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClInclude>
@@ -166,17 +163,60 @@
     <ClInclude Include="UnitManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="BishopEnemy.h" />
-    <ClInclude Include="EnemyManager.h" />
-    <ClInclude Include="Health.h" />
-    <ClInclude Include="KnightEnemy.h" />
-    <ClInclude Include="PawnEnemy.h" />
-    <ClInclude Include="QueenEnemy.h" />
-    <ClInclude Include="RookEnemy.h" />
-    <ClInclude Include="TextPro.h" />
-    <ClInclude Include="UI.h" />
-    <ClInclude Include="Waver.h" />
-    <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="KnightEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PawnEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="QueenEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RookEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BishopEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonUI.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DefenseScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TextPro.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Engine\03. Object\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Engine\03. Object\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Waver.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -222,13 +262,7 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="ResourceBase.cpp">
@@ -264,11 +298,9 @@
     <ClCompile Include="Road.cpp">
       <Filter>Engine\03. Object\Background</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Unit.cpp">
       <Filter>Engine\03. Object\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="DefenseScene.cpp" />
     <ClCompile Include="Pawn.cpp">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClCompile>
@@ -278,7 +310,6 @@
     <ClCompile Include="Bishop.cpp">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Knight.cpp">
       <Filter>Engine\03. Object\Unit\ChessPiece</Filter>
     </ClCompile>
@@ -291,17 +322,60 @@
     <ClCompile Include="UnitManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="BishopEnemy.cpp" />
-    <ClCompile Include="EnemyManager.cpp" />
-    <ClCompile Include="Health.cpp" />
-    <ClCompile Include="KnightEnemy.cpp" />
-    <ClCompile Include="PawnEnemy.cpp" />
-    <ClCompile Include="QueenEnemy.cpp" />
-    <ClCompile Include="RookEnemy.cpp" />
-    <ClCompile Include="TextPro.cpp" />
-    <ClCompile Include="UI.cpp" />
-    <ClCompile Include="Waver.cpp" />
-    <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="KnightEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PawnEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="QueenEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RookEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BishopEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Engine\07. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonUI.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DefenseScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TextPro.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Engine\03. Object\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Engine\03. Object\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Waver.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -11,7 +11,7 @@ Rook::Rook()
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
 	SetAttackDamage(5.f);
-	SetAttackCooldown(0.1f);
+	SetAttackCooldown(20);
 }
 
 Rook::~Rook()

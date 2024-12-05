@@ -11,7 +11,7 @@ Queen::Queen()
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
 	SetAttackDamage(10.f);
-	SetAttackCooldown(0.1f);
+	SetAttackCooldown(20);
 }
 
 Queen::~Queen()

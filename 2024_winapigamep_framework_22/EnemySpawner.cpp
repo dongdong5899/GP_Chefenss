@@ -32,11 +32,14 @@ void EnemySpawner::Update()
 
 void EnemySpawner::SpawnEnemy()
 {
-	Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(m_enemySpawnVec[m_enemySpawnIndex++]);
-	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pEnemy, LAYER::ENEMY);
+	UNIT_TYPE enemyType = GetUnitType(m_enemySpawnVec[m_enemySpawnIndex++]);
 
 	if (m_enemySpawnIndex == m_enemySpawnVec.size())
 	{
 		m_isEnd = true;
 	}
+
+	if (enemyType == UNIT_TYPE::END) return;
+	Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(enemyType);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(pEnemy, LAYER::ENEMY);
 }

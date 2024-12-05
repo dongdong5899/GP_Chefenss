@@ -68,26 +68,6 @@ void DefenseScene::Update()
 		Scene::Update();
 	}
 
-	if (GET_KEYDOWN(KEY_TYPE::A)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::PAWN);
-		AddObject(pEnemy, LAYER::ENEMY);
-	}
-	else if (GET_KEYDOWN(KEY_TYPE::S)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::BISHOP);
-		AddObject(pEnemy, LAYER::ENEMY);
-	}
-	else if (GET_KEYDOWN(KEY_TYPE::D)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::KNIGHT);
-		AddObject(pEnemy, LAYER::ENEMY);
-	}
-	else if (GET_KEYDOWN(KEY_TYPE::F)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::ROOK);
-		AddObject(pEnemy, LAYER::ENEMY);
-	}
-	else if (GET_KEYDOWN(KEY_TYPE::G)) {
-		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::QUEEN);
-		AddObject(pEnemy, LAYER::ENEMY);
-	}
 	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
 		if (GET_SINGLE(UnitManager)->GetUnit()) {

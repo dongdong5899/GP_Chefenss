@@ -40,6 +40,10 @@ void Road::RemoveAssignedEnemy(Enemy* _enemy)
 	{
 		m_assignedEnemy.erase(pos);
 	}
+	else
+	{
+		cout << "ELSE" << endl;
+	}
 	for (int i = 0; i < m_assignedEnemy.size(); ++i)
 	{
 		m_assignedEnemy[i]->SetHpIndex(i);

@@ -92,7 +92,6 @@ void Enemy::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
 	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
 	Texture* texture = GetTexture();
 	int width = texture->GetWidth();
 	int height = texture->GetHeight();

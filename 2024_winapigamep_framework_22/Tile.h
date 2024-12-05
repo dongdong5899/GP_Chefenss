@@ -18,13 +18,13 @@ public:
 	void SetScale(float _scale) { m_vScale = _scale; }
 	void SetColor(BRUSH_TYPE _color) { m_fillColor = _color; }
 	BRUSH_TYPE GetColor() { return m_fillColor; }
-	float GetAlpha() { return m_alpha; }
+	BYTE GetAlpha() { return m_alpha; }
 	void SetAlpha(float _alpha) { m_alpha = _alpha; }
 private:
 	Vec2 m_tilePos;
 	Texture* m_uTexture;
 	float m_vScale;
-	float m_alpha;
+	BYTE m_alpha;
 	BRUSH_TYPE m_fillColor;
 };
 

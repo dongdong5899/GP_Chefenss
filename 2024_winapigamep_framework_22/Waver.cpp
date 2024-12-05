@@ -51,13 +51,9 @@ void Waver::Update()
 	for (EnemySpawner* spawner : m_spawners)
 	{
 		if (spawner->IsEnd())
-		{
 			m_deadSpawners.push_back(spawner);
-		}
 		else
-		{
 			spawner->Update();
-		}
 	}
 	for (EnemySpawner* deadSpawner : m_deadSpawners)
 	{
@@ -74,8 +70,8 @@ void Waver::Render(HDC _hdc)
 void Waver::StartWave()
 {
 	EnemySpawner* spawner = new EnemySpawner();
-	vector<UNIT_TYPE> enemyVec = GetCurrentWaveEnemyVec();
-	spawner->SetEnemySpawnVec(enemyVec);
+	wstring enemyDataStr = GetCurrentWaveEnemyVec();
+	spawner->SetEnemySpawnVec(enemyDataStr);
 	int spawnDelay = GetCurrentWaveSpawnDelay();
 	spawner->SetEnemySpawnDelay(spawnDelay);
 	AddSpawner(spawner);

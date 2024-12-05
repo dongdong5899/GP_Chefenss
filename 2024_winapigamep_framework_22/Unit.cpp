@@ -5,7 +5,10 @@
 #include "MapManager.h"
 
 
-Unit::Unit():m_uTexture(nullptr), attackCooldown(0)
+Unit::Unit()
+	: m_uTexture(nullptr)
+	, attackCooldown(0)
+	, rangeCheck(false)
 {
 	
 }
@@ -18,16 +21,14 @@ void Unit::Update()
 {
 	if (!rangeCheck) {
 		rangeCheck = true;
+		cout << "RangeCheck\n";
 		RangeCheck();
 	}
 	else {
-		for (Road*& range : attackRange)
-		{
-			range->SetColor(BRUSH_TYPE::RED);
-			range->SetAlpha((attackCooldown / stat.AttackCooldown) * 255);
-		}
+		SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round((attackCooldown / stat.AttackCooldown) * 255));
 		attackCooldown+=GET_SINGLE(TimeManager)->GetDT();
 		if (attackCooldown > stat.AttackCooldown) {
+			SetAttackRoadColor(BRUSH_TYPE::WHITE, 255);
 			attackCooldown = 0;
 			Attack();
 		}
@@ -60,6 +61,17 @@ bool Unit::AttackCoolTimeCheck(float fdt)
 	else {
 		attackCooldown += fdt;
 		return false;
+	}
+}
+
+void Unit::SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional)
+{
+	for (Road*& range : attackRange)
+	{
+		range->SetColor(_color);
+		BYTE alpha = range->GetAlpha();
+		if (!_isUnconditional && alpha > _alpha && alpha != 255) continue;
+		range->SetAlpha(_alpha);
 	}
 }
 

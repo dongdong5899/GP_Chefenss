@@ -14,7 +14,7 @@ public:
     void SetWaveDuration(float _duration) { m_waveDuration = _duration; }
 private:
     void StartWave();
-    vector<UNIT_TYPE> GetCurrentWaveEnemyVec() { return m_waveEnemyVec[m_currentWave].second; }
+    wstring GetCurrentWaveEnemyVec() { return m_waveEnemyVec[m_currentWave].second; }
     int GetCurrentWaveSpawnDelay() { return m_waveEnemyVec[m_currentWave].first; }
     void AddSpawner(EnemySpawner* _spawner)
     {
@@ -35,10 +35,17 @@ private:
     float m_waveEndTime;
     float m_waveDuration;
     int m_currentWave;
-    vector<std::pair<int, vector<UNIT_TYPE>>> m_waveEnemyVec
+    vector<std::pair<int, wstring>> m_waveEnemyVec
     {
-        {7, {UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN}},
-        {2, {UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN,UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN,UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN, UNIT_TYPE::PAWN}},
+        {1, L"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"},
+        {7, L"P"},
+        {5, L"PPP"},
+        {2, L"PPPPP"},
+        {7, L"PPBP"},
+        {5, L"PPPPBPPPPBPPP"},
+        {10, L"BBB"},
+        {5, L"PBPBPBPB"},
+        {5, L"N"},
     };
     vector<EnemySpawner*> m_spawners;
     vector<EnemySpawner*> m_deadSpawners;

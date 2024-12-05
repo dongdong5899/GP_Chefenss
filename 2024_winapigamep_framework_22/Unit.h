@@ -25,6 +25,8 @@ public:
     void SetDeploy(bool deploy) { isDeployed = deploy; }
     void SetAttackDamage(float _damage) { stat.AttackDamage = _damage; }
     void SetAttackCooldown(float _cooldown) { stat.AttackCooldown = _cooldown; }
+private:
+    void SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional = false);
 public:
     Stat stat;
     vector<Enemy> enemyList;

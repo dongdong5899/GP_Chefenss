@@ -8,7 +8,7 @@ Tile::Tile()
 	: m_tilePos{}
 	, m_uTexture(nullptr)
 	, m_vScale(0)
-	, m_alpha(255)
+	, m_alpha(0)
 	, m_fillColor()
 {
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
@@ -31,12 +31,15 @@ void Tile::Render(HDC _hdc)
 	int height = texture->GetHeight();
 	float textureScale = GetScale();
 
+	BYTE alpha = GetAlpha();
+
 	BLENDFUNCTION bfunc;
 	bfunc.BlendOp = AC_SRC_OVER;
 	bfunc.BlendFlags = 0;
-	bfunc.SourceConstantAlpha = GetAlpha();
+	bfunc.SourceConstantAlpha = 255 - alpha;
 	bfunc.AlphaFormat = 0;
 
+	if (alpha != 0)
 	{
 		GDISelector brush(_hdc, GetColor());
 		RECT_RENDER(_hdc, vPos.x, vPos.y, width * textureScale, height * textureScale);

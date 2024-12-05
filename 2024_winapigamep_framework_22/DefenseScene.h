@@ -21,6 +21,7 @@ private:
 	Texture* GetTexture() { return m_backgroundTexture; }
 	float GetScale() { return m_backgroundScale; }
 	void SetUI();
+	void SetShortcut();
 	
 private:
 	float m_lastUpdateTime;

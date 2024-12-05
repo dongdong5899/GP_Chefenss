@@ -19,19 +19,12 @@ Unit::~Unit()
 
 void Unit::Update()
 {
-	if (!rangeCheck) {
-		rangeCheck = true;
-		cout << "RangeCheck\n";
-		RangeCheck();
-	}
-	else {
-		SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round((attackCooldown / stat.AttackCooldown) * 255));
-		attackCooldown+=GET_SINGLE(TimeManager)->GetDT();
-		if (attackCooldown > stat.AttackCooldown) {
-			SetAttackRoadColor(BRUSH_TYPE::WHITE, 255);
-			attackCooldown = 0;
-			Attack();
-		}
+	SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round((attackCooldown / stat.AttackCooldown) * 255));
+	attackCooldown+=GET_SINGLE(TimeManager)->GetDT();
+	if (attackCooldown > stat.AttackCooldown) {
+		SetAttackRoadColor(BRUSH_TYPE::WHITE, 255);
+		attackCooldown = 0;
+		Attack();
 	}
 }
 

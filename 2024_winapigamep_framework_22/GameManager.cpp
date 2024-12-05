@@ -8,14 +8,14 @@
 
 void GameManager::Init()
 {
-	SetCoin(100000000);
+	SetCoin(300);
 }
 
 void GameManager::SetCoin(int _coin)
 {
 	coin = _coin;
 	CheckUnitCost();
-	ChangeText();
+	ChangeText();         
 }
 
 void GameManager::AddCoin(int _add)

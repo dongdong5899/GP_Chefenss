@@ -82,6 +82,7 @@ void DefenseScene::Update()
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
 			GET_SINGLE(GameManager)->Buy(GET_SINGLE(UnitManager)->GetUnitType());
 			GenerateUnit();
+			GET_SINGLE(UnitManager)->UnitDelete();
 		}
 	}
 }

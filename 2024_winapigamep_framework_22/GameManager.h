@@ -9,6 +9,8 @@ public:
 	void SetCoin(int _coin);
 	void AddCoin(int _add);
 	bool CanBuy(int cost);
+	void Buy(UNIT_TYPE _unitType);
+	void CheckUnitCost();
 private:
 	void ChangeText();
 private:

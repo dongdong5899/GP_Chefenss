@@ -32,6 +32,7 @@ DefenseScene::DefenseScene()
 	, m_backgroundTexture(nullptr)
 	, m_backgroundScale(5.f)
 	, m_goldText(nullptr)
+	, m_costText{ nullptr }
 {
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"Background", L"Texture\\Background.bmp"));
@@ -47,18 +48,7 @@ void DefenseScene::Init()
 	waver->SetWaveDuration(30.f);
 	AddObject(waver, LAYER::DEFAULT);
 
-	//TestButtonUI
-	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
-	//±¸µ¶
-	{
-		ButtonUI* button = new ButtonUI();
-		button->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, SCREEN_HEIGHT/2 + 300 + mapOffset.y });
-		button->SetSize({ 100, 100 });
-		AddObject(button, LAYER::UI);
-		Button* buttonCompo = button->GetComponent<Button>();
-		buttonCompo->onClick += [this]() { cout << "Click" << endl; };
-	}
-	//TestButtonUI
+	SetUI();
 
 	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();
@@ -67,10 +57,6 @@ void DefenseScene::Init()
 		AddObject(pObj, LAYER::BACKGROUND);
 	}
 
-	m_goldText = new TextPro();
-	m_goldText->SetText(L"Gold : " + std::to_wstring(GET_SINGLE(GameManager)->GetCoin()));
-	m_goldText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 140 + mapOffset.y });
-	AddObject(m_goldText, LAYER::UI);
 }
 
 void DefenseScene::Update()
@@ -102,13 +88,19 @@ void DefenseScene::Update()
 		Enemy* pEnemy = GET_SINGLE(EnemyManager)->CreateEnemy(UNIT_TYPE::QUEEN);
 		AddObject(pEnemy, LAYER::ENEMY);
 	}
+	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
+		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+		if (GET_SINGLE(UnitManager)->GetUnit()) {
+			GET_SINGLE(UnitManager)->UnitDelete();
+		}
+		GET_SINGLE(UnitManager)->SetSelectMode(false);
+	}
 
-	SetUnitType();
 	if (GET_SINGLE(UnitManager)->GetSelectMode()) {
 		GET_SINGLE(UnitManager)->UnitSelect();
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
-			if(GET_SINGLE(GameManager)->CanBuy(GET_SINGLE(UnitManager)->GetUnitCost()))
+			GET_SINGLE(GameManager)->Buy(GET_SINGLE(UnitManager)->GetUnitType());
 			GenerateUnit();
 		}
 	}
@@ -130,34 +122,15 @@ void DefenseScene::Render(HDC _hdc)
 }
 
 
-void DefenseScene::SetUnitType()
+void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 {
-	if (GET_KEYDOWN(KEY_TYPE::Q)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::PAWN);
+	if (GET_SINGLE(GameManager)->CanBuy(GET_SINGLE(UnitManager)->GetUnitCost(_unitType)))
+	{
 		GET_SINGLE(UnitManager)->SetSelectMode(true);
+		GET_SINGLE(UnitManager)->SetUnitType(_unitType);
 	}
-	if (GET_KEYDOWN(KEY_TYPE::W)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::KNIGHT);
-		GET_SINGLE(UnitManager)->SetSelectMode(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::E)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::BISHOP);
-		GET_SINGLE(UnitManager)->SetSelectMode(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::R)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::ROOK);
-		GET_SINGLE(UnitManager)->SetSelectMode(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::T)) {
-		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::QUEEN);
-		GET_SINGLE(UnitManager)->SetSelectMode(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::ESC)) {
+	else {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
-		if (GET_SINGLE(UnitManager)->GetUnit()) {
-			GET_SINGLE(UnitManager)->UnitDelete();
-		}
-		GET_SINGLE(UnitManager)->SetSelectMode(false);
 	}
 }
 
@@ -167,4 +140,158 @@ void DefenseScene::GenerateUnit()
 	if (unit != nullptr) {
 		AddObject(unit,LAYER::PLAYER);
 	}
+}
+
+void DefenseScene::SetUI()
+{
+	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
+	//Pawn
+	{
+		ButtonUI* button_backGround = new ButtonUI();
+		button_backGround->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x - 300, SCREEN_HEIGHT / 2 + 300 + mapOffset.y });
+		button_backGround->SetSize({ 100, 100 });
+		button_backGround->SetScale(3.f);
+		button_backGround->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp"));
+		AddObject(button_backGround, LAYER::UI);
+		Button* buttonCompo = button_backGround->GetComponent<Button>();
+		buttonCompo->onClick += [this]() {SetUnitType(UNIT_TYPE::PAWN); };
+
+		ButtonUI* button_unit = new ButtonUI();
+		Vec2 backgroundPos = button_backGround->GetPos();
+		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
+		button_unit->SetSize({ 0,0 });
+		button_unit->SetScale(2.f);
+		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Pawn", L"Texture\\PlayerPawn.bmp"));
+		AddObject(button_unit, LAYER::UI);
+
+		m_costText[0] = new TextPro;
+		m_costText[0]->SetPos({ backgroundPos.x,backgroundPos.y + 15 });
+		m_costText[0]->SetText(L"100");
+		m_costText[0]->SetColor(RGB(255, 0, 0));
+		AddObject(m_costText[0], LAYER::UI);
+	}
+	//Knight
+	{
+		ButtonUI* button_backGround = new ButtonUI();
+		button_backGround->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x - 150, SCREEN_HEIGHT / 2 + 300 + mapOffset.y });
+		button_backGround->SetSize({ 100, 100 });
+		button_backGround->SetScale(3.f);
+		button_backGround->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp"));
+		AddObject(button_backGround, LAYER::UI);
+		Button* buttonCompo = button_backGround->GetComponent<Button>();
+		buttonCompo->onClick += [this]() {SetUnitType(UNIT_TYPE::KNIGHT); };
+
+		ButtonUI* button_unit = new ButtonUI();
+		Vec2 backgroundPos = button_backGround->GetPos();
+		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
+		button_unit->SetSize({ 0,0 });
+		button_unit->SetScale(2.f);
+		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Knight", L"Texture\\PlayerKnight.bmp"));
+		AddObject(button_unit, LAYER::UI);
+
+		m_costText[1] = new TextPro;
+		m_costText[1]->SetPos({ backgroundPos.x,backgroundPos.y + 15 });
+		m_costText[1]->SetText(L"300");
+		m_costText[1]->SetColor(RGB(255, 0, 0));
+		AddObject(m_costText[1], LAYER::UI);
+	}
+	//Bishop
+	{
+		ButtonUI* button_backGround = new ButtonUI();
+		button_backGround->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x , SCREEN_HEIGHT / 2 + 300 + mapOffset.y });
+		button_backGround->SetSize({ 100, 100 });
+		button_backGround->SetScale(3.f);
+		button_backGround->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp"));
+		AddObject(button_backGround, LAYER::UI);
+		Button* buttonCompo = button_backGround->GetComponent<Button>();
+		buttonCompo->onClick += [this]() {SetUnitType(UNIT_TYPE::BISHOP); };
+
+		ButtonUI* button_unit = new ButtonUI();
+		Vec2 backgroundPos = button_backGround->GetPos();
+		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
+		button_unit->SetSize({ 0,0 });
+		button_unit->SetScale(2.f);
+		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Bishop", L"Texture\\PlayerBishop.bmp"));
+		AddObject(button_unit, LAYER::UI);
+
+		m_costText[2] = new TextPro;
+		m_costText[2]->SetPos({ backgroundPos.x,backgroundPos.y + 15 });
+		m_costText[2]->SetText(L"500");
+		m_costText[2]->SetColor(RGB(255, 0, 0));
+		AddObject(m_costText[2], LAYER::UI);
+	}
+	//Rook
+	{
+		ButtonUI* button_backGround = new ButtonUI();
+		button_backGround->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x + 150, SCREEN_HEIGHT / 2 + 300 + mapOffset.y });
+		button_backGround->SetSize({ 100, 100 });
+		button_backGround->SetScale(3.f);
+		button_backGround->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp"));
+		AddObject(button_backGround, LAYER::UI);
+		Button* buttonCompo = button_backGround->GetComponent<Button>();
+		buttonCompo->onClick += [this]() {SetUnitType(UNIT_TYPE::ROOK); };
+
+		ButtonUI* button_unit = new ButtonUI();
+		Vec2 backgroundPos = button_backGround->GetPos();
+		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
+		button_unit->SetSize({ 0,0 });
+		button_unit->SetScale(2.f);
+		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Rook", L"Texture\\PlayerRook.bmp"));
+		AddObject(button_unit, LAYER::UI);
+
+		m_costText[3] = new TextPro;
+		m_costText[3]->SetPos({ backgroundPos.x,backgroundPos.y + 15 });
+		m_costText[3]->SetText(L"2000");
+		m_costText[3]->SetColor(RGB(255, 0, 0));
+		AddObject(m_costText[3], LAYER::UI);
+	}
+	//Queen
+	{
+		ButtonUI* button_backGround = new ButtonUI();
+		button_backGround->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x + 300, SCREEN_HEIGHT / 2 + 300 + mapOffset.y });
+		button_backGround->SetSize({ 100, 100 });
+		button_backGround->SetScale(3.f);
+		button_backGround->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp"));
+		AddObject(button_backGround, LAYER::UI);
+		ButtonUI* button_unit = new ButtonUI();
+		Vec2 backgroundPos = button_backGround->GetPos();
+		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
+		button_unit->SetSize({ 0,0 });
+		button_unit->SetScale(2.f);
+		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp"));
+		AddObject(button_unit, LAYER::UI);
+
+		m_costText[4] = new TextPro;
+		m_costText[4]->SetPos({ backgroundPos.x,backgroundPos.y + 15 });
+		m_costText[4]->SetText(L"5000");
+		m_costText[4]->SetColor(RGB(255, 0, 0));
+		AddObject(m_costText[4], LAYER::UI);
+
+		Button* buttonCompo = button_backGround->GetComponent<Button>();
+		buttonCompo->onClick += [this]() {SetUnitType(UNIT_TYPE::QUEEN); };
+	}
+
+	//goldText
+	{
+		m_goldText = new TextPro();
+		m_goldText->SetText(L"Gold : " + std::to_wstring(GET_SINGLE(GameManager)->GetCoin()));
+		m_goldText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 140 + mapOffset.y });
+		AddObject(m_goldText, LAYER::UI);
+	}
+
+}
+
+void DefenseScene::SetCostTextColor(int index, COLORREF color)
+{
+	m_costText[index]->SetColor(color);
 }

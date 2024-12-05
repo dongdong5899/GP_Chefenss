@@ -53,7 +53,6 @@ Unit* UnitManager::UnitGenerate()
 
 	Tile* tile = GET_SINGLE(MapManager)->GetMapTileData()[mousePos.y][mousePos.x];
 	Wall* wall = dynamic_cast<Wall*>(tile);
-	cout << wall->GetPos().x;
 	if (wall) {
 		if (wall->GetAssignedUnit()) {
 			return nullptr;
@@ -63,7 +62,11 @@ Unit* UnitManager::UnitGenerate()
 		unit->SetPos(wall->GetPos());
 		wall->SetAssignedUnit(unit);
 	}
+	else {
+		return nullptr;
+	}
 	m_currentUnitType = UNIT_TYPE::END;
+	m_prevUnitType = UNIT_TYPE::END;
 	unit->SetDeploy(true);
 	return unit;
 }
@@ -110,6 +113,14 @@ void UnitManager::UnitDelete()
 	if (m_currentUnit) {
 		GET_SINGLE(EventManager)->DeleteObject(m_currentUnit);
 		m_currentUnit = nullptr;
+	}
+}
+
+void UnitManager::SetSelectMode(bool _selectMode)
+{
+	m_selectMode = _selectMode;
+	if (!_selectMode) {
+		m_prevUnitType = UNIT_TYPE::END;
 	}
 }
 

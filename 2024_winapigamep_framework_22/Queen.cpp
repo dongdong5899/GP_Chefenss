@@ -10,8 +10,8 @@ Queen::Queen()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	stat.AttackDamage = 10.f;
-	stat.AttackCooldown = 0.1f;
+	SetAttackDamage(10.f);
+	SetAttackCooldown(0.1f);
 }
 
 Queen::~Queen()

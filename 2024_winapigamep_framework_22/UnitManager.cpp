@@ -60,6 +60,7 @@ Unit* UnitManager::UnitGenerate()
 		unit = TypeUnitGenerate();
 		unit->SetUnitType(GET_SINGLE(UnitManager)->GetUnitType());
 		unit->SetPos(wall->GetPos());
+		unit->RangeCheck();
 		wall->SetAssignedUnit(unit);
 	}
 	else {
@@ -101,7 +102,7 @@ void UnitManager::UnitSelect()
 					m_currentUnit->SetPos(GET_SINGLE(InputManager)->GetMousePos());
 				else 
 					m_currentUnit->SetPos(wall->GetPos());
-			}
+			} 
 		}
 		m_prevUnitType = m_currentUnitType;
 	}

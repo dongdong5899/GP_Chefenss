@@ -39,10 +39,10 @@ enum class MAP_SIZE
 
 enum class UNIT_TYPE 
 {
-	PAWN,
-	KNIGHT,
-	BISHOP,
-	ROOK,
-	QUEEN,
+	PAWN = 0,
+	KNIGHT = 1,
+	BISHOP = 2,
+	ROOK = 3,
+	QUEEN = 4,
 	END
 };

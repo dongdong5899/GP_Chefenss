@@ -11,7 +11,7 @@ Bishop::Bishop()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(3.f);
+	SetAttackDamage(3);
 	SetAttackCooldown(30);
 }
 

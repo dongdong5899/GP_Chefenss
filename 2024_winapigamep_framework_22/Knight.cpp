@@ -10,7 +10,7 @@ Knight::Knight()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(5.f);
+	SetAttackDamage(3);
 	SetAttackCooldown(40); 
 }
 

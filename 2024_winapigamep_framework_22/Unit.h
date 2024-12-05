@@ -5,7 +5,7 @@
 struct Stat
 {
     int AttackCooldown;
-    float AttackDamage;
+    int AttackDamage;
 };
 
 class Texture;
@@ -23,7 +23,7 @@ public:
     bool AttackCoolTimeCheck(float fdt);
     void SetUnitType(UNIT_TYPE unitType) { m_unitType = unitType; }
     void SetDeploy(bool deploy) { isDeployed = deploy; }
-    void SetAttackDamage(float _damage) { stat.AttackDamage = _damage; }
+    void SetAttackDamage(int _damage) { stat.AttackDamage = _damage; }
     void SetAttackCooldown(int _cooldown) { stat.AttackCooldown = _cooldown; }
 private:
     void SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional = false);

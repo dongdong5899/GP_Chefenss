@@ -7,7 +7,7 @@ BishopEnemy::BishopEnemy()
 {
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"BishopEnemy", L"Texture\\EnemyBishop.bmp"));
-	SetHP(5);
+	SetHP(10);
 	SetMoveCooltime(20);
 	SetCost(100);
 	GetComponent<Health>()->SetColor(BRUSH_TYPE::BLUE);

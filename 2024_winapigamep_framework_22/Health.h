@@ -19,6 +19,7 @@ public:
 	void SetColor(BRUSH_TYPE _color) { m_color = _color; }
 	int GetHealth() { return m_currnetHealth; }
 	void ApplyDamage(int _damage) { m_currnetHealth -= _damage; }
+	float GetHealthAmount() { return (float)m_currnetHealth / m_maxHealth; }
 private:
 	BRUSH_TYPE m_color;
 	int m_maxHealth;

@@ -7,7 +7,7 @@ QueenEnemy::QueenEnemy()
 {
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"QueenEnemy", L"Texture\\EnemyQueen.bmp"));
-	SetHP(100);
+	SetHP(200);
 	SetMoveCooltime(70);
 	SetCost(1000);
 	GetComponent<Health>()->SetColor(BRUSH_TYPE::YELLOW);

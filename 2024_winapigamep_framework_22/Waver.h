@@ -40,7 +40,7 @@ private:
         {7, L"P"},
         {5, L"PPP"},
         {2, L"PPPPP"},
-        {7, L"PPBP"},
+        {7, L"PPBP"}, 
         {5, L"PPPPBPPPPBPPP"},
         {10, L"BBB"},
         {5, L"PBPBPBPB"},

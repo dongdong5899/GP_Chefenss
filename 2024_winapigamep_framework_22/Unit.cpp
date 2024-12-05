@@ -21,6 +21,11 @@ void Unit::Update()
 		RangeCheck();
 	}
 	else {
+		for (Road*& range : attackRange)
+		{
+			range->SetColor(BRUSH_TYPE::RED);
+			range->SetAlpha((attackCooldown / stat.AttackCooldown) * 255);
+		}
 		attackCooldown+=GET_SINGLE(TimeManager)->GetDT();
 		if (attackCooldown > stat.AttackCooldown) {
 			attackCooldown = 0;

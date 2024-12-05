@@ -16,12 +16,15 @@ public:
 	void SetTexture(Texture* _texture) { m_uTexture = _texture; }
 	float GetScale() { return m_vScale; }
 	void SetScale(float _scale) { m_vScale = _scale; }
-	void SetColor(PEN_TYPE _color) { m_color = _color; }
-	PEN_TYPE GetColor() { return m_color; }
+	void SetColor(BRUSH_TYPE _color) { m_fillColor = _color; }
+	BRUSH_TYPE GetColor() { return m_fillColor; }
+	float GetAlpha() { return m_alpha; }
+	void SetAlpha(float _alpha) { m_alpha = _alpha; }
 private:
 	Vec2 m_tilePos;
 	Texture* m_uTexture;
-	PEN_TYPE m_color;
 	float m_vScale;
+	float m_alpha;
+	BRUSH_TYPE m_fillColor;
 };
 

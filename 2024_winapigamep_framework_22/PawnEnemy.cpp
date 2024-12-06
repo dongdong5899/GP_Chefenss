@@ -8,7 +8,7 @@ PawnEnemy::PawnEnemy()
 {
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"PawnEnemy", L"Texture\\EnemyPawn.bmp"));
-	SetMoveCooltime(70);
+	SetMoveCooltime(50);
 	SetCost(20);
 	Health* health = GetComponent<Health>();
 	health->SetColor(BRUSH_TYPE::RED);

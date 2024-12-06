@@ -196,6 +196,7 @@
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="PawnEnemy.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PlayerHealthUI.h" />
     <ClInclude Include="Queen.h" />
     <ClInclude Include="QueenEnemy.h" />
     <ClInclude Include="Resource.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="PawnEnemy.cpp" />
+    <ClCompile Include="PlayerHealthUI.cpp" />
     <ClCompile Include="Queen.cpp" />
     <ClCompile Include="QueenEnemy.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

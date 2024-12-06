@@ -80,10 +80,11 @@ void DefenseScene::Update()
 		GET_SINGLE(UnitManager)->UnitSelect();
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
-			GET_SINGLE(GameManager)->Buy(GET_SINGLE(UnitManager)->GetUnitType());
-			GET_SINGLE(UnitManager)->UnitDelete();
-			GenerateUnit();
-			GET_SINGLE(UnitManager)->UnitDelete();
+			Unit* unit = GenerateUnit();
+			if (unit) {
+				GET_SINGLE(GameManager)->Buy(unit->GetUnitType());
+				GET_SINGLE(UnitManager)->UnitDelete();
+			}
 		}
 	}
 }
@@ -116,11 +117,15 @@ void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 	}
 }
 
-void DefenseScene::GenerateUnit()
+Unit* DefenseScene::GenerateUnit()
 {
 	Unit* unit = GET_SINGLE(UnitManager)->UnitGenerate();
 	if (unit != nullptr) {
 		AddObject(unit,LAYER::PLAYER);
+		return unit;
+	}
+	else {
+		return nullptr;
 	}
 }
 

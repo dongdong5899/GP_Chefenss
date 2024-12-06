@@ -37,14 +37,14 @@ private:
     int m_currentWave;
     vector<std::pair<int, wstring>> m_waveEnemyVec
     {
-        {7, L"P"},
-        {5, L"PPP"},
-        {2, L"PPPPP"},
-        {7, L"PPBP"}, 
-        {5, L"PPPPBPPPPBPPP"},
-        {10, L"BBB"},
-        {5, L"PBPBPBPB"},
-        {5, L"N"},
+        {70, L"P"},
+        {50, L"PPP"},
+        {20, L"PPPPP"},
+        {70, L"PPBP"}, 
+        {50, L"PPPPBPPPPBPPP"},
+        {100, L"BBB"},
+        {50, L"PBPBPBPB"},
+        {50, L"N"},
     };
     vector<EnemySpawner*> m_spawners;
     vector<EnemySpawner*> m_deadSpawners;

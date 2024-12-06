@@ -13,8 +13,7 @@ int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
 
 Enemy::Enemy()
-	: m_hp(5)
-	, m_moveDuration(5)
+	: m_moveDuration(5)
 	, m_uTexture(nullptr)
 	, m_vScale(1)
 	, m_currnetUpdateCount(0)
@@ -26,6 +25,7 @@ Enemy::Enemy()
 	SetScale(size);
 
 	AddComponent<Health>();
+	GetComponent<Health>()->onDieEvent += [this]() { this->Die(); };
 }
 
 Enemy::~Enemy()
@@ -34,7 +34,7 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	if (GetHP() == 0) return;
+	if (GetComponent<Health>()->IsDead()) return;
 	m_currnetUpdateCount++;
 	if (m_currnetUpdateCount >= m_moveDuration)
 	{
@@ -103,17 +103,6 @@ void Enemy::Render(HDC _hdc)
 		, width * textureScale, height * textureScale
 		, texture->GetTexDC()
 		, 0, 0, width, height, RGB(255, 0, 255));
-}
-
-void Enemy::ApplyDamage(int _damage)
-{
-	int hp = GetHP();
-	hp -= _damage;
-	if (hp < 0) hp = 0;
-	SetHP(hp);
-
-	if (hp <= 0)
-		Die();
 }
 
 void Enemy::Die()

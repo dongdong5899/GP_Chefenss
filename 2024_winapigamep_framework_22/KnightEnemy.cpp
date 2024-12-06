@@ -7,10 +7,11 @@ KnightEnemy::KnightEnemy()
 {
 	SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"KnightEnemy", L"Texture\\EnemyKnight.bmp"));
-	SetHP(5);
 	SetMoveCooltime(10);
 	SetCost(60);
-	GetComponent<Health>()->SetColor(BRUSH_TYPE::GREEN);
+	Health* health = GetComponent<Health>();
+	health->SetColor(BRUSH_TYPE::GREEN);
+	health->SetMaxHealth(5, true);
 }
 
 KnightEnemy::~KnightEnemy()

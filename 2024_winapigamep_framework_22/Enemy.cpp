@@ -25,11 +25,18 @@ Enemy::Enemy()
 	SetScale(size);
 
 	AddComponent<Health>();
-	GetComponent<Health>()->onDieEvent += [this]() { this->Die(); };
+	GetComponent<Health>()->onDieEvent += [this]() 
+		{ 
+			this->Die();
+			GET_SINGLE(GameManager)->AddCoin(m_cost); 
+		};
+
+	srand((unsigned int)time(NULL));
 }
 
 Enemy::~Enemy()
 {
+	GetComponent<Health>()->onDieEvent.Clear();
 }
 
 void Enemy::Update()
@@ -46,6 +53,7 @@ void Enemy::Update()
 		wchar_t tileChar = GET_SINGLE(MapManager)->GetMapStrData()[tilePos.y][tilePos.x];
 		if (tileChar == L'E')
 		{
+			GET_SINGLE(GameManager)->Hit();
 			Die();
 			return;
 		}
@@ -109,5 +117,4 @@ void Enemy::Die()
 {
 	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(this);
-	GET_SINGLE(GameManager)->AddCoin(cost);
 }

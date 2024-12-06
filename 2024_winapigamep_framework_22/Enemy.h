@@ -26,7 +26,7 @@ public:
 	void SetMoveCooltime(int _count) { m_moveDuration = _count; }
 	int GetMoveSpeed() { return m_moveDuration; }
 	void Die();
-	void SetCost(int _cost) { cost = _cost; }
+	void SetCost(int _cost) { m_cost = _cost; }
 private:
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
 	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
@@ -39,6 +39,6 @@ private:
 	Road* m_road;
 	Vec2 m_movement;
 	std::set<Road*> m_passedRoadSet;
-	int cost;
+	int m_cost;
 };
 

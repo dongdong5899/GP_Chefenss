@@ -23,6 +23,7 @@
 #include "TextPro.h"
 
 #include "Waver.h"
+#include "PlayerHealthUI.h"
 #include "ButtonUI.h"
 #include "Button.h"
 
@@ -44,6 +45,13 @@ DefenseScene::~DefenseScene()
 
 void DefenseScene::Init()
 {
+	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
+	PlayerHealthUI* playerHealth = new PlayerHealthUI();
+	playerHealth->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, SCREEN_HEIGHT / 2 + 210 + mapOffset.y });
+	playerHealth->SetSize({ 650, 20 });
+	AddObject(playerHealth, LAYER::UI);
+
+
 	Waver* waver = new Waver();
 	waver->SetWaveDuration(30.f);
 	AddObject(waver, LAYER::DEFAULT);

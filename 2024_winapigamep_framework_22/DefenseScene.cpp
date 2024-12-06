@@ -7,6 +7,7 @@
 #include "EnemyManager.h"
 #include "ResourceManager.h"
 #include "GameManager.h"
+#include "EventManager.h"
 
 #include "Object.h"
 #include "Road.h"
@@ -95,6 +96,11 @@ void DefenseScene::Update()
 			}
 		}
 	}
+
+	if (GET_KEYDOWN(KEY_TYPE::RBUTTON)) {
+		UnitDelate();
+	}
+	SetShotcut();
 }
 
 void DefenseScene::Render(HDC _hdc)
@@ -122,6 +128,9 @@ void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 	}
 	else {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+		if (GET_SINGLE(UnitManager)->GetUnit()) {
+			GET_SINGLE(UnitManager)->UnitDelete();
+		}
 	}
 }
 
@@ -140,6 +149,18 @@ Unit* DefenseScene::GenerateUnit()
 void DefenseScene::SetUI()
 {
 	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
+
+	//buttonArea
+	{
+		ButtonUI* buttonArea = new ButtonUI();
+		buttonArea->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x , SCREEN_HEIGHT / 2 + 320 + mapOffset.y });
+		buttonArea->SetSize({ 0, 0 });
+		buttonArea->SetScale(3.f);
+		buttonArea->SetTexture(GET_SINGLE(ResourceManager)->
+			TextureLoad(L"ButtonArea", L"Texture\\Unit_Card_Area.bmp"));
+		AddObject(buttonArea, LAYER::UI);
+	}
+
 	//Pawn
 	{
 		ButtonUI* button_backGround = new ButtonUI();
@@ -163,9 +184,21 @@ void DefenseScene::SetUI()
 
 		m_costText[0] = new TextPro;
 		m_costText[0]->SetPos({ backgroundPos.x,backgroundPos.y + 15 });
-		m_costText[0]->SetText(L"100");
+		m_costText[0]->SetText(L"100G");
 		m_costText[0]->SetColor(RGB(255, 0, 0));
 		AddObject(m_costText[0], LAYER::UI);
+
+		TextPro* atkText = new TextPro();
+		atkText->SetPos({backgroundPos.x,backgroundPos.y+55});
+		atkText->SetColor(RGB(255, 255, 255));
+		atkText->SetText(L"ATK : 1");
+		AddObject(atkText, LAYER::UI);
+
+		TextPro* atkspeedText = new TextPro();
+		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
+		atkspeedText->SetColor(RGB(255, 255, 255));
+		atkspeedText->SetText(L"ATKCOOL : 50");
+		AddObject(atkspeedText, LAYER::UI);
 	}
 	//Knight
 	{
@@ -193,6 +226,18 @@ void DefenseScene::SetUI()
 		m_costText[1]->SetText(L"300");
 		m_costText[1]->SetColor(RGB(255, 0, 0));
 		AddObject(m_costText[1], LAYER::UI);
+
+		TextPro* atkText = new TextPro();
+		atkText->SetPos({ backgroundPos.x,backgroundPos.y + 55 });
+		atkText->SetColor(RGB(255, 255, 255));
+		atkText->SetText(L"ATK : 3");
+		AddObject(atkText, LAYER::UI);
+
+		TextPro* atkspeedText = new TextPro();
+		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
+		atkspeedText->SetColor(RGB(255, 255, 255));
+		atkspeedText->SetText(L"ATKCOOL : 40");
+		AddObject(atkspeedText, LAYER::UI);
 	}
 	//Bishop
 	{
@@ -220,6 +265,20 @@ void DefenseScene::SetUI()
 		m_costText[2]->SetText(L"500");
 		m_costText[2]->SetColor(RGB(255, 0, 0));
 		AddObject(m_costText[2], LAYER::UI);
+
+		TextPro* atkText = new TextPro();
+		atkText->SetPos({ backgroundPos.x,backgroundPos.y + 55 });
+		atkText->SetColor(RGB(255, 255, 255));
+		atkText->SetText(L"ATK : 3");
+		AddObject(atkText, LAYER::UI);
+
+		TextPro* atkspeedText = new TextPro();
+		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
+		atkspeedText->SetColor(RGB(255, 255, 255));
+		atkspeedText->SetText(L"ATKCOOL : 30");
+		AddObject(atkspeedText, LAYER::UI);
+
+
 	}
 	//Rook
 	{
@@ -247,6 +306,18 @@ void DefenseScene::SetUI()
 		m_costText[3]->SetText(L"2000");
 		m_costText[3]->SetColor(RGB(255, 0, 0));
 		AddObject(m_costText[3], LAYER::UI);
+
+		TextPro* atkText = new TextPro();
+		atkText->SetPos({ backgroundPos.x,backgroundPos.y + 55 });
+		atkText->SetColor(RGB(255, 255, 255));
+		atkText->SetText(L"ATK : 5");
+		AddObject(atkText, LAYER::UI);
+
+		TextPro* atkspeedText = new TextPro();
+		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
+		atkspeedText->SetColor(RGB(255, 255, 255));
+		atkspeedText->SetText(L"ATKCOOL : 20");
+		AddObject(atkspeedText, LAYER::UI);
 	}
 	//Queen
 	{
@@ -274,6 +345,18 @@ void DefenseScene::SetUI()
 
 		Button* buttonCompo = button_backGround->GetComponent<Button>();
 		buttonCompo->onClick += [this]() {SetUnitType(UNIT_TYPE::QUEEN); };
+
+		TextPro* atkText = new TextPro();
+		atkText->SetPos({ backgroundPos.x,backgroundPos.y + 55 });
+		atkText->SetColor(RGB(255, 255, 255));
+		atkText->SetText(L"ATK : 10");
+		AddObject(atkText, LAYER::UI);
+
+		TextPro* atkspeedText = new TextPro();
+		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
+		atkspeedText->SetColor(RGB(255, 255, 255));
+		atkspeedText->SetText(L"ATKCOOL : 20");
+		AddObject(atkspeedText, LAYER::UI);
 	}
 
 	//goldText
@@ -282,6 +365,57 @@ void DefenseScene::SetUI()
 		m_goldText->SetText(L"Gold : " + std::to_wstring(GET_SINGLE(GameManager)->GetCoin()));
 		m_goldText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 140 + mapOffset.y });
 		AddObject(m_goldText, LAYER::UI);
+	}
+
+	
+
+}
+
+void DefenseScene::SetShotcut()
+{
+	if (GET_KEYDOWN(KEY_TYPE::NUM_1)) {
+		SetUnitType(UNIT_TYPE::PAWN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_2)) {
+		SetUnitType(UNIT_TYPE::KNIGHT);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_3)) {
+		SetUnitType(UNIT_TYPE::BISHOP);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_4)) {
+		SetUnitType(UNIT_TYPE::ROOK);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_5)) {
+		SetUnitType(UNIT_TYPE::QUEEN);
+	}
+}
+
+void DefenseScene::UnitDelate()
+{
+	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
+	vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
+
+	int mapWidth = map[1].size();
+	int mapHeight = map.size();
+
+	if (mousePos.x < 0 || mousePos.y < 0 || mousePos.x >= mapWidth || mousePos.y >= mapHeight) {
+		return;
+	}
+	else {
+		Tile* tile = map[mousePos.y][mousePos.x];
+
+		Wall* wall = dynamic_cast<Wall*>(tile);
+		if (wall) {
+			Unit* unit = wall->GetAssignedUnit();
+			if (unit) {
+				GET_SINGLE(GameManager)->AddCoin(GET_SINGLE(UnitManager)->GetUnitCost(unit->GetUnitType()) / 2);
+				wall->SetAssignedUnit(nullptr);
+				unit->SetAttackRoadColor(BRUSH_TYPE::WHITE, 0);
+				GET_SINGLE(EventManager)->DeleteObject(unit);
+			}
+			else
+				return;
+		}
 	}
 
 }

@@ -15,7 +15,9 @@ public:
 	Texture* GetTexture() { return m_texture; }
 	void SetScale(float _scale) { m_scale = _scale; }
 	float GetScale() { return m_scale; }
+	void SetIsTransparent(bool _isTransparent) { m_isTransparent = _isTransparent; }
 private:
 	Texture* m_texture;
 	float m_scale;
+	bool m_isTransparent;
 };

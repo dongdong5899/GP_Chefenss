@@ -5,6 +5,7 @@
 UI::UI()
 	: m_texture()
 	, m_scale(1)
+	, m_isTransparent(false)
 {
 }
 
@@ -25,12 +26,23 @@ void UI::Render(HDC _hdc)
 		int width = texture->GetWidth();
 		int height = texture->GetHeight();
 		float textureScale = GetScale();
-		::TransparentBlt(_hdc
-			, (int)(pos.x - width * textureScale / 2)
-			, (int)(pos.y - height * textureScale / 2)
-			, width * textureScale, height * textureScale
-			, texture->GetTexDC()
-			, 0, 0, width, height, RGB(255, 0, 255));
+
+		if (m_isTransparent) {
+			::TransparentBlt(_hdc
+				, (int)(pos.x - width * textureScale / 2)
+				, (int)(pos.y - height * textureScale / 2)
+				, width * textureScale, height * textureScale
+				, texture->GetTexDC()
+				, 0, 0, width, height, RGB(255, 0, 255));
+		}
+		else {
+			::StretchBlt(_hdc
+				, (int)(pos.x - width * textureScale / 2)
+				, (int)(pos.y - height * textureScale / 2)
+				, width * textureScale, height * textureScale
+				, texture->GetTexDC()
+				, 0, 0, width, height,SRCCOPY);
+		}
 	}
 	else
 	{

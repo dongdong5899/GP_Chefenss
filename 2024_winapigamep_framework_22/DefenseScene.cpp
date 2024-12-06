@@ -101,11 +101,15 @@ void DefenseScene::Render(HDC _hdc)
 	int width = texture->GetWidth();
 	int height = texture->GetHeight();
 	float textureScale = GetScale();
-	
-	::TransparentBlt(_hdc, -50, 0
+	::StretchBlt(_hdc, -50, 0
 		, width * textureScale, height * textureScale
 		, texture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+		, 0, 0, width, height, SRCCOPY);
+
+	//::TransparentBlt(_hdc, -50, 0
+	//	, width * textureScale, height * textureScale
+	//	, texture->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 
 	Scene::Render(_hdc);
 }
@@ -409,7 +413,6 @@ void DefenseScene::UnitDelate()
 				return;
 		}
 	}
-
 }
 
 void DefenseScene::SetCostTextColor(int index, COLORREF color)

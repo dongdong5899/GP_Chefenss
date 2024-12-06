@@ -24,11 +24,12 @@
 #include "TextPro.h"
 
 #include "Waver.h"
+#include "PlayerHealthUI.h"
 #include "ButtonUI.h"
 #include "Button.h"
 
 DefenseScene::DefenseScene()
-	: m_lastUpdateTime(0)
+	: m_UpdateCool(0)
 	, m_UpdateDuration(0.01f)
 	, m_backgroundTexture(nullptr)
 	, m_backgroundScale(5.f)
@@ -45,6 +46,13 @@ DefenseScene::~DefenseScene()
 
 void DefenseScene::Init()
 {
+	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
+	PlayerHealthUI* playerHealth = new PlayerHealthUI();
+	playerHealth->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, SCREEN_HEIGHT / 2 + 210 + mapOffset.y });
+	playerHealth->SetSize({ 650, 20 });
+	AddObject(playerHealth, LAYER::UI);
+
+
 	Waver* waver = new Waver();
 	waver->SetWaveDuration(30.f);
 	AddObject(waver, LAYER::DEFAULT);
@@ -65,10 +73,11 @@ void DefenseScene::Init()
 
 void DefenseScene::Update()
 {
+	m_UpdateCool += GET_SINGLE(TimeManager)->GetDT();
 	float time = GET_SINGLE(TimeManager)->GetTime();
-	if (m_lastUpdateTime + m_UpdateDuration < time)
+	while (m_UpdateDuration < m_UpdateCool)
 	{
-		m_lastUpdateTime = time;
+		m_UpdateCool -= m_UpdateDuration;
 		Scene::Update();
 	}
 

@@ -4,6 +4,8 @@
 #include "Texture.h"
 void ResourceManager::Init()
 {
+	int font = AddFontResourceEx(L"..\\Neo.ttf", FR_PRIVATE, NULL);
+	cout << "font : " << font << endl;
 	::GetCurrentDirectory(255, m_resourcePath);
 	wcscat_s(m_resourcePath, 255, L"\\Resource\\");
 	//::SetWindowText(GET_SINGLE(Core)->GetHwnd(), m_resourcePath);
@@ -45,6 +47,7 @@ Texture* ResourceManager::TextureFind(const wstring& _key)
 
 void ResourceManager::Release()
 {
+	RemoveFontResourceEx(L"..\\Neo.ttf", FR_PRIVATE, NULL);
 	map<wstring, Texture*>::iterator iter;
 	for (iter = m_mapTextures.begin(); iter != m_mapTextures.end(); ++iter)
 		delete iter->second;

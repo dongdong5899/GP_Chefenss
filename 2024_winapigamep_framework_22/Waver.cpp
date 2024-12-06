@@ -6,7 +6,9 @@
 #include "Scene.h"
 #include "EnemySpawner.h"
 #include "MapManager.h"
-#include <cmath>
+#include "ButtonUI.h"
+#include "Button.h"
+#include "ResourceManager.h"
 
 Waver::Waver()
 	: m_waveText(nullptr)
@@ -15,9 +17,6 @@ Waver::Waver()
 	, m_waveDuration(0)
 	, m_currentWave(-1)
 {
-	m_waveEndTime = GET_SINGLE(TimeManager)->GetTime();
-	cout << GET_SINGLE(TimeManager)->GetTime() << endl;
-
 	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
 	m_waveText = new TextPro();
 	m_waveText->SetText(L"Wave : " + std::to_wstring(m_currentWave + 1));
@@ -29,6 +28,28 @@ Waver::Waver()
 	m_waveDelayText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 120 + mapOffset.y });
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(m_waveDelayText, LAYER::UI);
+
+
+
+	ButtonUI* stageSkipBtn = new ButtonUI();
+	stageSkipBtn->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x + 180, SCREEN_HEIGHT / 2 + mapOffset.y - 230 });
+	stageSkipBtn->SetSize({ 100, 50 });
+	stageSkipBtn->SetScale(0.6f);
+	stageSkipBtn->SetTexture(GET_SINGLE(ResourceManager)->
+		TextureLoad(L"StageSkipBtn", L"Texture\\Unit_Card_Area.bmp"));
+	Button* buttonCompo = stageSkipBtn->GetComponent<Button>();
+	buttonCompo->onClick += [this]() { m_waveEndTime = 0; };
+	GET_SINGLE(SceneManager)->GetCurrentScene()
+		->AddObject(stageSkipBtn, LAYER::UI);
+
+	Vec2 skipTextPos = stageSkipBtn->GetPos();
+	skipTextPos.y -= 9;
+	TextPro* skipText = new TextPro;
+	skipText->SetPos(skipTextPos);
+	skipText->SetText(L"다음 웨이브 진행");
+	skipText->SetColor(RGB(255, 0, 0));
+	GET_SINGLE(SceneManager)->GetCurrentScene()
+		->AddObject(skipText, LAYER::UI);
 }
 
 Waver::~Waver()

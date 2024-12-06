@@ -8,33 +8,35 @@
 
 void GameManager::Init()
 {
-	SetCoin(10000);
+	SetCoin(300);
+	SetMaxHealth(10);
+	SetHealth(10);
 }
 
 void GameManager::SetCoin(int _coin)
 {
-	coin = _coin;
+	m_coin = _coin;
 	CheckUnitCost();
 	UpdateShopText();         
 }
 
 void GameManager::AddCoin(int _add)
 {
-	coin += _add;
+	m_coin += _add;
 	CheckUnitCost();
 	UpdateShopText();
 }
 
 bool GameManager::CanBuy(int cost)
 {
-	if (coin >= cost)
+	if (m_coin >= cost)
 		return true;
 	return false;
 }
 
 void GameManager::Buy(UNIT_TYPE _unitType)
 {
-	coin -= GET_SINGLE(UnitManager)->GetUnitCost(_unitType);
+	m_coin -= GET_SINGLE(UnitManager)->GetUnitCost(_unitType);
 	CheckUnitCost();
 	UpdateShopText();
 }
@@ -45,7 +47,7 @@ void GameManager::CheckUnitCost()
 	DefenseScene* scene = dynamic_cast<DefenseScene*>(curScene.get());
 	if (scene) {
 		for (int i = 0; i < 5; i++) {
-			if (coin >= GET_SINGLE(UnitManager)->GetUnitCostVec()[i]) {
+			if (m_coin >= GET_SINGLE(UnitManager)->GetUnitCostVec()[i]) {
 				scene->SetCostTextColor(i, RGB(255,255,0));
 			}
 			else {
@@ -58,8 +60,11 @@ void GameManager::CheckUnitCost()
 void GameManager::Hit()
 {
 	int health = GetHealth();
+	if (health == 0) return;
+
 	health--;
 	SetHealth(health);
+	onHit.Invoke();
 	if (health == 0)
 		Die();
 }
@@ -82,4 +87,5 @@ void GameManager::UpdateHealth()
 
 void GameManager::Die()
 {
+
 }

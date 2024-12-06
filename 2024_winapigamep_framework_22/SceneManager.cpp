@@ -14,7 +14,7 @@ void SceneManager::Init()
 	RegisterScene(L"DefenseScene",std::make_shared<DefenseScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"DefenseScene");
+	LoadScene(L"TitleScene");
 }
 
 void SceneManager::Update()

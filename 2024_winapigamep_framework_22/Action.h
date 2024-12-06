@@ -6,7 +6,7 @@ using ActionEvent = std::function<void()>;
 class Action
 {
 public:
-    void operator+=(ActionEvent _func)
+    void operator+=(const ActionEvent _func)
     {
         m_eventVec.push_back(_func);
     }

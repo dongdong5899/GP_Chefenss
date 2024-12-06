@@ -3,6 +3,7 @@
 #include "GDISelector.h"
 #include "TimeManager.h"
 #include "MapManager.h"
+#include "Health.h"
 
 
 Unit::Unit()
@@ -40,8 +41,7 @@ void Unit::Attack()
 		vector<Enemy*> enemies = range->GetAssignedEnemy();
 		for (Enemy* enemy : enemies)
 		{
-			enemy->ApplyDamage(stat.AttackDamage);
-			cout << enemy->GetHP()<<endl;
+			enemy->GetComponent<Health>()->ApplyDamage(stat.AttackDamage);
 		}
 	}
 }

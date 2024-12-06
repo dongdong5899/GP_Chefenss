@@ -15,14 +15,14 @@ void GameManager::SetCoin(int _coin)
 {
 	coin = _coin;
 	CheckUnitCost();
-	ChangeText();         
+	UpdateShopText();         
 }
 
 void GameManager::AddCoin(int _add)
 {
 	coin += _add;
 	CheckUnitCost();
-	ChangeText();
+	UpdateShopText();
 }
 
 bool GameManager::CanBuy(int cost)
@@ -36,7 +36,7 @@ void GameManager::Buy(UNIT_TYPE _unitType)
 {
 	coin -= GET_SINGLE(UnitManager)->GetUnitCost(_unitType);
 	CheckUnitCost();
-	ChangeText();
+	UpdateShopText();
 }
 
 void GameManager::CheckUnitCost()
@@ -55,9 +55,18 @@ void GameManager::CheckUnitCost()
 	}
 }
 
+void GameManager::Hit()
+{
+	int health = GetHealth();
+	health--;
+	SetHealth(health);
+	if (health == 0)
+		Die();
+}
 
 
-void GameManager::ChangeText()
+
+void GameManager::UpdateShopText()
 {
 	std::shared_ptr<Scene> curScene = GET_SINGLE(SceneManager)->GetCurrentScene();
 	DefenseScene* scene = dynamic_cast<DefenseScene*>(curScene.get());
@@ -65,4 +74,12 @@ void GameManager::ChangeText()
 		TextPro* goldTxt = scene->GetGoldText();
 		goldTxt->SetText(L"Gold : " + std::to_wstring(GET_SINGLE(GameManager)->GetCoin()));
 	}
+}
+
+void GameManager::UpdateHealth()
+{
+}
+
+void GameManager::Die()
+{
 }

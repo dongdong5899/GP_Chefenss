@@ -17,8 +17,6 @@ public:
 	Road* GetOwner() { return m_road; }
 	void SetMovement(Vec2 _movement) { m_movement = _movement; }
 	Vec2 GetMovement() { return m_movement; }
-	void SetHP(int _hp) { m_hp = _hp; }
-	int GetHP() { return m_hp; }
 	void SetHpIndex(int _index) { m_hpIndex = _index; }
 	int GetHpIndex() { return m_hpIndex; }
 	void SetTexture(Texture* _texture) { m_uTexture = _texture; }
@@ -27,14 +25,12 @@ public:
 	float GetScale() { return m_vScale; }
 	void SetMoveCooltime(int _count) { m_moveDuration = _count; }
 	int GetMoveSpeed() { return m_moveDuration; }
-	void ApplyDamage(int _damage);
 	void Die();
 	void SetCost(int _cost) { cost = _cost; }
 private:
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
 	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
 private:
-	int m_hp;
 	int m_hpIndex;
 	int m_moveDuration;
 	int m_currnetUpdateCount;

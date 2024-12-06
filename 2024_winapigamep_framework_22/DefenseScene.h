@@ -2,6 +2,7 @@
 #include "Scene.h"
 class Texture;
 class TextPro;
+class Unit;
 class DefenseScene : public Scene
 {
 public:
@@ -16,7 +17,7 @@ public:
 	void SetCostTextColor(int index, COLORREF color);
 private:
 	void SetUnitType(UNIT_TYPE _unitType);
-	void GenerateUnit();
+	Unit* GenerateUnit();
 	void SetTexture(Texture* _texture) { m_backgroundTexture = _texture; }
 	Texture* GetTexture() { return m_backgroundTexture; }
 	float GetScale() { return m_backgroundScale; }

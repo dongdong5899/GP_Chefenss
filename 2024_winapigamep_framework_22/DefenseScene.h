@@ -23,6 +23,7 @@ private:
 	float GetScale() { return m_backgroundScale; }
 	void SetUI();
 	void SetShotcut();
+	void UnitDelate();
 	
 private:
 	float m_lastUpdateTime;

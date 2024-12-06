@@ -26,8 +26,9 @@ public:
     void SetAttackDamage(int _damage) { stat.AttackDamage = _damage; }
     void SetAttackCooldown(int _cooldown) { stat.AttackCooldown = _cooldown; }
     UNIT_TYPE GetUnitType() { return m_unitType; }
-private:
+    vector<Road*> GetAttackRange() { return attackRange; }
     void SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional = false);
+
 public:
     Stat stat;
     vector<Enemy> enemyList;

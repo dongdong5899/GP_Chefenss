@@ -25,6 +25,7 @@ public:
     void SetDeploy(bool deploy) { isDeployed = deploy; }
     void SetAttackDamage(float _damage) { stat.AttackDamage = _damage; }
     void SetAttackCooldown(float _cooldown) { stat.AttackCooldown = _cooldown; }
+    UNIT_TYPE GetUnitType() { return m_unitType; }
 private:
     void SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional = false);
 public:

@@ -39,4 +39,6 @@ void UI::Render(HDC _hdc)
 	}
 	//캐스트 영역 보여주기
 	ComponentRender(_hdc);
+	ComponentRender(_hdc);
+	ComponentRender(_hdc);
 }

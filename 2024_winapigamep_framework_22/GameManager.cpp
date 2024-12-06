@@ -87,4 +87,5 @@ void GameManager::UpdateHealth()
 
 void GameManager::Die()
 {
+
 }

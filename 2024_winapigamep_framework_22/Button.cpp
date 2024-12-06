@@ -25,6 +25,7 @@ void Button::LateUpdate()
 		float yDis = abs(mousePos.y - pos.y);
 		if (xDis < size.x / 2 && yDis < size.y / 2)
 		{
+			cout << "Click\n";
 			onClick.Invoke();
 		}
 	}
@@ -32,11 +33,10 @@ void Button::LateUpdate()
 
 void Button::Render(HDC _hdc)
 {
-	{
-		GDISelector pen(_hdc, PEN_TYPE::YELLOW);
-		GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
-		Vec2 pos = GetPos();
-		Vec2 size = GetSize();
-		RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
-	}
+	GDISelector pen(_hdc, PEN_TYPE::YELLOW);
+	GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
+	Object* owner = GetOwner();
+	Vec2 pos = owner->GetPos();
+	Vec2 size = owner->GetSize();
+	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 }

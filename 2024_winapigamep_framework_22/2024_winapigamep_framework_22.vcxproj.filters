@@ -205,9 +205,6 @@
     <ClInclude Include="Wall.h">
       <Filter>Engine\03. Object\Background</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClInclude>
     <ClInclude Include="ButtonUI.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
@@ -216,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Engine\06. Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -364,9 +364,6 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Engine\03. Object\Background</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClCompile>
     <ClCompile Include="ButtonUI.cpp">
       <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
@@ -375,6 +372,9 @@
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Engine\06. Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

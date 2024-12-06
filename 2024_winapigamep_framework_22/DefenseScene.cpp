@@ -87,6 +87,7 @@ void DefenseScene::Update()
 			}
 		}
 	}
+	SetShotcut();
 }
 
 void DefenseScene::Render(HDC _hdc)
@@ -114,6 +115,9 @@ void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 	}
 	else {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+		if (GET_SINGLE(UnitManager)->GetUnit()) {
+			GET_SINGLE(UnitManager)->UnitDelete();
+		}
 	}
 }
 
@@ -276,6 +280,25 @@ void DefenseScene::SetUI()
 		AddObject(m_goldText, LAYER::UI);
 	}
 
+}
+
+void DefenseScene::SetShotcut()
+{
+	if (GET_KEYDOWN(KEY_TYPE::NUM_1)) {
+		SetUnitType(UNIT_TYPE::PAWN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_2)) {
+		SetUnitType(UNIT_TYPE::KNIGHT);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_3)) {
+		SetUnitType(UNIT_TYPE::BISHOP);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_4)) {
+		SetUnitType(UNIT_TYPE::ROOK);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_5)) {
+		SetUnitType(UNIT_TYPE::QUEEN);
+	}
 }
 
 void DefenseScene::SetCostTextColor(int index, COLORREF color)

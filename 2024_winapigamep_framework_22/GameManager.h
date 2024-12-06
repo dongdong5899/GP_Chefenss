@@ -11,9 +11,15 @@ public:
 	bool CanBuy(int cost);
 	void Buy(UNIT_TYPE _unitType);
 	void CheckUnitCost();
+	void Hit();
+	void SetHealth(int _health) { m_health = _health; }
+	int GetHealth() { return m_health; }
 private:
-	void ChangeText();
+	void UpdateShopText();
+	void UpdateHealth();
+	void Die();
 private:
 	int coin;
+	int m_health;
 };
 

@@ -58,6 +58,9 @@ void DefenseScene::Init()
 		AddObject(pObj, LAYER::BACKGROUND);
 	}
 
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\BGM.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"BGM");
+
 }
 
 void DefenseScene::Update()
@@ -101,11 +104,15 @@ void DefenseScene::Render(HDC _hdc)
 	int width = texture->GetWidth();
 	int height = texture->GetHeight();
 	float textureScale = GetScale();
-	
-	::TransparentBlt(_hdc, -50, 0
+	::StretchBlt(_hdc, -50, 0
 		, width * textureScale, height * textureScale
 		, texture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+		, 0, 0, width, height, SRCCOPY);
+
+	//::TransparentBlt(_hdc, -50, 0
+	//	, width * textureScale, height * textureScale
+	//	, texture->GetTexDC()
+	//	, 0, 0, width, height, RGB(255, 0, 255));
 
 	Scene::Render(_hdc);
 }
@@ -170,6 +177,7 @@ void DefenseScene::SetUI()
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
 		button_unit->SetSize({ 0,0 });
 		button_unit->SetScale(2.f);
+		button_unit->SetIsTransparent(true);
 		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
 			TextureLoad(L"Pawn", L"Texture\\PlayerPawn.bmp"));
 		AddObject(button_unit, LAYER::UI);
@@ -209,6 +217,7 @@ void DefenseScene::SetUI()
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
 		button_unit->SetSize({ 0,0 });
 		button_unit->SetScale(2.f);
+		button_unit->SetIsTransparent(true);
 		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
 			TextureLoad(L"Knight", L"Texture\\PlayerKnight.bmp"));
 		AddObject(button_unit, LAYER::UI);
@@ -248,6 +257,7 @@ void DefenseScene::SetUI()
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
 		button_unit->SetSize({ 0,0 });
 		button_unit->SetScale(2.f);
+		button_unit->SetIsTransparent(true);
 		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
 			TextureLoad(L"Bishop", L"Texture\\PlayerBishop.bmp"));
 		AddObject(button_unit, LAYER::UI);
@@ -289,6 +299,7 @@ void DefenseScene::SetUI()
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
 		button_unit->SetSize({ 0,0 });
 		button_unit->SetScale(2.f);
+		button_unit->SetIsTransparent(true);
 		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
 			TextureLoad(L"Rook", L"Texture\\PlayerRook.bmp"));
 		AddObject(button_unit, LAYER::UI);
@@ -325,6 +336,7 @@ void DefenseScene::SetUI()
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
 		button_unit->SetSize({ 0,0 });
 		button_unit->SetScale(2.f);
+		button_unit->SetIsTransparent(true);
 		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
 			TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp"));
 		AddObject(button_unit, LAYER::UI);
@@ -348,6 +360,8 @@ void DefenseScene::SetUI()
 		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
 		atkspeedText->SetColor(RGB(255, 255, 255));
 		atkspeedText->SetText(L"ATKCOOL : 20");
+
+
 		AddObject(atkspeedText, LAYER::UI);
 	}
 
@@ -409,7 +423,6 @@ void DefenseScene::UnitDelate()
 				return;
 		}
 	}
-
 }
 
 void DefenseScene::SetCostTextColor(int index, COLORREF color)

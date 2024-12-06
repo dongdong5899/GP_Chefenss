@@ -8,7 +8,7 @@
 
 void GameManager::Init()
 {
-	SetCoin(300);
+	SetCoin(10000);
 }
 
 void GameManager::SetCoin(int _coin)

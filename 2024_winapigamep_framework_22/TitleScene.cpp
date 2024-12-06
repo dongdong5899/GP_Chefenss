@@ -6,6 +6,11 @@
 #include "Enemy.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "Button.h"
+#include "ButtonUI.h"
+#include "TextPro.h"
+
+
 void TitleScene::Init()
 {
 	//Object* pObj = new Enemy;
@@ -23,6 +28,16 @@ void TitleScene::Init()
 	//GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
 	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 
+
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\BGM.wav",true);
+	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	{
+		TextPro* titleText = new TextPro();
+		titleText->SetScale(5.f);
+		titleText->SetText(L"Chefense");
+		titleText->SetPos({ SCREEN_WIDTH/2,SCREEN_HEIGHT/2 });
+		AddObject(titleText, LAYER::UI);
+	}
 }
 
 void TitleScene::Update()

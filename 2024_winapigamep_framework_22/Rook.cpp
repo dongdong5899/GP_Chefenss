@@ -10,8 +10,8 @@ Rook::Rook()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(5.f);
-	SetAttackCooldown(0.1f);
+	SetAttackDamage(5);
+	SetAttackCooldown(20);
 }
 
 Rook::~Rook()

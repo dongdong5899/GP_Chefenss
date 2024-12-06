@@ -29,6 +29,7 @@ void Health::Render(HDC _hdc)
 		int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 		pos.y -= tileSize / 2 + enemy->GetHpIndex() * tileSize * 0.14f;
 		Vec2 size = { tileSize * 0.7f, tileSize * 0.1f };
-		RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+		cout << GetHealthAmount() << endl;
+		Rectangle(_hdc, pos.x - size.x / 2, pos.y - size.y / 2, (pos.x + size.x / 2) * GetHealthAmount(), pos.y + size.y / 2);
 	}
 }

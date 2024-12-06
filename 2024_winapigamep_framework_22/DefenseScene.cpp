@@ -28,7 +28,7 @@
 
 DefenseScene::DefenseScene()
 	: m_lastUpdateTime(0)
-	, m_UpdateDuration(0.1f)
+	, m_UpdateDuration(0.01f)
 	, m_backgroundTexture(nullptr)
 	, m_backgroundScale(5.f)
 	, m_goldText(nullptr)
@@ -80,15 +80,12 @@ void DefenseScene::Update()
 		GET_SINGLE(UnitManager)->UnitSelect();
 		if (GET_KEYDOWN(KEY_TYPE::LBUTTON) && 
 			GET_SINGLE(UnitManager)->GetUnitType() != UNIT_TYPE::END) {
-			Unit* unit = GenerateUnit();
-			if (unit) {
-				GET_SINGLE(GameManager)->Buy(unit->GetUnitType());
-				GET_SINGLE(UnitManager)->UnitDelete();
-			}
+			GET_SINGLE(GameManager)->Buy(GET_SINGLE(UnitManager)->GetUnitType());
+			GET_SINGLE(UnitManager)->UnitDelete();
+			GenerateUnit();
+			GET_SINGLE(UnitManager)->UnitDelete();
 		}
 	}
-
-	SetShortcut();
 }
 
 void DefenseScene::Render(HDC _hdc)
@@ -116,19 +113,14 @@ void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 	}
 	else {
 		GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
-		GET_SINGLE(UnitManager)->UnitDelete();
 	}
 }
 
-Unit* DefenseScene::GenerateUnit()
+void DefenseScene::GenerateUnit()
 {
 	Unit* unit = GET_SINGLE(UnitManager)->UnitGenerate();
 	if (unit != nullptr) {
-		AddObject(unit, LAYER::PLAYER);
-		return unit;
-	}
-	else {
-		return nullptr;
+		AddObject(unit,LAYER::PLAYER);
 	}
 }
 
@@ -279,25 +271,6 @@ void DefenseScene::SetUI()
 		AddObject(m_goldText, LAYER::UI);
 	}
 
-}
-
-void DefenseScene::SetShortcut()
-{
-	if (GET_KEYDOWN(KEY_TYPE::NUM_1)) {
-		SetUnitType(UNIT_TYPE::PAWN);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_2)) {
-		SetUnitType(UNIT_TYPE::KNIGHT);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_3)) {
-		SetUnitType(UNIT_TYPE::BISHOP);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_4)) {
-		SetUnitType(UNIT_TYPE::ROOK);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_5)) {
-		SetUnitType(UNIT_TYPE::QUEEN);
-	}
 }
 
 void DefenseScene::SetCostTextColor(int index, COLORREF color)

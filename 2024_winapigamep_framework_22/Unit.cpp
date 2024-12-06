@@ -19,8 +19,8 @@ Unit::~Unit()
 
 void Unit::Update()
 {
-	SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round((attackCooldown / stat.AttackCooldown) * 255));
-	attackCooldown+=GET_SINGLE(TimeManager)->GetDT();
+	attackCooldown++;
+	SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round(((float)attackCooldown / stat.AttackCooldown) * 255));
 	if (attackCooldown > stat.AttackCooldown) {
 		SetAttackRoadColor(BRUSH_TYPE::WHITE, 255);
 		attackCooldown = 0;

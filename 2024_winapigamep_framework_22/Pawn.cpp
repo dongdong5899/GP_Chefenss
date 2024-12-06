@@ -14,8 +14,8 @@ Pawn::Pawn()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(5.f);
-	SetAttackCooldown(0.5f);
+	SetAttackDamage(1);
+	SetAttackCooldown(50);
 }
 
 Pawn::~Pawn()

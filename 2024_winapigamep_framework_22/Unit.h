@@ -4,8 +4,8 @@
 #include "Road.h"
 struct Stat
 {
-    float AttackCooldown;
-    float AttackDamage;
+    int AttackCooldown;
+    int AttackDamage;
 };
 
 class Texture;
@@ -23,9 +23,8 @@ public:
     bool AttackCoolTimeCheck(float fdt);
     void SetUnitType(UNIT_TYPE unitType) { m_unitType = unitType; }
     void SetDeploy(bool deploy) { isDeployed = deploy; }
-    void SetAttackDamage(float _damage) { stat.AttackDamage = _damage; }
-    void SetAttackCooldown(float _cooldown) { stat.AttackCooldown = _cooldown; }
-    UNIT_TYPE GetUnitType() { return m_unitType; }
+    void SetAttackDamage(int _damage) { stat.AttackDamage = _damage; }
+    void SetAttackCooldown(int _cooldown) { stat.AttackCooldown = _cooldown; }
 private:
     void SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional = false);
 public:
@@ -33,12 +32,13 @@ public:
     vector<Enemy> enemyList;
     Vec2 m_tilePos;
     vector<Road*> attackRange;
-    float attackCooldown;
     UNIT_TYPE m_unitType;
     std::string unitName,unitDescription;
     Texture* m_uTexture;
     int m_vScale;
     bool rangeCheck;
     bool isDeployed;
+private:
+    int attackCooldown;
 };
 

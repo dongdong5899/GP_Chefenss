@@ -12,11 +12,11 @@
 
 void TitleScene::Init()
 {
-	/*TextPro* titleTxt = new TextPro;
+	TextPro* titleTxt = new TextPro;
 	titleTxt->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150 });
 	titleTxt->SetText(L"Gambit Streat");
 	titleTxt->SetFontSize(100);
-	AddObject(titleTxt, LAYER::UI);*/
+	AddObject(titleTxt, LAYER::UI);
 
 	ButtonUI* gameStartBtn = new ButtonUI;
 	gameStartBtn->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 200 });

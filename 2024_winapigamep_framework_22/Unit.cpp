@@ -21,7 +21,6 @@ Unit::~Unit()
 void Unit::Update()
 {
 	attackCooldown++;
-	cout << attackCooldown << endl;
 	SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round(((float)attackCooldown / stat.AttackCooldown) * 255));
 	if (attackCooldown > stat.AttackCooldown) {
 		SetAttackRoadColor(BRUSH_TYPE::WHITE, 255);

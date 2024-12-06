@@ -17,9 +17,6 @@ Waver::Waver()
 	, m_waveDuration(0)
 	, m_currentWave(-1)
 {
-	m_waveEndTime = GET_SINGLE(TimeManager)->GetTime();
-	cout << GET_SINGLE(TimeManager)->GetTime() << endl;
-
 	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
 	m_waveText = new TextPro();
 	m_waveText->SetText(L"Wave : " + std::to_wstring(m_currentWave + 1));

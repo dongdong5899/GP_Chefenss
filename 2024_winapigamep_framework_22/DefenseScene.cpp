@@ -29,7 +29,7 @@
 #include "Button.h"
 
 DefenseScene::DefenseScene()
-	: m_lastUpdateTime(0)
+	: m_UpdateCool(0)
 	, m_UpdateDuration(0.01f)
 	, m_backgroundTexture(nullptr)
 	, m_backgroundScale(5.f)
@@ -70,10 +70,11 @@ void DefenseScene::Init()
 
 void DefenseScene::Update()
 {
+	m_UpdateCool += GET_SINGLE(TimeManager)->GetDT();
 	float time = GET_SINGLE(TimeManager)->GetTime();
-	if (m_lastUpdateTime + m_UpdateDuration < time)
+	while (m_UpdateDuration < m_UpdateCool)
 	{
-		m_lastUpdateTime = time;
+		m_UpdateCool -= m_UpdateDuration;
 		Scene::Update();
 	}
 

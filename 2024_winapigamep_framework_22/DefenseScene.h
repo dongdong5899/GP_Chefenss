@@ -26,7 +26,7 @@ private:
 	void UnitDelate();
 	
 private:
-	float m_lastUpdateTime;
+	float m_UpdateCool;
 	float m_UpdateDuration;
 	Texture* m_backgroundTexture;
 	float m_backgroundScale;

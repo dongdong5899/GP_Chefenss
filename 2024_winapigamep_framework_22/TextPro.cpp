@@ -21,8 +21,13 @@ void TextPro::Update()
 
 void TextPro::Render(HDC _hdc)
 {
-	/*HFONT hFont = CreateFont(m_fontSize, m_fontSize, 0, 0, 0, false, false, false
+	/*HFONT hFont = CreateFont(m_fontSize, m_fontSize, 0, 0, FW_NORMAL, false, false, false
 		, HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH | FF_ROMAN, TEXT("NeoµÕ±Ù¸ð pro"));
+	if (hFont == nullptr)
+	{
+		DWORD error = GetLastError();
+		cout << "errorCode : " << error << endl;
+	}
 	HFONT defaultFont = (HFONT)SelectObject(_hdc, hFont);*/
 
 	SetTextColor(_hdc, m_color);

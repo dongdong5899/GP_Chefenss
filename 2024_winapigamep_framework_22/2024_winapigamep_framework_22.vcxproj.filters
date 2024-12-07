@@ -242,6 +242,9 @@
     <Image Include="2024_winapigamep_framework_22.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="ChessIcon.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -404,5 +407,6 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

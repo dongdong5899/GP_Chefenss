@@ -13,7 +13,7 @@ MapSelectScene::MapSelectScene()
 {
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"title_Background", L"Texture\\titleBackground.bmp"));
-	SetBackgroundScale(3.f);
+	SetBackgroundScale(2.3f);
 }
 
 MapSelectScene::~MapSelectScene()

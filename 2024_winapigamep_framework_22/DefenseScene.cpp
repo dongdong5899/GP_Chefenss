@@ -35,7 +35,7 @@ DefenseScene::DefenseScene()
 	, m_costText{ nullptr }
 {
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
-		TextureLoad(L"Background", L"Texture\\Background.bmp"));
+		TextureLoad(L"GameBackground", L"Texture\\Background.bmp"));
 	SetBackgroundScale(5.f);
 }
 
@@ -98,6 +98,25 @@ void DefenseScene::Update()
 
 	if (GET_KEYDOWN(KEY_TYPE::RBUTTON)) {
 		UnitDelate();
+	}
+}
+
+void DefenseScene::SetShortcut()
+{
+	if (GET_KEYDOWN(KEY_TYPE::NUM_1)) {
+		SetUnitType(UNIT_TYPE::PAWN);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_2)) {
+		SetUnitType(UNIT_TYPE::KNIGHT);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_3)) {
+		SetUnitType(UNIT_TYPE::BISHOP);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_4)) {
+		SetUnitType(UNIT_TYPE::ROOK);
+	}
+	if (GET_KEYDOWN(KEY_TYPE::NUM_5)) {
+		SetUnitType(UNIT_TYPE::QUEEN);
 	}
 }
 

@@ -12,6 +12,7 @@ public:
 	// Scene을(를) 통해 상속됨
 	virtual void Init() override;
 	virtual void Update() override;
+	void SetShortcut();
 	TextPro* GetGoldText() { return m_goldText; }
 	void SetCostTextColor(int index, COLORREF color);
 private:

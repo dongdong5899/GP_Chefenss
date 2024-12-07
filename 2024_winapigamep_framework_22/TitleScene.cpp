@@ -14,8 +14,8 @@
 TitleScene::TitleScene()
 {
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
-		TextureLoad(L"Background", L"Texture\\Background.bmp"));
-	SetBackgroundScale(5.f);
+		TextureLoad(L"Background", L"Texture\\titleBackground.bmp"));
+	SetBackgroundScale(2.3f);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\BGM.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
@@ -26,19 +26,6 @@ TitleScene::~TitleScene()
 
 void TitleScene::Init()
 {
-	/*{
-		Image* background = new Image();
-		Texture* backgroundTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"TitleBackGround", L"Textur\\titleBackground.bmp");
-		background->SetImage(backgroundTexture, 1);
-		background->SetPos({ SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2 });
-		AddObject(background, LAYER::UI);
-	}*/
-
-	/*{
-		Image* whiteQueen = new Image();
-	}*/
-
-
 	{
 		TextPro* titleTxt = new TextPro;
 		titleTxt->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150 });

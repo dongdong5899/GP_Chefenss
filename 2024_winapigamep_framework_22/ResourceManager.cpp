@@ -4,7 +4,7 @@
 #include "Texture.h"
 void ResourceManager::Init()
 {
-	int font = AddFontResourceEx(L"..\\Neo.ttf", FR_PRIVATE, NULL);
+	int font = AddFontResourceEx(L".\\Neo.ttf", FR_PRIVATE, NULL);
 	cout << "font : " << font << endl;
 	::GetCurrentDirectory(255, m_resourcePath);
 	wcscat_s(m_resourcePath, 255, L"\\Resource\\");

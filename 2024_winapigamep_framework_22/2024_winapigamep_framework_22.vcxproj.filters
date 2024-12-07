@@ -205,13 +205,7 @@
     <ClInclude Include="Wall.h">
       <Filter>Engine\03. Object\Background</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonUI.h">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClInclude>
     <ClInclude Include="TextPro.h">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
@@ -371,13 +365,7 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Engine\03. Object\Background</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonUI.cpp">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClCompile>
     <ClCompile Include="TextPro.cpp">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
       <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">

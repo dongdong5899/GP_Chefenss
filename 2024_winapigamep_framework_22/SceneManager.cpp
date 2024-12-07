@@ -15,7 +15,7 @@ void SceneManager::Init()
 	RegisterScene(L"DefenseScene",std::make_shared<DefenseScene>());
 
 	// 씬 로드
-	LoadScene(L"TitleScene");
+	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");
 }
 
 void SceneManager::Update()
@@ -56,5 +56,4 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
 	}
-	cout << "지우기 끝";
 }

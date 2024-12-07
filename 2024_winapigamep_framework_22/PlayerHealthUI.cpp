@@ -23,6 +23,11 @@ PlayerHealthUI::~PlayerHealthUI()
 {
 }
 
+void PlayerHealthUI::Update()
+{
+}
+
+
 void PlayerHealthUI::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();

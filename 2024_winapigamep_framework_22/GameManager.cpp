@@ -4,6 +4,7 @@
 #include "DefenseScene.h"
 #include "TextPro.h"
 #include "UnitManager.h"
+#include "EventManager.h"
 
 
 void GameManager::Init()
@@ -87,5 +88,5 @@ void GameManager::UpdateHealth()
 
 void GameManager::Die()
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
+	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");
 }

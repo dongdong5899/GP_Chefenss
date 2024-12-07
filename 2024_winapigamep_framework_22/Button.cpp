@@ -25,7 +25,6 @@ void Button::LateUpdate()
 		float yDis = abs(mousePos.y - pos.y);
 		if (xDis < size.x / 2 && yDis < size.y / 2)
 		{
-			cout << "Click\n";
 			onClick.Invoke();
 		}
 	}

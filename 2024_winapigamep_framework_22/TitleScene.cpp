@@ -5,10 +5,11 @@
 #include "SceneManager.h"
 #include "Enemy.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
 #include "ResourceManager.h"
-#include "ButtonUI.h"
 #include "Button.h"
 #include "TextPro.h"
+#include "Image.h"
 
 void TitleScene::Init()
 {
@@ -18,13 +19,15 @@ void TitleScene::Init()
 	titleTxt->SetFontSize(100);
 	AddObject(titleTxt, LAYER::UI);
 
-	ButtonUI* gameStartBtn = new ButtonUI;
+	Image* gameStartBtn = new Image;
 	gameStartBtn->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 200 });
 	gameStartBtn->SetSize({250, 60});
-	gameStartBtn->SetScale(1.f);
-	gameStartBtn->SetTexture(GET_SINGLE(ResourceManager)->
-		TextureLoad(L"GameStartBtn", L"Texture\\Unit_Card_Area.bmp"));
-	gameStartBtn->GetComponent<Button>()->onClick += []() { GET_SINGLE(SceneManager)->LoadScene(L"DefenseScene"); };
+	Texture* texture = GET_SINGLE(ResourceManager)->
+		TextureLoad(L"GameStartBtn", L"Texture\\Unit_Card_Area.bmp");
+	gameStartBtn->SetImage(texture, 1.f);
+	Button* button = new Button();
+	button->onClick += []() { GET_SINGLE(EventManager)->SceneChange(L"DefenseScene"); };
+	gameStartBtn->AddComponent(button);
 	AddObject(gameStartBtn, LAYER::UI);
 
 	TextPro* gamestartTxt = new TextPro;

@@ -5,6 +5,7 @@ struct tEvent
 	EVENT_TYPE eveType;
 	Object* obj;
 	LAYER objType;
+	wstring name;
 public:
 	bool operator==(const tEvent& other)
 	{
@@ -17,6 +18,7 @@ class EventManager
 public:
 	void Update();
 	void DeleteObject(Object* _pObj);
+	void SceneChange(wstring _sceneName);
 	void ClearDeleteObject() { m_vecDead.clear(); };
 	// todo..
 private:
@@ -24,4 +26,5 @@ private:
 private:
 	vector<tEvent> m_vecEvent;
 	vector<Object*> m_vecDead;
+	wstring m_changeScene;
 };

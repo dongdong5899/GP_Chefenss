@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Health.h"
 #include "SpriteRenderer.h"
+#include "HealthBar.h"
 
 RookEnemy::RookEnemy()
 {
@@ -11,8 +12,8 @@ RookEnemy::RookEnemy()
 	SetMoveCooltime(100);
 	SetCost(400);
 	Health* health = GetComponent<Health>();
-	health->SetColor(BRUSH_TYPE::RED);
 	health->SetMaxHealth(50, true);
+	GetHealthBar()->SetColor(BRUSH_TYPE::WHITE);
 }
 
 RookEnemy::~RookEnemy()

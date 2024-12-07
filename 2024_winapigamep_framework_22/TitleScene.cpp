@@ -11,12 +11,23 @@
 #include "TextPro.h"
 #include "Image.h"
 
+TitleScene::TitleScene()
+{
+	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
+		TextureLoad(L"Background", L"Texture\\Background.bmp"));
+	SetBackgroundScale(5.f);
+}
+
+TitleScene::~TitleScene()
+{
+}
+
 void TitleScene::Init()
 {
 	TextPro* titleTxt = new TextPro;
 	titleTxt->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150 });
 	titleTxt->SetText(L"Gambit Streat");
-	titleTxt->SetFontSize(100);
+	titleTxt->SetFontSize(150);
 	AddObject(titleTxt, LAYER::UI);
 
 	Image* gameStartBtn = new Image;
@@ -26,7 +37,7 @@ void TitleScene::Init()
 		TextureLoad(L"GameStartBtn", L"Texture\\Unit_Card_Area.bmp");
 	gameStartBtn->SetImage(texture, 1.f);
 	Button* button = new Button();
-	button->onClick += []() { GET_SINGLE(EventManager)->SceneChange(L"DefenseScene"); };
+	button->onClick += []() { GET_SINGLE(EventManager)->SceneChange(L"MapSelectScene"); };
 	gameStartBtn->AddComponent(button);
 	AddObject(gameStartBtn, LAYER::UI);
 
@@ -41,5 +52,4 @@ void TitleScene::Init()
 void TitleScene::Update()
 {
 	Scene::Update();
-	
 }

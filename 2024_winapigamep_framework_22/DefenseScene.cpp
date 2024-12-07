@@ -31,13 +31,12 @@
 DefenseScene::DefenseScene()
 	: m_UpdateCool(0)
 	, m_UpdateDuration(0.01f)
-	, m_backgroundTexture(nullptr)
-	, m_backgroundScale(5.f)
 	, m_goldText(nullptr)
 	, m_costText{ nullptr }
 {
-	SetTexture(GET_SINGLE(ResourceManager)->
+	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"Background", L"Texture\\Background.bmp"));
+	SetBackgroundScale(5.f);
 }
 
 DefenseScene::~DefenseScene()
@@ -59,7 +58,6 @@ void DefenseScene::Init()
 	waver->SetWaveDuration(30.f);
 	AddObject(waver, LAYER::DEFAULT);
 
-	GET_SINGLE(MapManager)->SetMapMode(MAP_SIZE::BIG);
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();
 	for (Object* pObj : createdObj)
 	{
@@ -101,24 +99,12 @@ void DefenseScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::RBUTTON)) {
 		UnitDelate();
 	}
-	SetShotcut();
 }
 
-void DefenseScene::Render(HDC _hdc)
+void DefenseScene::SetCostTextColor(int index, COLORREF color)
 {
-	Texture* texture = GetTexture();
-	int width = texture->GetWidth();
-	int height = texture->GetHeight();
-	float textureScale = GetScale();
-	
-	::StretchBlt(_hdc, -50, 0
-		, width * textureScale, height * textureScale
-		, texture->GetTexDC()
-		, 0, 0, width, height, SRCCOPY);
-
-	Scene::Render(_hdc);
+	m_costText[index]->SetColor(color);
 }
-
 
 void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 {
@@ -149,6 +135,25 @@ Unit* DefenseScene::GenerateUnit()
 
 void DefenseScene::SetUI()
 {
+	Image* exitBtn = new Image();
+	exitBtn->SetPos({ 150, SCREEN_HEIGHT - 50 });
+	exitBtn->SetSize({ 150, 40 });
+	Texture* cardTexture = GET_SINGLE(ResourceManager)->
+		TextureLoad(L"ButtonArea", L"Texture\\Unit_Card_Area.bmp");
+	exitBtn->SetImage(cardTexture, 0.6f);
+
+	Button* button = new Button;
+	button->onClick += []() { GET_SINGLE(EventManager)->SceneChange(L"TitleScene"); };
+	exitBtn->AddComponent(button);
+	AddObject(exitBtn, LAYER::UI);
+
+	TextPro* exitTxt = new TextPro;
+	exitTxt->SetPos({ 150, SCREEN_HEIGHT - 60 });
+	exitTxt->SetColor(RGB(255, 255, 255));
+	exitTxt->SetText(L"그만하기");
+	exitTxt->SetFontSize(20);
+	AddObject(exitTxt, LAYER::UI);
+
 	Vec2 mapOffset = GET_SINGLE(MapManager)->GetMapOffset();
 
 	//buttonArea
@@ -183,7 +188,6 @@ void DefenseScene::SetUI()
 		Image* button_unit = new Image();
 		Vec2 backgroundPos = button_backGround->GetPos();
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
-		button_unit->SetSize({ 0,0 });
 		Texture* unitTexture = GET_SINGLE(ResourceManager)->
 			TextureLoad(unitName[i], L"Texture\\Player" + unitName[i] + L".bmp");
 		button_unit->SetImage(unitTexture, 2.f, true);
@@ -217,25 +221,6 @@ void DefenseScene::SetUI()
 	}
 }
 
-void DefenseScene::SetShotcut()
-{
-	if (GET_KEYDOWN(KEY_TYPE::NUM_1)) {
-		SetUnitType(UNIT_TYPE::PAWN);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_2)) {
-		SetUnitType(UNIT_TYPE::KNIGHT);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_3)) {
-		SetUnitType(UNIT_TYPE::BISHOP);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_4)) {
-		SetUnitType(UNIT_TYPE::ROOK);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_5)) {
-		SetUnitType(UNIT_TYPE::QUEEN);
-	}
-}
-
 void DefenseScene::UnitDelate()
 {
 	Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
@@ -263,9 +248,4 @@ void DefenseScene::UnitDelate()
 		}
 	}
 
-}
-
-void DefenseScene::SetCostTextColor(int index, COLORREF color)
-{
-	m_costText[index]->SetColor(color);
 }

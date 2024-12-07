@@ -1,6 +1,6 @@
 #pragma once
-//#include "Object.h"
-class Object; // 클래스 전방선언
+class Texture;
+class Object;
 class Scene
 {
 public:
@@ -21,9 +21,16 @@ public:
 	{
 		return m_vecObj[(UINT)_type];
 	}
+public:
+	void SetBackgroundTexture(Texture* _texture) { m_backgroundTexture = _texture; }
+	Texture* GetBackgroundTexture() { return m_backgroundTexture; }
+	void SetBackgroundScale(float _scale) { m_backgroundScale = _scale; }
+	float GetBackgroundScale() { return m_backgroundScale; }
 private:
 	//Object m_obj;
 	//Object* m_pObj;
+	Texture* m_backgroundTexture;
+	float m_backgroundScale;
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
 };
 

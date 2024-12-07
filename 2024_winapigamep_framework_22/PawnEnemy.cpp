@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "Health.h"
 #include "SpriteRenderer.h"
+#include "HealthBar.h"
 
 PawnEnemy::PawnEnemy()
 {
@@ -12,8 +13,8 @@ PawnEnemy::PawnEnemy()
 	SetMoveCooltime(50);
 	SetCost(20);
 	Health* health = GetComponent<Health>();
-	health->SetColor(BRUSH_TYPE::RED);
 	health->SetMaxHealth(2, true);
+	GetHealthBar()->SetColor(BRUSH_TYPE::RED);
 }
 
 PawnEnemy::~PawnEnemy()

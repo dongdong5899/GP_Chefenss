@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Health.h"
 #include "SpriteRenderer.h"
+#include "HealthBar.h"
 
 QueenEnemy::QueenEnemy()
 {
@@ -11,8 +12,8 @@ QueenEnemy::QueenEnemy()
 	SetMoveCooltime(70);
 	SetCost(1000);
 	Health* health = GetComponent<Health>();
-	health->SetColor(BRUSH_TYPE::YELLOW);
 	health->SetMaxHealth(200, true);
+	GetHealthBar()->SetColor(BRUSH_TYPE::YELLOW);
 }
 
 QueenEnemy::~QueenEnemy()

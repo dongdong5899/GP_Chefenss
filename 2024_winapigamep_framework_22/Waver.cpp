@@ -48,6 +48,7 @@ Waver::Waver()
 	TextPro* skipText = new TextPro;
 	skipText->SetPos(skipTextPos);
 	skipText->SetText(L"다음 웨이브 진행");
+	skipText->SetFontSize(15.f);
 	skipText->SetColor(RGB(255, 0, 0));
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(skipText, LAYER::UI);

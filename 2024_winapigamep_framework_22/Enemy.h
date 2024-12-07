@@ -2,7 +2,7 @@
 #include <set>
 #include "Object.h"
 class Road;
-class Texture;
+class HealthBar;
 class Enemy :
     public Object
 {
@@ -23,6 +23,7 @@ public:
 	int GetMoveSpeed() { return m_moveDuration; }
 	void Die();
 	void SetCost(int _cost) { m_cost = _cost; }
+	HealthBar* GetHealthBar() { return m_healthBar; }
 private:
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
 	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
@@ -31,6 +32,7 @@ private:
 	int m_moveDuration;
 	int m_currnetUpdateCount;
 	Road* m_road;
+	HealthBar* m_healthBar;
 	Vec2 m_movement;
 	std::set<Road*> m_passedRoadSet;
 	int m_cost;

@@ -16,6 +16,8 @@ TitleScene::TitleScene()
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"Background", L"Texture\\Background.bmp"));
 	SetBackgroundScale(5.f);
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\BGM.wav", true);
+	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
 TitleScene::~TitleScene()

@@ -56,7 +56,7 @@ void Scene::Render(HDC _hdc)
 	int height = texture->GetHeight();
 	float textureScale = GetBackgroundScale();
 	::StretchBlt(_hdc, -50, 0
-		, width * textureScale, height * textureScale
+		, width * textureScale, height * textureScale+100
 		, texture->GetTexDC()
 		, 0, 0, width, height, SRCCOPY);
 

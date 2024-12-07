@@ -88,5 +88,5 @@ void GameManager::UpdateHealth()
 
 void GameManager::Die()
 {
-	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");
+	GET_SINGLE(EventManager)->SceneChange(L"DieScene");
 }

@@ -19,7 +19,7 @@ void SceneManager::Init()
 	RegisterScene(L"DieScene",std::make_shared<DieScene>());
 
 	// ¾À ·Îµå
-	GET_SINGLE(EventManager)->SceneChange(L"MapSelectScene");
+	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");
 }
 
 void SceneManager::Update()

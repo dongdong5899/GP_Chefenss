@@ -16,14 +16,17 @@ public:
 	void UnitDelete();
 	bool GetSelectMode() { return m_selectMode; }
 	void SetSelectMode(bool _selectMode);
-	int GetUnitCost(UNIT_TYPE _unitType);
+	int GetUnitCost(UNIT_TYPE _unitType) { return m_unitCost[(int)_unitType]; }
+	int GetUnitAtkDamage(UNIT_TYPE _unitType) { return m_unitAtkDamage[(int)_unitType];}
+	int GetUnitAtkCool(UNIT_TYPE _unitType) { return m_unitAtkCool[(int)_unitType];}
 	Unit* GetUnit() { return m_currentUnit; }
-	vector<int> GetUnitCostVec() { return unitCost;}
 private:
 	UNIT_TYPE m_currentUnitType;
 	UNIT_TYPE m_prevUnitType;
 	Unit* m_currentUnit;
-	vector<int> unitCost = { 100,300,500,2000,5000 };
+	vector<int> m_unitCost = { 100,300,500,2000,5000 };
+	vector<int> m_unitAtkDamage = { 1,3,3,5,10 };
+	vector<int> m_unitAtkCool = { 50,40,30,20,20 };
 	bool m_selectMode;
 };
 

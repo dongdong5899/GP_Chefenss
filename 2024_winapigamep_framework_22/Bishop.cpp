@@ -4,6 +4,7 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "InputManager.h"
+#include "UnitManager.h"
 
 Bishop::Bishop()
 {
@@ -11,8 +12,8 @@ Bishop::Bishop()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(3);
-	SetAttackCooldown(30);
+	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::BISHOP));
+	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::BISHOP));
 }
 
 Bishop::~Bishop()

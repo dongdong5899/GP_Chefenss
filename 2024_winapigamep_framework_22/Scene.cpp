@@ -65,7 +65,6 @@ void Scene::Render(HDC _hdc)
 				m_vecObj[i].erase(m_vecObj[i].begin() + j);
 		}
 	}
-
 }
 
 void Scene::Release()

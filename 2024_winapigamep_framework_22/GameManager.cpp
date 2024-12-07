@@ -47,7 +47,7 @@ void GameManager::CheckUnitCost()
 	DefenseScene* scene = dynamic_cast<DefenseScene*>(curScene.get());
 	if (scene) {
 		for (int i = 0; i < 5; i++) {
-			if (m_coin >= GET_SINGLE(UnitManager)->GetUnitCostVec()[i]) {
+			if (m_coin >= GET_SINGLE(UnitManager)->GetUnitCost((UNIT_TYPE)i)) {
 				scene->SetCostTextColor(i, RGB(255,255,0));
 			}
 			else {
@@ -87,5 +87,5 @@ void GameManager::UpdateHealth()
 
 void GameManager::Die()
 {
-
+	GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 }

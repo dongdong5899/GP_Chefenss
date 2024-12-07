@@ -4,14 +4,15 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "InputManager.h"
+#include "UnitManager.h"
 Queen::Queen()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp");
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(10);
-	SetAttackCooldown(20);
+	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::QUEEN));
+	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::QUEEN));
 }
 
 Queen::~Queen()

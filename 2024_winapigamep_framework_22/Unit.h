@@ -28,7 +28,7 @@ public:
     UNIT_TYPE GetUnitType() { return m_unitType; }
     vector<Road*> GetAttackRange() { return attackRange; }
     void SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional = false);
-
+    void Die();
 public:
     Stat stat;
     vector<Enemy> enemyList;

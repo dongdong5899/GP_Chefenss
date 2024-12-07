@@ -4,6 +4,7 @@
 #include "TimeManager.h"
 #include "MapManager.h"
 #include "Health.h"
+#include "EventManager.h"
 
 
 Unit::Unit()
@@ -66,6 +67,12 @@ void Unit::SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditio
 		if (!_isUnconditional && alpha > _alpha && alpha != 255) continue;
 		range->SetAlpha(_alpha);
 	}
+}
+
+void Unit::Die()
+{
+	SetAttackRoadColor(BRUSH_TYPE::WHITE, 0, true);
+	GET_SINGLE(EventManager)->DeleteObject(this);
 }
 
 

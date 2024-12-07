@@ -4,14 +4,15 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "UnitManager.h"
 Rook::Rook()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Rook", L"Texture\\PlayerRook.bmp");
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(5);
-	SetAttackCooldown(20);
+	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::ROOK));
+	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::ROOK));
 }
 
 Rook::~Rook()

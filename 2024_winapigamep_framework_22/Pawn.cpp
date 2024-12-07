@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "Animator.h"
 #include "InputManager.h"
+#include "UnitManager.h"
 
 Pawn::Pawn()
 {
@@ -14,8 +15,8 @@ Pawn::Pawn()
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(1);
-	SetAttackCooldown(50);
+	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::PAWN));
+	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::PAWN));
 }
 
 Pawn::~Pawn()

@@ -33,7 +33,7 @@ Waver::Waver()
 
 	ButtonUI* stageSkipBtn = new ButtonUI();
 	stageSkipBtn->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x + 180, SCREEN_HEIGHT / 2 + mapOffset.y - 230 });
-	stageSkipBtn->SetSize({ 100, 50 });
+	stageSkipBtn->SetSize({ 150, 35 });
 	stageSkipBtn->SetScale(0.6f);
 	stageSkipBtn->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"StageSkipBtn", L"Texture\\Unit_Card_Area.bmp"));

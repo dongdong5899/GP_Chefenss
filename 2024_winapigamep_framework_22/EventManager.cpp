@@ -7,7 +7,10 @@ void EventManager::Update()
 	for (Object* obj : m_vecDead)
 	{
 		if (obj != nullptr)
+		{
+			cout << "Âé±Ý!" << endl;
 			delete obj;
+		}
 	}
 	m_vecDead.clear();
 

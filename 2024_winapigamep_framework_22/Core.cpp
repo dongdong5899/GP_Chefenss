@@ -31,7 +31,6 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(InputManager)->Init();
 	GET_SINGLE(ResourceManager)->Init();
 	GET_SINGLE(MapManager)->Init();
-	GET_SINGLE(GameManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
 	GET_SINGLE(UnitManager)->Init();
 

@@ -17,6 +17,7 @@ class EventManager
 public:
 	void Update();
 	void DeleteObject(Object* _pObj);
+	void ClearDeleteObject() { m_vecDead.clear(); };
 	// todo..
 private:
 	void Excute(const tEvent& _eve);

@@ -125,9 +125,3 @@ void UnitManager::SetSelectMode(bool _selectMode)
 	}
 }
 
-int UnitManager::GetUnitCost(UNIT_TYPE _unitType)
-{
-	return unitCost[(int)_unitType];
-}
-
-

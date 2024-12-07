@@ -4,14 +4,15 @@
 #include "ResourceManager.h"
 #include "Texture.h"
 #include "InputManager.h"
+#include "UnitManager.h"
 Knight::Knight()
 {
 	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Knight", L"Texture\\PlayerKnight.bmp");
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
 	m_vScale = size;
-	SetAttackDamage(3);
-	SetAttackCooldown(40); 
+	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::KNIGHT));
+	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::KNIGHT));
 }
 
 Knight::~Knight()

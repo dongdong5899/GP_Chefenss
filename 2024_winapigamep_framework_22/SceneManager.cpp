@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "TitleScene.h"
 #include "GameScene.h"
+#include "EventManager.h"
 #include "DefenseScene.h"
 void SceneManager::Init()
 {
@@ -41,6 +42,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 
 void SceneManager::LoadScene(const wstring& _sceneName)
 {
+	GET_SINGLE(EventManager)->ClearDeleteObject();
 	// 씬이 있으면
 	if (m_pCurrentScene != nullptr)
 	{
@@ -54,4 +56,5 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
 	}
+	cout << "지우기 끝";
 }

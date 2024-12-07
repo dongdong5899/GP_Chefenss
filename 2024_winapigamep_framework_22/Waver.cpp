@@ -7,6 +7,7 @@
 #include "EnemySpawner.h"
 #include "MapManager.h"
 #include "ResourceManager.h"
+#include "EventManager.h"
 #include "Image.h"
 #include "Button.h"
 
@@ -64,11 +65,20 @@ void Waver::Update()
 	int remain = (float)round((m_waveEndTime + m_waveDuration - time));
 	if (remain < 0) remain = 0;
 	m_waveDelayText->SetText(L"다음 웨이브까지 : " + std::to_wstring(remain));
-	if (remain == 0 && !IsEnd())
+	if (!IsEnd())
 	{
-		m_waveEndTime = time;
-		m_waveText->SetText(L"Wave : " + std::to_wstring(++m_currentWave + 1));
-		StartWave();
+		if (remain == 0)
+		{
+			m_waveEndTime = time;
+			m_waveText->SetText(L"Wave : " + std::to_wstring(++m_currentWave + 1));
+			StartWave();
+		}
+	}
+	else
+	{
+		if (GET_SINGLE(SceneManager)->GetCurrentScene()->GetObjectCount(LAYER::ENEMY) == 0) {
+			GET_SINGLE(EventManager)->SceneChange(L"ClearScene");
+		}
 	}
 
 	for (EnemySpawner* spawner : m_spawners)

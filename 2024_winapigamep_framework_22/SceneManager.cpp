@@ -5,6 +5,8 @@
 #include "MapSelectScene.h"
 #include "EventManager.h"
 #include "DefenseScene.h"
+#include "ClearScene.h"
+#include "DieScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -13,6 +15,8 @@ void SceneManager::Init()
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	RegisterScene(L"MapSelectScene",std::make_shared<MapSelectScene>());
 	RegisterScene(L"DefenseScene",std::make_shared<DefenseScene>());
+	RegisterScene(L"ClearScene",std::make_shared<ClearScene>());
+	RegisterScene(L"DieScene",std::make_shared<DieScene>());
 
 	// ¾À ·Îµå
 	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");

@@ -17,8 +17,6 @@ public:
 	int GetHealth() { return m_health; }
 	void SetMaxHealth(int _health) { m_maxHealth = _health; }
 	int GetMaxHealth() { return m_maxHealth; }
-	void SetEndState(bool _isClear) { m_isClear = _isClear; }
-	bool GetEndState() { return m_isClear; }
 private:
 	void UpdateShopText();
 	void UpdateHealth();
@@ -27,7 +25,6 @@ private:
 	int m_coin;
 	int m_health;
 	int m_maxHealth;
-	bool m_isClear;
 public:
 	Action onHit;
 };

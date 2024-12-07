@@ -1,11 +1,11 @@
 #pragma once
 #include "Scene.h"
-class EndScene :
+class DieScene :
     public Scene
 {
 public:
-    EndScene();
-    ~EndScene();
+    DieScene();
+    ~DieScene();
 public:
     void Init() override;
 };

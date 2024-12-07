@@ -8,21 +8,24 @@
 #include "Texture.h"
 #include "Health.h"
 #include "GameManager.h"
+#include "SpriteRenderer.h"
 
 int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
 
 Enemy::Enemy()
 	: m_moveDuration(5)
-	, m_uTexture(nullptr)
-	, m_vScale(1)
 	, m_currnetUpdateCount(0)
 	, m_road(nullptr)
 	, m_movement{1, 0}
 {
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
-	SetScale(size);
+
+	AddComponent<SpriteRenderer>();
+	SpriteRenderer* renderer = GetComponent<SpriteRenderer>();
+	renderer->OnTransparent();
+	renderer->SetScale(size);
 
 	AddComponent<Health>();
 	GetComponent<Health>()->onDieEvent += [this]() 
@@ -100,17 +103,6 @@ void Enemy::Update()
 void Enemy::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
-	Vec2 vPos = GetPos();
-	Texture* texture = GetTexture();
-	int width = texture->GetWidth();
-	int height = texture->GetHeight();
-	float textureScale = GetScale();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width * textureScale / 2)
-		, (int)(vPos.y - height * textureScale / 2)
-		, width * textureScale, height * textureScale
-		, texture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 void Enemy::Die()

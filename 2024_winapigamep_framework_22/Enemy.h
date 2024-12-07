@@ -19,10 +19,6 @@ public:
 	Vec2 GetMovement() { return m_movement; }
 	void SetHpIndex(int _index) { m_hpIndex = _index; }
 	int GetHpIndex() { return m_hpIndex; }
-	void SetTexture(Texture* _texture) { m_uTexture = _texture; }
-	Texture* GetTexture() { return m_uTexture; }
-	void SetScale(float _scale) { m_vScale = _scale; }
-	float GetScale() { return m_vScale; }
 	void SetMoveCooltime(int _count) { m_moveDuration = _count; }
 	int GetMoveSpeed() { return m_moveDuration; }
 	void Die();
@@ -34,8 +30,6 @@ private:
 	int m_hpIndex;
 	int m_moveDuration;
 	int m_currnetUpdateCount;
-	Texture* m_uTexture;
-	float m_vScale;
 	Road* m_road;
 	Vec2 m_movement;
 	std::set<Road*> m_passedRoadSet;

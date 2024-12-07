@@ -2,10 +2,11 @@
 #include "BishopEnemy.h"
 #include "ResourceManager.h"
 #include "Health.h"
+#include "SpriteRenderer.h"
 
 BishopEnemy::BishopEnemy()
 {
-	SetTexture(GET_SINGLE(ResourceManager)->
+	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"BishopEnemy", L"Texture\\EnemyBishop.bmp"));
 	SetMoveCooltime(20);
 	SetCost(100);

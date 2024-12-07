@@ -2,10 +2,11 @@
 #include "QueenEnemy.h"
 #include "ResourceManager.h"
 #include "Health.h"
+#include "SpriteRenderer.h"
 
 QueenEnemy::QueenEnemy()
 {
-	SetTexture(GET_SINGLE(ResourceManager)->
+	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"QueenEnemy", L"Texture\\EnemyQueen.bmp"));
 	SetMoveCooltime(70);
 	SetCost(1000);

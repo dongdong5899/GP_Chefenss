@@ -27,6 +27,7 @@
 #include "PlayerHealthUI.h"
 #include "ButtonUI.h"
 #include "Button.h"
+#include "Image.h"
 
 DefenseScene::DefenseScene()
 	: m_UpdateCool(0)
@@ -111,10 +112,10 @@ void DefenseScene::Render(HDC _hdc)
 	int height = texture->GetHeight();
 	float textureScale = GetScale();
 	
-	::TransparentBlt(_hdc, -50, 0
+	::StretchBlt(_hdc, -50, 0
 		, width * textureScale, height * textureScale
 		, texture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
+		, 0, 0, width, height, SRCCOPY);
 
 	Scene::Render(_hdc);
 }
@@ -153,12 +154,12 @@ void DefenseScene::SetUI()
 
 	//buttonArea
 	{
-		ButtonUI* buttonArea = new ButtonUI();
+		Image* buttonArea = new Image();
 		buttonArea->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x , SCREEN_HEIGHT / 2 + 310 + mapOffset.y });
 		buttonArea->SetSize({ 0, 0 });
-		buttonArea->SetScale(3.f);
-		buttonArea->SetTexture(GET_SINGLE(ResourceManager)->
-			TextureLoad(L"ButtonArea", L"Texture\\Unit_Card_Area.bmp"));
+		Texture* backgroundTexture = GET_SINGLE(ResourceManager)->
+			TextureLoad(L"ButtonArea", L"Texture\\Unit_Card_Area.bmp");
+		buttonArea->SetImage(backgroundTexture, 3.f);
 		AddObject(buttonArea, LAYER::UI);
 	}
 
@@ -167,23 +168,26 @@ void DefenseScene::SetUI()
 	{
 		UNIT_TYPE type = (UNIT_TYPE)i;
 
-		ButtonUI* button_backGround = new ButtonUI();
+		Image* button_backGround = new Image();
 		button_backGround->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x - 300 + 150 * i, SCREEN_HEIGHT / 2 + 290 + mapOffset.y });
 		button_backGround->SetSize({ 72, 98 });
-		button_backGround->SetScale(3.f);
-		button_backGround->SetTexture(GET_SINGLE(ResourceManager)->
-			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp"));
-		AddObject(button_backGround, LAYER::UI);
-		Button* buttonCompo = button_backGround->GetComponent<Button>();
-		buttonCompo->onClick += [this, type]() { SetUnitType(type); };
+		Texture* cardTexture = GET_SINGLE(ResourceManager)->
+			TextureLoad(L"Card_Background", L"Texture\\Unit_Card_Background.bmp");
+		button_backGround->SetImage(cardTexture, 3.f);
 
-		ButtonUI* button_unit = new ButtonUI();
+		Button* buttonCompo = new Button;
+		buttonCompo->onClick += [this, type]() { SetUnitType(type); };
+		button_backGround->AddComponent(buttonCompo);
+
+		AddObject(button_backGround, LAYER::UI);
+
+		Image* button_unit = new Image();
 		Vec2 backgroundPos = button_backGround->GetPos();
 		button_unit->SetPos({ backgroundPos.x,backgroundPos.y - 10 });
 		button_unit->SetSize({ 0,0 });
-		button_unit->SetScale(2.f);
-		button_unit->SetTexture(GET_SINGLE(ResourceManager)->
-			TextureLoad(unitName[i], L"Texture\\Player" + unitName[i] + L".bmp"));
+		Texture* unitTexture = GET_SINGLE(ResourceManager)->
+			TextureLoad(unitName[i], L"Texture\\Player" + unitName[i] + L".bmp");
+		button_unit->SetImage(unitTexture, 2.f, true);
 		AddObject(button_unit, LAYER::UI);
 
 		m_costText[i] = new TextPro;
@@ -212,9 +216,6 @@ void DefenseScene::SetUI()
 		m_goldText->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x, 140 + mapOffset.y });
 		AddObject(m_goldText, LAYER::UI);
 	}
-
-	
-
 }
 
 void DefenseScene::SetShotcut()

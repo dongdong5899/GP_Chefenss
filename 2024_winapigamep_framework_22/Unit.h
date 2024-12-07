@@ -36,8 +36,6 @@ public:
     vector<Road*> attackRange;
     UNIT_TYPE m_unitType;
     std::string unitName,unitDescription;
-    Texture* m_uTexture;
-    int m_vScale;
     bool rangeCheck;
     bool isDeployed;
 private:

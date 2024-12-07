@@ -8,13 +8,15 @@
 #include "Animator.h"
 #include "InputManager.h"
 #include "UnitManager.h"
+#include "SpriteRenderer.h"
 
 Pawn::Pawn()
 {
-	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Pawn", L"Texture\\PlayerPawn.bmp");
+	SpriteRenderer* renderer = GetComponent<SpriteRenderer>();
+	renderer->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Pawn", L"Texture\\PlayerPawn.bmp"));
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
-	m_vScale = size;
+	renderer->SetScale(size);
 	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::PAWN));
 	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::PAWN));
 }
@@ -28,21 +30,6 @@ void Pawn::Update()
 	if(isDeployed)
 		Unit::Update();
 }
-
-void Pawn::Render(HDC _hdc)
-{
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = m_uTexture->GetWidth();
-	int height = m_uTexture->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width * m_vScale / 2)
-		, (int)(vPos.y - height * m_vScale / 2)
-		, width * m_vScale, height * m_vScale,
-		m_uTexture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
-}
-
 
 vector<Road*> Pawn::RangeCheck()
 {

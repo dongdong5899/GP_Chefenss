@@ -220,6 +220,10 @@
     <ClInclude Include="PlayerHealthUI.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -382,6 +386,10 @@
     <ClCompile Include="PlayerHealthUI.cpp">
       <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

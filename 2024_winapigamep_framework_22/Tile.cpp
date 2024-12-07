@@ -43,12 +43,20 @@ void Tile::Render(HDC _hdc)
 	{
 		GDISelector brush(_hdc, GetColor());
 		RECT_RENDER(_hdc, vPos.x, vPos.y, width * textureScale, height * textureScale);
-	}
 
-	AlphaBlend(_hdc
-		, (int)(vPos.x - width * textureScale / 2)
-		, (int)(vPos.y - height * textureScale / 2)
-		, width * textureScale, height * textureScale
-		, texture->GetTexDC()
-		, 0, 0, width, height, bfunc);
+		::AlphaBlend(_hdc
+			, (int)(vPos.x - width * textureScale / 2)
+			, (int)(vPos.y - height * textureScale / 2)
+			, width * textureScale, height * textureScale
+			, texture->GetTexDC()
+			, 0, 0, width, height, bfunc);
+	}
+	else
+		::StretchBlt(_hdc
+			, (int)(vPos.x - width * textureScale / 2)
+			, (int)(vPos.y - height * textureScale / 2)
+			, width * textureScale, height * textureScale
+			, texture->GetTexDC()
+			, 0, 0, width, height, SRCCOPY);
+
 }

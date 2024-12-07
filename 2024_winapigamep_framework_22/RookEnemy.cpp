@@ -2,10 +2,11 @@
 #include "RookEnemy.h"
 #include "ResourceManager.h"
 #include "Health.h"
+#include "SpriteRenderer.h"
 
 RookEnemy::RookEnemy()
 {
-	SetTexture(GET_SINGLE(ResourceManager)->
+	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"RookEnemy", L"Texture\\EnemyRook.bmp"));
 	SetMoveCooltime(100);
 	SetCost(400);

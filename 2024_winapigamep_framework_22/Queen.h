@@ -8,7 +8,6 @@ public:
     ~Queen();
 public:
     void Update() override;
-    void Render(HDC _hdc) override;
     vector<Road*> RangeCheck() override;
 
 private:

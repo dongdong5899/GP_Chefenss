@@ -6,11 +6,12 @@
 #include "Health.h"
 #include "ResourceManager.h"
 #include "EventManager.h"
+#include "Texture.h"
+#include "SpriteRenderer.h"
 
 
 Unit::Unit()
-	: m_uTexture(nullptr)
-	, attackCooldown(0)
+	: attackCooldown(0)
 	, rangeCheck(false)
 {
 	GET_SINGLE(ResourceManager)->LoadSound(L"PawnAttack", L"Sound\\PawnAttack.wav",false);
@@ -18,6 +19,9 @@ Unit::Unit()
 	GET_SINGLE(ResourceManager)->LoadSound(L"BishopAttack", L"Sound\\BishopAttack.wav",false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"RookAttack", L"Sound\\RookAttack.wav",false);
 	//GET_SINGLE(ResourceManager)->LoadSound(L"PawnAttack", L"Sound\\PawnAttack.wav",false
+
+	AddComponent<SpriteRenderer>();
+	GetComponent<SpriteRenderer>()->OnTransparent();
 }
 
 Unit::~Unit()
@@ -37,7 +41,7 @@ void Unit::Update()
 
 void Unit::Render(HDC _hdc)
 {
-	
+	ComponentRender(_hdc);
 }
 
 void Unit::Attack()

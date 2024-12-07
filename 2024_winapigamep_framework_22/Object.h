@@ -37,6 +37,12 @@ public:
 		m_vecComponents.push_back(com);
 	}
 	template<typename T>
+	void AddComponent(T* _com)
+	{
+		_com->SetOwner(this);
+		m_vecComponents.push_back(_com);
+	}
+	template<typename T>
 	T* GetComponent()
 	{
 		T* component = nullptr;

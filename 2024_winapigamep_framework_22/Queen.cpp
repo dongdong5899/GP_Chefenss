@@ -5,12 +5,14 @@
 #include "Texture.h"
 #include "InputManager.h"
 #include "UnitManager.h"
+#include "SpriteRenderer.h"
 Queen::Queen()
 {
-	m_uTexture = GET_SINGLE(ResourceManager)->TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp");
+	SpriteRenderer* renderer = GetComponent<SpriteRenderer>();
+	renderer->SetTexture(GET_SINGLE(ResourceManager)->TextureLoad(L"Queen", L"Texture\\PlayerQueen.bmp"));
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
-	m_vScale = size;
+	renderer->SetScale(size);
 	SetAttackDamage(GET_SINGLE(UnitManager)->GetUnitAtkDamage(UNIT_TYPE::QUEEN));
 	SetAttackCooldown(GET_SINGLE(UnitManager)->GetUnitAtkCool(UNIT_TYPE::QUEEN));
 }
@@ -24,20 +26,6 @@ void Queen::Update()
 	if (isDeployed) {
 		Unit::Update();
 	}
-}
-
-void Queen::Render(HDC _hdc)
-{
-	Vec2 vPos = GetPos();
-	Vec2 vSize = GetSize();
-	int width = m_uTexture->GetWidth();
-	int height = m_uTexture->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(vPos.x - width * m_vScale / 2)
-		, (int)(vPos.y - height * m_vScale / 2)
-		, width * m_vScale, height * m_vScale,
-		m_uTexture->GetTexDC()
-		, 0, 0, width, height, RGB(255, 0, 255));
 }
 
 vector<Road*> Queen::RangeCheck()

@@ -3,10 +3,11 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "Health.h"
+#include "SpriteRenderer.h"
 
 PawnEnemy::PawnEnemy()
 {
-	SetTexture(GET_SINGLE(ResourceManager)->
+	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"PawnEnemy", L"Texture\\EnemyPawn.bmp"));
 	SetMoveCooltime(50);
 	SetCost(20);

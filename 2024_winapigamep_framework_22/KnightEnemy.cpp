@@ -2,10 +2,11 @@
 #include "KnightEnemy.h"
 #include "ResourceManager.h"
 #include "Health.h"
+#include "SpriteRenderer.h"
 
 KnightEnemy::KnightEnemy()
 {
-	SetTexture(GET_SINGLE(ResourceManager)->
+	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"KnightEnemy", L"Texture\\EnemyKnight.bmp"));
 	SetMoveCooltime(10);
 	SetCost(60);

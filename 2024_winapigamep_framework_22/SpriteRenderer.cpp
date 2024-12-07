@@ -1,25 +1,29 @@
 #include "pch.h"
-#include "UI.h"
+#include "SpriteRenderer.h"
 #include "Texture.h"
+#include "Object.h"
 
-UI::UI()
-	: m_texture()
-	, m_scale(1)
+SpriteRenderer::SpriteRenderer()
+	: m_offset{}
+	, m_texture(nullptr)
+	, m_scale(1.f)
 	, m_isTransparent(false)
 {
 }
 
-UI::~UI()
+SpriteRenderer::~SpriteRenderer()
 {
 }
 
-void UI::Update()
+void SpriteRenderer::LateUpdate()
 {
 }
 
-void UI::Render(HDC _hdc)
+void SpriteRenderer::Render(HDC _hdc)
 {
-	Vec2 pos = GetPos();
+	Object* owner = GetOwner();
+	Vec2 pos = owner->GetPos();
+	pos += GetOffset();
 	Texture* texture = GetTexture();
 	if (texture != nullptr)
 	{
@@ -27,7 +31,7 @@ void UI::Render(HDC _hdc)
 		int height = texture->GetHeight();
 		float textureScale = GetScale();
 
-		if (m_isTransparent) {
+		if (IsTransparent()) {
 			::TransparentBlt(_hdc
 				, (int)(pos.x - width * textureScale / 2)
 				, (int)(pos.y - height * textureScale / 2)
@@ -41,14 +45,12 @@ void UI::Render(HDC _hdc)
 				, (int)(pos.y - height * textureScale / 2)
 				, width * textureScale, height * textureScale
 				, texture->GetTexDC()
-				, 0, 0, width, height,SRCCOPY);
+				, 0, 0, width, height, SRCCOPY);
 		}
 	}
 	else
 	{
-		Vec2 size = GetSize();
+		Vec2 size = owner->GetSize();
 		RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 	}
-	//캐스트 영역 보여주기
-	ComponentRender(_hdc);
 }

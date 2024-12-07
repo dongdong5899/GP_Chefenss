@@ -15,7 +15,7 @@ void SceneManager::Init()
 	RegisterScene(L"DefenseScene",std::make_shared<DefenseScene>());
 
 	// ¾À ·Îµå
-	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");
+	GET_SINGLE(EventManager)->SceneChange(L"MapSelectScene");
 }
 
 void SceneManager::Update()

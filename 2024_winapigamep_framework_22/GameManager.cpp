@@ -9,7 +9,7 @@
 
 void GameManager::Init()
 {
-	SetCoin(300);
+	SetCoin(30000);
 	SetMaxHealth(10);
 	SetHealth(10);
 }

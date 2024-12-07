@@ -12,8 +12,8 @@
 MapSelectScene::MapSelectScene()
 {
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)->
-		TextureLoad(L"Background", L"Texture\\Background.bmp"));
-	SetBackgroundScale(5.f);
+		TextureLoad(L"title_Background", L"Texture\\titleBackground.bmp"));
+	SetBackgroundScale(3.f);
 }
 
 MapSelectScene::~MapSelectScene()
@@ -25,6 +25,7 @@ void MapSelectScene::Init()
 	TextPro* titleTxt = new TextPro;
 	titleTxt->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 250 });
 	titleTxt->SetText(L"맵을 고르세요");
+	titleTxt->SetColor(RGB(255,255,255));
 	titleTxt->SetFontSize(100);
 	AddObject(titleTxt, LAYER::UI);
 

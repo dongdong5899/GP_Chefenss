@@ -18,7 +18,7 @@ Unit::Unit()
 	GET_SINGLE(ResourceManager)->LoadSound(L"KnightAttack", L"Sound\\KnightAttack.wav",false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BishopAttack", L"Sound\\BishopAttack.wav",false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"RookAttack", L"Sound\\RookAttack.wav",false);
-	//GET_SINGLE(ResourceManager)->LoadSound(L"PawnAttack", L"Sound\\PawnAttack.wav",false
+	GET_SINGLE(ResourceManager)->LoadSound(L"QueenAttack", L"Sound\\QueenAttack.wav", false);
 
 	AddComponent<SpriteRenderer>();
 	GetComponent<SpriteRenderer>()->OnTransparent();
@@ -61,15 +61,16 @@ void Unit::Attack()
 				GET_SINGLE(ResourceManager)->Play(L"PawnAttack");
 				break;
 			case UNIT_TYPE::KNIGHT:
-				GET_SINGLE(ResourceManager)->Play(L"KnightAttack");
+				GET_SINGLE(ResourceManager)->Play(L"PawnAttack");
 				break;
 			case UNIT_TYPE::BISHOP:
 				GET_SINGLE(ResourceManager)->Play(L"BishopAttack");
 				break;
 			case UNIT_TYPE::ROOK:
-				GET_SINGLE(ResourceManager)->Play(L"RookAttack");
+				GET_SINGLE(ResourceManager)->Play(L"QueenAttack");
 				break;
 			case UNIT_TYPE::QUEEN:
+				GET_SINGLE(ResourceManager)->Play(L"QueenAttack");
 				break;
 			}
 		}

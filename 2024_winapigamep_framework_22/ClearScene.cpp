@@ -9,7 +9,8 @@
 ClearScene::ClearScene()
 {
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)
-		->TextureLoad(L"Clear_Background", L"Textur\\Clear_Background.bmp"));
+		->TextureLoad(L"ClearBackground", L"Texture\\Clear_Background.bmp"));
+	SetBackgroundScale(5.f);
 }
 
 ClearScene::~ClearScene()

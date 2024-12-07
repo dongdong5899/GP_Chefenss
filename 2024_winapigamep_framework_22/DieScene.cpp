@@ -9,7 +9,8 @@
 DieScene::DieScene()
 {
 	SetBackgroundTexture(GET_SINGLE(ResourceManager)
-		->TextureLoad(L"Clear_Background", L"Textur\\Clear_Background.bmp"));
+		->TextureLoad(L"DieBackground", L"Texture\\Die_Background.bmp"));
+	SetBackgroundScale(5.f);
 }
 
 DieScene::~DieScene()

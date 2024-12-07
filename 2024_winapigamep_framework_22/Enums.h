@@ -35,6 +35,8 @@ enum class MAP_SIZE
 {
 	SMALL,
 	BIG,
+	HUGE,
+	END
 };
 
 enum class UNIT_TYPE 

@@ -1,12 +1,13 @@
 #pragma once
-#include "UI.h"
+#include "Object.h"
 class PlayerHealthUI :
-    public UI
+    public Object
 {
 public:
 	PlayerHealthUI();
 	~PlayerHealthUI();
 public:
+	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
 public:
 	int GetInterval() { return m_interval; }

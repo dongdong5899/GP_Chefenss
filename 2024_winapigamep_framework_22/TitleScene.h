@@ -1,9 +1,12 @@
 #pragma once
 #include "Scene.h"
-class TitleScene : public Scene
+class TitleScene 
+	: public Scene
 {
 public:
-	// Scene을(를) 통해 상속됨
+	TitleScene();
+	~TitleScene();
+public:
 	virtual void Init() override;
 	virtual void Update() override;
 private:

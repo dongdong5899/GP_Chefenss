@@ -100,9 +100,6 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceBase.h">
       <Filter>Engine\05. Resource</Filter>
     </ClInclude>
@@ -205,13 +202,7 @@
     <ClInclude Include="Wall.h">
       <Filter>Engine\03. Object\Background</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonUI.h">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClInclude>
     <ClInclude Include="TextPro.h">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
@@ -223,7 +214,16 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h" />
+    <ClInclude Include="Image.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSelectScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -265,9 +265,6 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="ResourceBase.cpp">
       <Filter>Engine\05. Resource</Filter>
@@ -371,13 +368,7 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Engine\03. Object\Background</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonUI.cpp">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClCompile>
     <ClCompile Include="TextPro.cpp">
-      <Filter>Engine\03. Object\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
       <Filter>Engine\03. Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
@@ -389,7 +380,16 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Image.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSelectScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

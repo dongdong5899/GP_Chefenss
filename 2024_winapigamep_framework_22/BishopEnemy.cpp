@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Health.h"
 #include "SpriteRenderer.h"
+#include "HealthBar.h"
 
 BishopEnemy::BishopEnemy()
 {
@@ -11,8 +12,8 @@ BishopEnemy::BishopEnemy()
 	SetMoveCooltime(20);
 	SetCost(100);
 	Health* health = GetComponent<Health>();
-	health->SetColor(BRUSH_TYPE::BLUE);
 	health->SetMaxHealth(10, true);
+	GetHealthBar()->SetColor(BRUSH_TYPE::BLUE);
 }
 
 BishopEnemy::~BishopEnemy()

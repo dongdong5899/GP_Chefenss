@@ -6,9 +6,9 @@
 #include "Scene.h"
 #include "EnemySpawner.h"
 #include "MapManager.h"
-#include "ButtonUI.h"
-#include "Button.h"
 #include "ResourceManager.h"
+#include "Image.h"
+#include "Button.h"
 
 Waver::Waver()
 	: m_waveText(nullptr)
@@ -31,14 +31,15 @@ Waver::Waver()
 
 
 
-	ButtonUI* stageSkipBtn = new ButtonUI();
+	Image* stageSkipBtn = new Image();
 	stageSkipBtn->SetPos({ SCREEN_WIDTH / 2 + mapOffset.x + 180, SCREEN_HEIGHT / 2 + mapOffset.y - 230 });
 	stageSkipBtn->SetSize({ 150, 35 });
-	stageSkipBtn->SetScale(0.6f);
-	stageSkipBtn->SetTexture(GET_SINGLE(ResourceManager)->
-		TextureLoad(L"StageSkipBtn", L"Texture\\Unit_Card_Area.bmp"));
-	Button* buttonCompo = stageSkipBtn->GetComponent<Button>();
-	buttonCompo->onClick += [this]() { m_waveEndTime = 0; };
+	Texture* skipTexture = GET_SINGLE(ResourceManager)->
+		TextureLoad(L"StageSkipBtn", L"Texture\\Unit_Card_Area.bmp");
+	stageSkipBtn->SetImage(skipTexture, 0.6f);
+	Button* button = new Button;
+	button->onClick += [this]() { m_waveEndTime = 0; };
+	stageSkipBtn->AddComponent(button);
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(stageSkipBtn, LAYER::UI);
 
@@ -47,6 +48,7 @@ Waver::Waver()
 	TextPro* skipText = new TextPro;
 	skipText->SetPos(skipTextPos);
 	skipText->SetText(L"다음 웨이브 진행");
+	skipText->SetFontSize(15.f);
 	skipText->SetColor(RGB(255, 0, 0));
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(skipText, LAYER::UI);

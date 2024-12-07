@@ -2,7 +2,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
-#include "GameScene.h"
+#include "MapSelectScene.h"
 #include "EventManager.h"
 #include "DefenseScene.h"
 void SceneManager::Init()
@@ -11,11 +11,11 @@ void SceneManager::Init()
 
 	// ¾À µî·Ï
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene",std::make_shared<GameScene>());
+	RegisterScene(L"MapSelectScene",std::make_shared<MapSelectScene>());
 	RegisterScene(L"DefenseScene",std::make_shared<DefenseScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"TitleScene");
+	GET_SINGLE(EventManager)->SceneChange(L"TitleScene");
 }
 
 void SceneManager::Update()
@@ -56,5 +56,4 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
 	}
-	cout << "Áö¿ì±â ³¡";
 }

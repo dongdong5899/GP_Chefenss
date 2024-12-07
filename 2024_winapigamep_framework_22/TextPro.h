@@ -1,7 +1,7 @@
 #pragma once
-#include "UI.h"
+#include "Object.h"
 class TextPro : 
-	public UI
+	public Object
 {
 public:
 	TextPro();

@@ -9,6 +9,9 @@
 #include "Health.h"
 #include "GameManager.h"
 #include "SpriteRenderer.h"
+#include "HealthBar.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 int xDir[] = {-1, 0, 1, 0};
 int yDir[] = {0, -1, 0, 1};
@@ -17,6 +20,7 @@ Enemy::Enemy()
 	: m_moveDuration(5)
 	, m_currnetUpdateCount(0)
 	, m_road(nullptr)
+	, m_healthBar(nullptr)
 	, m_movement{1, 0}
 {
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
@@ -33,6 +37,11 @@ Enemy::Enemy()
 			this->Die();
 			GET_SINGLE(GameManager)->AddCoin(m_cost); 
 		};
+
+	m_healthBar = new HealthBar;
+	m_healthBar->SetOwner(this);
+	GET_SINGLE(SceneManager)->GetCurrentScene()
+		->AddObject(m_healthBar, LAYER::UI);
 
 	srand((unsigned int)time(NULL));
 }
@@ -109,4 +118,5 @@ void Enemy::Die()
 {
 	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(this);
+	GET_SINGLE(EventManager)->DeleteObject(m_healthBar);
 }

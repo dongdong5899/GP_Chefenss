@@ -16,7 +16,7 @@ void MapManager::Update()
 {
 }
 
-void MapManager::SetMapMode(MAP_SIZE _mapSize)
+void MapManager::SetMapSize(MAP_SIZE _mapSize)
 {
 	m_mapSize = _mapSize;
 	m_currentMapStrVec = m_mapStrVec[(int)m_mapSize];

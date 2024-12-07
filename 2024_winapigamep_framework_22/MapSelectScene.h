@@ -1,10 +1,12 @@
 #pragma once
 #include "Scene.h"
-class GameScene :
+class MapSelectScene :
     public Scene
 {
 public:
-    // Scene을(를) 통해 상속됨
+    MapSelectScene();
+    ~MapSelectScene();
+public:
     virtual void Init() override;
 };
 

@@ -2,7 +2,10 @@
 #include "Scene.h"
 #include "Object.h"
 #include "CollisionManager.h"
+#include "Texture.h"
 Scene::Scene()
+	: m_backgroundScale(1.f)
+	, m_backgroundTexture(nullptr)
 {
 }
 
@@ -46,15 +49,18 @@ void Scene::LateUpdate()
 }
 
 void Scene::Render(HDC _hdc)
-{ 
-	//for (UINT i = 0; i < (UINT)LAYER::END; ++i)
-	//{
-	//	for (size_t j = 0; j < m_vecObj[i].size(); ++j)
-	//	{
-	//		if (!m_vecObj[i][j]->GetIsDead())
-	//			m_vecObj[i][j]->Render(_hdc);
-	//	}
-	//}
+{
+	//background
+	Texture* texture = GetBackgroundTexture();
+	int width = texture->GetWidth();
+	int height = texture->GetHeight();
+	float textureScale = GetBackgroundScale();
+	::StretchBlt(_hdc, -50, 0
+		, width * textureScale, height * textureScale
+		, texture->GetTexDC()
+		, 0, 0, width, height, SRCCOPY);
+
+	//object
 	for (UINT i = 0; i < (UINT)LAYER::END; ++i)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size();)

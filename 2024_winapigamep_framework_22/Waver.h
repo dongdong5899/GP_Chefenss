@@ -37,14 +37,31 @@ private:
     int m_currentWave;
     vector<std::pair<int, wstring>> m_waveEnemyVec
     {
-        {70, L"P"},
+        {200, L"P"},
         {50, L"PPP"},
-        {20, L"PPPPP"},
-        {70, L"PPBP"}, 
-        {50, L"PPPPBPPPPBPPP"},
-        {100, L"BBB"},
+        {50, L"PPPPPPPP"},
+        {50, L"PPPPPB"},
+        {50, L"PPBPPPPBPP"},//5
+        {20, L"PPBPPBPPBPP"},
+        {70, L"PBPBPBPBPBPB"},
+        {30, L"BBBBBBBB"},
         {50, L"PBPBPBPB"},
-        {50, L"N"},
+        {50, L"N"},//10
+        {40, L"PBPNPPBPBPBBPPBB"},
+        {10, L"BBBBNBBBB"},
+        {50, L"PBPBNPBPBNPBPBN"},
+        {30, L"PNBPBBNBBPBNPBBNPBBPBNN"},
+        {10, L"NNNNNN"},//15
+        {60, L"RBBRBB"},
+        {100, L"RNRNRN"},
+        {100, L"RRRRRR"},
+        {50, L"PBNRPBNRPBNR"},
+        {50, L"Q"},//20
+        {40, L"PNBRPBBRNBBPBNRPBBNPBRBPBNNR"},
+        {10, L"PBNRPBNRPBNRPBNRPBNRPBNR"},
+        {50, L"QQ"},
+        {10, L"PPPBBBNNNRRRQQQ"},
+        {50, L"QQQQQ"},//25
     };
     vector<EnemySpawner*> m_spawners;
     vector<EnemySpawner*> m_deadSpawners;

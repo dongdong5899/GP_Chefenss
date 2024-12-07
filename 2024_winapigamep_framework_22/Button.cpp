@@ -32,10 +32,10 @@ void Button::LateUpdate()
 
 void Button::Render(HDC _hdc)
 {
-	GDISelector pen(_hdc, PEN_TYPE::YELLOW);
-	GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
-	Object* owner = GetOwner();
-	Vec2 pos = owner->GetPos();
-	Vec2 size = owner->GetSize();
-	RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+	//GDISelector pen(_hdc, PEN_TYPE::YELLOW);
+	//GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
+	//Object* owner = GetOwner();
+	//Vec2 pos = owner->GetPos();
+	//Vec2 size = owner->GetSize();
+	//RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 }

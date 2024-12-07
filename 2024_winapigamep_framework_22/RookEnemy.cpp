@@ -12,7 +12,7 @@ RookEnemy::RookEnemy()
 	SetMoveCooltime(100);
 	SetCost(400);
 	Health* health = GetComponent<Health>();
-	health->SetMaxHealth(50, true);
+	health->SetMaxHealth(100, true);
 	GetHealthBar()->SetColor(BRUSH_TYPE::WHITE);
 }
 

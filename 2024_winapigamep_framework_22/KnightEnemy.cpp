@@ -12,7 +12,7 @@ KnightEnemy::KnightEnemy()
 	SetMoveCooltime(10);
 	SetCost(60);
 	Health* health = GetComponent<Health>();
-	health->SetMaxHealth(5, true);
+	health->SetMaxHealth(10, true);
 	GetHealthBar()->SetColor(BRUSH_TYPE::GREEN);
 }
 

@@ -9,10 +9,10 @@ QueenEnemy::QueenEnemy()
 {
 	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"QueenEnemy", L"Texture\\EnemyQueen.bmp"));
-	SetMoveCooltime(70);
-	SetCost(1000);
+	SetMoveCooltime(50);
+	SetCost(700);
 	Health* health = GetComponent<Health>();
-	health->SetMaxHealth(200, true);
+	health->SetMaxHealth(400, true);
 	GetHealthBar()->SetColor(BRUSH_TYPE::YELLOW);
 }
 

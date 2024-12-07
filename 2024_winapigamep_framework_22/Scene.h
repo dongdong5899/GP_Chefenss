@@ -26,13 +26,7 @@ public:
 	Texture* GetBackgroundTexture() { return m_backgroundTexture; }
 	void SetBackgroundScale(float _scale) { m_backgroundScale = _scale; }
 	float GetBackgroundScale() { return m_backgroundScale; }
-	int GetObjectCount(LAYER _layer) 
-	{
-		if (m_vecObj[(int)_layer].empty())
-			return 0;
-		else
-			return m_vecObj[(int)_layer].size(); 
-	}
+	int GetObjectCount(LAYER _layer) { return m_vecObj[(int)_layer].size(); }
 private:
 	//Object m_obj;
 	//Object* m_pObj;

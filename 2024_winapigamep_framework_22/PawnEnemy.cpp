@@ -13,7 +13,7 @@ PawnEnemy::PawnEnemy()
 	SetMoveCooltime(50);
 	SetCost(20);
 	Health* health = GetComponent<Health>();
-	health->SetMaxHealth(2, true);
+	health->SetMaxHealth(3, true);
 	GetHealthBar()->SetColor(BRUSH_TYPE::RED);
 }
 

@@ -76,9 +76,9 @@ void Waver::Update()
 	}
 	else
 	{
-		/*if (GET_SINGLE(SceneManager)->GetCurrentScene()->GetObjectCount(LAYER::ENEMY) == 0) {
+		if (GET_SINGLE(SceneManager)->GetCurrentScene()->GetObjectCount(LAYER::ENEMY) == 0) {
 			GET_SINGLE(EventManager)->SceneChange(L"ClearScene");
-		}*/
+		}
 	}
 
 	for (EnemySpawner* spawner : m_spawners)

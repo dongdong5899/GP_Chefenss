@@ -25,8 +25,8 @@ private:
 	UNIT_TYPE m_prevUnitType;
 	Unit* m_currentUnit;
 	vector<int> m_unitCost = { 100,300,500,2000,5000 };
-	vector<int> m_unitAtkDamage = { 1,3,3,5,10 };
-	vector<int> m_unitAtkCool = { 50,40,30,20,20 };
+	vector<int> m_unitAtkDamage = { 1,2,2,5,7 };
+	vector<int> m_unitAtkCool = { 70,50,30,90,60 };
 	bool m_selectMode;
 };
 

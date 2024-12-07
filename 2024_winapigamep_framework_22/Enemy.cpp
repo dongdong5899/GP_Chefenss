@@ -22,6 +22,8 @@ Enemy::Enemy()
 	, m_road(nullptr)
 	, m_healthBar(nullptr)
 	, m_movement{1, 0}
+	, m_cost(0)
+	, m_hpIndex(0)
 {
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;

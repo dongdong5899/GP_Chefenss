@@ -10,9 +10,9 @@ BishopEnemy::BishopEnemy()
 	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"BishopEnemy", L"Texture\\EnemyBishop.bmp"));
 	SetMoveCooltime(20);
-	SetCost(100);
+	SetCost(80);
 	Health* health = GetComponent<Health>();
-	health->SetMaxHealth(10, true);
+	health->SetMaxHealth(5, true);
 	GetHealthBar()->SetColor(BRUSH_TYPE::BLUE);
 }
 

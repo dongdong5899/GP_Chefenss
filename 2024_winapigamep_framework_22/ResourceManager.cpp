@@ -47,7 +47,7 @@ Texture* ResourceManager::TextureFind(const wstring& _key)
 
 void ResourceManager::Release()
 {
-	RemoveFontResourceEx(L"..\\Neo.ttf", FR_PRIVATE, NULL);
+	RemoveFontResourceEx(L".\\Neo.ttf", FR_PRIVATE, NULL);
 	map<wstring, Texture*>::iterator iter;
 	for (iter = m_mapTextures.begin(); iter != m_mapTextures.end(); ++iter)
 		delete iter->second;

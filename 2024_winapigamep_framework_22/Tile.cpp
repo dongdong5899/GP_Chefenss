@@ -41,7 +41,8 @@ void Tile::Render(HDC _hdc)
 
 	if (alpha != 0)
 	{
-		GDISelector brush(_hdc, GetColor());
+		if ((int)m_fillColor == -1) m_fillColor = BRUSH_TYPE::RED;
+		GDISelector brush(_hdc, m_fillColor);
 		RECT_RENDER(_hdc, vPos.x, vPos.y, width * textureScale, height * textureScale);
 
 		::AlphaBlend(_hdc

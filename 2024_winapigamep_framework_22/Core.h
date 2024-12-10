@@ -22,7 +22,10 @@ public:
 	const HDC& GetMainDC() const { return m_hDC; }
 	const HBRUSH& GetBrush(BRUSH_TYPE _eType)
 	{
-		return m_colorBrushs[(UINT)_eType];
+		if ((int)_eType < 0 || (int)_eType > 6)
+			return m_colorBrushs[0];
+		else
+			return m_colorBrushs[(UINT)_eType];
 	}
 	const HPEN& GetPen(PEN_TYPE _eType)
 	{

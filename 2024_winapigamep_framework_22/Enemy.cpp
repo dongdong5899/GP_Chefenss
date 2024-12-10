@@ -119,6 +119,6 @@ void Enemy::Render(HDC _hdc)
 void Enemy::Die()
 {
 	GetOwner()->RemoveAssignedEnemy(this);
-	GET_SINGLE(EventManager)->DeleteObject(this);
 	GET_SINGLE(EventManager)->DeleteObject(m_healthBar);
+	GET_SINGLE(EventManager)->DeleteObject(this);
 }

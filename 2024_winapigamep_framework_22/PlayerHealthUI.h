@@ -15,6 +15,7 @@ public:
 	int GetMaxHealth() { return m_maxHealth; }
 	void SetHealth(int _health) { m_currentHealth = _health; }
 	int GetHealth() { return m_currentHealth; }
+	void HealthDown() { --m_currentHealth; }
 	void SetVisualHealth(int _health) { m_visualHealth = _health; }
 	int GetVisualHealth() { return m_visualHealth; }
 private:

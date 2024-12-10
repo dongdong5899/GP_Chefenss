@@ -10,13 +10,9 @@ PlayerHealthUI::PlayerHealthUI()
 	, m_interval(10)
 {
 	SetMaxHealth(GET_SINGLE(GameManager)->GetMaxHealth());
-	SetHealth(GetMaxHealth());
+	m_currentHealth = (GetMaxHealth());
 	SetVisualHealth(GetMaxHealth());
-	GET_SINGLE(GameManager)->onHit += [this]()
-		{
-			int health = this->GetHealth();
-			this->SetHealth(--health);
-		};
+	GET_SINGLE(GameManager)->onHit += [this]() { this->HealthDown(); };
 }
 
 PlayerHealthUI::~PlayerHealthUI()

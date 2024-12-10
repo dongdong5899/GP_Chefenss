@@ -24,6 +24,7 @@ Enemy::Enemy()
 	, m_movement{1, 0}
 	, m_cost(0)
 	, m_hpIndex(0)
+	, m_enemyDead(false)
 {
 	int tileSize = GET_SINGLE(MapManager)->GetTileSize();
 	float size = (float)tileSize / 20.f;
@@ -55,7 +56,8 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-	if (GetComponent<Health>()->IsDead()) return;
+	if (IsEnemyDead()) return;
+
 	m_currnetUpdateCount++;
 	if (m_currnetUpdateCount >= m_moveDuration)
 	{
@@ -118,6 +120,7 @@ void Enemy::Render(HDC _hdc)
 
 void Enemy::Die()
 {
+	EnemyDie();
 	GetOwner()->RemoveAssignedEnemy(this);
 	GET_SINGLE(EventManager)->DeleteObject(m_healthBar);
 	GET_SINGLE(EventManager)->DeleteObject(this);

@@ -30,6 +30,7 @@
 
 DefenseScene::DefenseScene()
 	: m_UpdateCool(0)
+	, m_currentSelectUnitIndex(-1)
 	, m_UpdateDuration(0.01f)
 	, m_goldText(nullptr)
 	, m_costText{ nullptr }
@@ -55,7 +56,7 @@ void DefenseScene::Init()
 	AddObject(playerHealth, LAYER::UI);
 
 	Waver* waver = new Waver();
-	waver->SetWaveDuration(30.f);
+	waver->SetWaveDuration(20.f);
 	AddObject(waver, LAYER::DEFAULT);
 
 	vector<Object*> createdObj = GET_SINGLE(MapManager)->CreateTiles();
@@ -63,7 +64,6 @@ void DefenseScene::Init()
 	{
 		AddObject(pObj, LAYER::BACKGROUND);
 	}
-
 }
 
 void DefenseScene::Update()
@@ -99,24 +99,34 @@ void DefenseScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::RBUTTON)) {
 		UnitDelate();
 	}
+
+	SetShortcut();
 }
 
 void DefenseScene::SetShortcut()
 {
-	if (GET_KEYDOWN(KEY_TYPE::NUM_1)) {
-		SetUnitType(UNIT_TYPE::PAWN);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_2)) {
-		SetUnitType(UNIT_TYPE::KNIGHT);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_3)) {
-		SetUnitType(UNIT_TYPE::BISHOP);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_4)) {
-		SetUnitType(UNIT_TYPE::ROOK);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::NUM_5)) {
-		SetUnitType(UNIT_TYPE::QUEEN);
+	int startChar = (int)KEY_TYPE::NUM_1;
+	for (int i = 0; i < 5; ++i)
+	{
+		if (GET_KEYDOWN((KEY_TYPE)(startChar + i)))
+		{
+			if (GetSelectUnit() == i)
+			{
+				GET_SINGLE(UnitManager)->SetUnitType(UNIT_TYPE::END);
+				if (GET_SINGLE(UnitManager)->GetUnit()) {
+					GET_SINGLE(UnitManager)->UnitDelete();
+				}
+				GET_SINGLE(UnitManager)->SetSelectMode(false);
+
+				GET_SINGLE(UnitManager)->ResetPrevTargetRoad();
+				SetSelectUnitIdx(-1);
+			}
+			else
+			{
+				SetUnitType(UNIT_TYPE(i));
+				SetSelectUnitIdx(i);
+			}
+		}
 	}
 }
 
@@ -127,6 +137,7 @@ void DefenseScene::SetCostTextColor(int index, COLORREF color)
 
 void DefenseScene::SetUnitType(UNIT_TYPE _unitType)
 {
+	SetSelectUnitIdx((int)_unitType);
 	if (GET_SINGLE(GameManager)->CanBuy(GET_SINGLE(UnitManager)->GetUnitCost(_unitType)))
 	{
 		GET_SINGLE(UnitManager)->SetSelectMode(true);
@@ -144,6 +155,7 @@ Unit* DefenseScene::GenerateUnit()
 {
 	Unit* unit = GET_SINGLE(UnitManager)->UnitGenerate();
 	if (unit != nullptr) {
+		SetSelectUnitIdx(-1);
 		AddObject(unit,LAYER::PLAYER);
 		return unit;
 	}
@@ -221,14 +233,23 @@ void DefenseScene::SetUI()
 		TextPro* atkText = new TextPro();
 		atkText->SetPos({ backgroundPos.x,backgroundPos.y + 55 });
 		atkText->SetColor(RGB(255, 255, 255));
+		atkText->SetFontSize(17);
 		atkText->SetText(L"ATK : " + std::to_wstring(GET_SINGLE(UnitManager)->GetUnitAtkDamage(type)));
 		AddObject(atkText, LAYER::UI);
 
 		TextPro* atkspeedText = new TextPro();
 		atkspeedText->SetPos({ backgroundPos.x,backgroundPos.y + 75 });
 		atkspeedText->SetColor(RGB(255, 255, 255));
-		atkspeedText->SetText(L"ATKCOOL : 0." + std::to_wstring(GET_SINGLE(UnitManager)->GetUnitAtkCool(type) / 10) + L"s");
+		atkspeedText->SetFontSize(17);
+		atkspeedText->SetText(L"ATKCOOL : " + std::to_wstring(GET_SINGLE(UnitManager)->GetUnitAtkCool(type) / 100) + L"." + std::to_wstring((GET_SINGLE(UnitManager)->GetUnitAtkCool(type) % 100) / 10) + L"s");
 		AddObject(atkspeedText, LAYER::UI);
+
+		TextPro* shotcutTxt = new TextPro;
+		shotcutTxt->SetFontSize(17);
+		shotcutTxt->SetPos({ backgroundPos.x,backgroundPos.y - 40 });
+		shotcutTxt->SetColor(RGB(255, 255, 0));
+		shotcutTxt->SetText(L"[" + std::to_wstring(i + 1) + L"]");
+		AddObject(shotcutTxt, LAYER::UI);
 	}
 
 	//goldText

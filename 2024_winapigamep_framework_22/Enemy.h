@@ -24,10 +24,13 @@ public:
 	void Die();
 	void SetCost(int _cost) { m_cost = _cost; }
 	HealthBar* GetHealthBar() { return m_healthBar; }
+	void EnemyDie() { m_enemyDead = true; }
+	bool IsEnemyDead() { return m_enemyDead; }
 private:
 	void PassRoad(Road* _road) { m_passedRoadSet.insert(_road); }
 	bool IsPassedRoad(Road* _road) { return m_passedRoadSet.find(_road) != m_passedRoadSet.end(); }
 private:
+	bool m_enemyDead;
 	int m_hpIndex;
 	int m_moveDuration;
 	int m_currnetUpdateCount;

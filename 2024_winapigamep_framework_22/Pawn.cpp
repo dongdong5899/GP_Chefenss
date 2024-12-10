@@ -27,7 +27,7 @@ Pawn::~Pawn()
 
 void Pawn::Update()
 {
-	if(isDeployed)
+	if(m_isDeployed)
 		Unit::Update();
 }
 

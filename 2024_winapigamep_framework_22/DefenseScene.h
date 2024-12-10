@@ -20,10 +20,12 @@ private:
 	Unit* GenerateUnit();
 	void SetUI();
 	void UnitDelate();
-	
+	void SetSelectUnitIdx(int _index) { m_currentSelectUnitIndex = _index; };
+	int GetSelectUnit() { return m_currentSelectUnitIndex; };
 private:
 	float m_UpdateCool;
 	float m_UpdateDuration;
+	int m_currentSelectUnitIndex;
 	TextPro* m_goldText;
 	TextPro* m_costText[5];
 };

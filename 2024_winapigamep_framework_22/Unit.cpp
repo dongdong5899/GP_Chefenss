@@ -11,8 +11,9 @@
 
 
 Unit::Unit()
-	: attackCooldown(0)
-	, rangeCheck(false)
+	: m_attackCooldown(0)
+	, m_rangeCheck(false)
+	, m_isDeployed(false)
 {
 	GET_SINGLE(ResourceManager)->LoadSound(L"PawnAttack", L"Sound\\PawnAttack.wav",false);
 	GET_SINGLE(ResourceManager)->LoadSound(L"KnightAttack", L"Sound\\KnightAttack.wav",false);
@@ -22,6 +23,7 @@ Unit::Unit()
 
 	AddComponent<SpriteRenderer>();
 	GetComponent<SpriteRenderer>()->OnTransparent();
+	GetComponent<SpriteRenderer>()->SetAlpha(128);
 }
 
 Unit::~Unit()
@@ -30,11 +32,13 @@ Unit::~Unit()
 
 void Unit::Update()
 {
-	attackCooldown++;
-	SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round(((float)attackCooldown / stat.AttackCooldown) * 255));
-	if (attackCooldown > stat.AttackCooldown) {
+	if (m_isDeployed == false) return;
+
+	m_attackCooldown++;
+	SetAttackRoadColor(BRUSH_TYPE::RED, (BYTE)round(((float)m_attackCooldown / stat.AttackCooldown) * 255));
+	if (m_attackCooldown > stat.AttackCooldown) {
 		SetAttackRoadColor(BRUSH_TYPE::WHITE, 255);
-		attackCooldown = 0;
+		m_attackCooldown = 0;
 		Attack();
 	}
 }
@@ -79,15 +83,20 @@ void Unit::Attack()
 
 bool Unit::AttackCoolTimeCheck(float fdt)
 {
-	if (attackCooldown > stat.AttackCooldown) {
+	if (m_attackCooldown > stat.AttackCooldown) {
 		return true;
 	}
 	else {
-		attackCooldown += fdt;
+		m_attackCooldown += fdt;
 		return false;
 	}
 }
 
+void Unit::SetDeploy(bool deploy)
+{
+	GetComponent<SpriteRenderer>()->SetAlpha(255);
+	m_isDeployed = deploy;
+}
 void Unit::SetAttackRoadColor(BRUSH_TYPE _color, BYTE _alpha, bool _isUnconditional)
 {
 	for (Road*& range : attackRange)

@@ -4,15 +4,16 @@
 #include "Health.h"
 #include "SpriteRenderer.h"
 #include "HealthBar.h"
+#include "EnemyManager.h"
 
 QueenEnemy::QueenEnemy()
 {
 	GetComponent<SpriteRenderer>()->SetTexture(GET_SINGLE(ResourceManager)->
 		TextureLoad(L"QueenEnemy", L"Texture\\EnemyQueen.bmp"));
-	SetMoveCooltime(70);
-	SetCost(700);
+	SetMoveCooltime(GET_SINGLE(EnemyManager)->GetEnemyMoveCool(UNIT_TYPE::QUEEN));
+	SetCost(GET_SINGLE(EnemyManager)->GetEnemyCost(UNIT_TYPE::QUEEN));
 	Health* health = GetComponent<Health>();
-	health->SetMaxHealth(350, true);
+	health->SetMaxHealth(GET_SINGLE(EnemyManager)->GetEnemyHealth(UNIT_TYPE::QUEEN), true);
 	GetHealthBar()->SetColor(BRUSH_TYPE::YELLOW);
 }
 

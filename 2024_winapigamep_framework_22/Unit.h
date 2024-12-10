@@ -22,7 +22,7 @@ public:
     void Attack();
     bool AttackCoolTimeCheck(float fdt);
     void SetUnitType(UNIT_TYPE unitType) { m_unitType = unitType; }
-    void SetDeploy(bool deploy) { isDeployed = deploy; }
+    void SetDeploy(bool deploy);
     void SetAttackDamage(int _damage) { stat.AttackDamage = _damage; }
     void SetAttackCooldown(int _cooldown) { stat.AttackCooldown = _cooldown; }
     UNIT_TYPE GetUnitType() { return m_unitType; }
@@ -36,9 +36,9 @@ public:
     vector<Road*> attackRange;
     UNIT_TYPE m_unitType;
     std::string unitName,unitDescription;
-    bool rangeCheck;
-    bool isDeployed;
+    bool m_rangeCheck;
+    bool m_isDeployed;
 private:
-    int attackCooldown;
+    int m_attackCooldown;
 };
 

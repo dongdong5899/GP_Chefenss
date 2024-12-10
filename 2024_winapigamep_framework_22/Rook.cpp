@@ -23,7 +23,7 @@ Rook::~Rook()
 
 void Rook::Update()
 {
-	if (isDeployed) {
+	if (m_isDeployed) {
 		Unit::Update();
 	}
 }

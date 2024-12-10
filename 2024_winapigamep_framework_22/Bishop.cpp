@@ -24,7 +24,7 @@ Bishop::~Bishop()
 
 void Bishop::Update()
 {
-	if (isDeployed) {
+	if (m_isDeployed) {
 		Unit::Update();
 	}
 }

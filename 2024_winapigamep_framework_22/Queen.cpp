@@ -23,7 +23,7 @@ Queen::~Queen()
 
 void Queen::Update()
 {
-	if (isDeployed) {
+	if (m_isDeployed) {
 		Unit::Update();
 	}
 }

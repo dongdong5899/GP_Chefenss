@@ -81,5 +81,6 @@ void TitleScene::Update()
 
 void TitleScene::Quit()
 {
-	ExitProcess(0);
+	exit(1);
+	//ExitProcess(0);
 }

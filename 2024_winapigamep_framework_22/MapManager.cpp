@@ -84,8 +84,10 @@ Vec2 MapManager::PosToMapPos(Vec2 _pos)
 	int yPos = SCREEN_HEIGHT / 2 + size / 2 - ((float)height / 2 + 0.5f) * size + offset.y;
 	POINT startPos = { xPos, yPos };
 
-	int x = (_pos.x - startPos.x) / size;
-	int y = (_pos.y - startPos.y) / size;
+	int x = _pos.x - startPos.x < 0 ? 
+		-1 : (_pos.x - startPos.x) / size;
+	int y = _pos.y - startPos.y < 0 ? 
+		-1 : (_pos.y - startPos.y) / size;
 
 	return {x, y};
 }

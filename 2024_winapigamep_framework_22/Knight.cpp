@@ -23,7 +23,7 @@ Knight::~Knight()
 
 void Knight::Update()
 {
-	if (isDeployed) {
+	if (m_isDeployed) {
 		Unit::Update();
 	}
 }

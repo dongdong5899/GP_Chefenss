@@ -17,6 +17,8 @@ public:
     Texture* GetTexture() { return m_texture; }
     void SetScale(float _scale) { m_scale = _scale; }
     float GetScale() { return m_scale; }
+    void SetAlpha(BYTE _alpha) { m_alpha = _alpha; }
+    BYTE GetAlpha() { return m_alpha; }
     void OnTransparent() { m_isTransparent = true; }
     bool IsTransparent() { return m_isTransparent; }
 private:
@@ -24,5 +26,6 @@ private:
     Texture* m_texture;
     float m_scale;
     bool m_isTransparent;
+    BYTE m_alpha;
 };
 

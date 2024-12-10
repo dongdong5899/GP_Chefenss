@@ -23,6 +23,7 @@ void ClearScene::Init()
 		TextPro* endText = new TextPro;
 		endText->SetPos({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150 });
 		endText->SetText(L"클리어 하셨군요!\n당신은 쩌는 사람입니다!");
+		endText->SetColor(RGB(255, 255, 255));
 		endText->SetFontSize(100.f);
 		AddObject(endText, LAYER::UI);
 	}

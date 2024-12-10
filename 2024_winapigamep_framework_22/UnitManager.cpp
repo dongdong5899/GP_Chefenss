@@ -82,7 +82,7 @@ void UnitManager::UnitSelect()
 				GET_SINGLE(EventManager)->DeleteObject(m_currentUnit);
 			}
 			m_currentUnit = TypeUnitGenerate();
-			GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(m_currentUnit,LAYER::PLAYER);
+			GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(m_currentUnit, LAYER::PLAYER);
 		}
 		Vec2 mousePos = GET_SINGLE(MapManager)->PosToMapPos(GET_SINGLE(InputManager)->GetMousePos());
 		vector<vector<Tile*>> map = GET_SINGLE(MapManager)->GetMapTileData();
@@ -97,16 +97,39 @@ void UnitManager::UnitSelect()
 			Tile* tile = map[mousePos.y][mousePos.x];
 
 			Wall* wall = dynamic_cast<Wall*>(tile);
-			if (wall) { 
-				if (wall->GetAssignedUnit()) 
+			if (wall) {
+				if (wall->GetAssignedUnit())
 					m_currentUnit->SetPos(GET_SINGLE(InputManager)->GetMousePos());
-				else 
+				else if (m_currentUnit != nullptr)
+				{
+					vector<Road*> pTargetRoad = m_currentUnit->RangeCheck();
+
+					for (Road* road : m_prevTargetRoad)
+					{
+						road->SetAlpha(0);
+					}
+					for (Road* road : pTargetRoad)
+					{
+						road->SetColor(BRUSH_TYPE::YELLOW);
+						road->SetAlpha(128);
+					}
+
+					m_prevTargetRoad = pTargetRoad;
 					m_currentUnit->SetPos(wall->GetPos());
-			} 
+				}
+			}
+			else
+			{
+				ResetPrevTargetRoad();
+				m_currentUnit->SetPos(GET_SINGLE(InputManager)->GetMousePos());
+			}
 		}
 		m_prevUnitType = m_currentUnitType;
 	}
-	
+	else if (!m_prevTargetRoad.empty())
+	{
+		ResetPrevTargetRoad();
+	}
 }
 
 void UnitManager::UnitDelete()
@@ -123,5 +146,14 @@ void UnitManager::SetSelectMode(bool _selectMode)
 	if (!_selectMode) {
 		m_prevUnitType = UNIT_TYPE::END;
 	}
+}
+
+void UnitManager::ResetPrevTargetRoad()
+{
+	for (Road* road : m_prevTargetRoad)
+	{
+		road->SetAlpha(0);
+	}
+	m_prevTargetRoad.clear();
 }
 

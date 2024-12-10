@@ -10,6 +10,7 @@
 #include "EventManager.h"
 #include "Image.h"
 #include "Button.h"
+#include "GameManager.h"
 
 Waver::Waver()
 	: m_waveText(nullptr)
@@ -39,7 +40,12 @@ Waver::Waver()
 		TextureLoad(L"StageSkipBtn", L"Texture\\Unit_Card_Area.bmp");
 	stageSkipBtn->SetImage(skipTexture, 0.6f);
 	Button* button = new Button;
-	button->onClick += [this]() { m_waveEndTime = 0; };
+	button->onClick += [this]() 
+		{
+			if (IsEnd() == false)
+				GET_SINGLE(GameManager)->AddCoin(round((m_waveEndTime + m_waveDuration - GET_SINGLE(TimeManager)->GetTime())) * 2);
+			m_waveEndTime = 0;
+		};
 	stageSkipBtn->AddComponent(button);
 	GET_SINGLE(SceneManager)->GetCurrentScene()
 		->AddObject(stageSkipBtn, LAYER::UI);

@@ -19,7 +19,7 @@ public:
 	void SetColor(BRUSH_TYPE _color) { m_fillColor = _color; }
 	BRUSH_TYPE GetColor() { return m_fillColor; }
 	BYTE GetAlpha() { return m_alpha; }
-	void SetAlpha(float _alpha) { m_alpha = _alpha; }
+	void SetAlpha(BYTE _alpha) { m_alpha = _alpha; }
 private:
 	Vec2 m_tilePos;
 	Texture* m_uTexture;
